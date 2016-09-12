@@ -1,0 +1,103 @@
+﻿@model FundRaising.Models.Coupon
+
+@{
+    ViewBag.Title = "Edit";
+}
+<script>
+    $(document).ready(function () {
+        $('#StartDate').datepick({ dateFormat: 'yyyy-mm-dd' });
+        $('#EndDate').datepick({ dateFormat: 'yyyy-mm-dd' });
+    });
+</script>
+@using (Html.BeginForm())
+        {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+<div class="row">
+    <fieldset>
+        <legend style="margin-left: 14px;">Coupon<input type="submit" value="Create" class="buttn update_btn" />@Html.ActionLink("Back", "Index", null, new { @class="linkbtn update_btn text-center" })</legend>
+        <div class="col-md-5">
+            <div class="row no-margin">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Code)
+                </div>
+                <div class="editor-field">
+                    <input type="text" id="Code" name="Code" class="text-box single-line" style="background:rgba(214, 214, 214, 0.53) !important" value="@Model.Code" disabled />
+                    @*@Html.EditorFor(model => model.Code)
+            @Html.ValidationMessageFor(model => model.Code)*@
+                </div>
+
+            </div>
+            
+            @*<div class="editor-label">
+                @Html.LabelFor(model => model.CouponType)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("CouponType", "select--")
+                @Html.EditorFor(model => model.CouponType)
+                @Html.ValidationMessageFor(model => model.CouponType)
+            </div>*@
+            <div class="row no-margin">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.value)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.value)
+                    @Html.ValidationMessageFor(model => model.value)
+                </div>
+            </div>
+          
+            <div class="row no-margin">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CouponUsage)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("CouponUsage", "select--")
+                    @Html.ValidationMessageFor(model => model.CouponUsage)
+                </div>
+            </div>
+           
+            <div class="row no-margin">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.StartDate)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.StartDate)
+                    @Html.ValidationMessageFor(model => model.StartDate)
+                </div>
+            </div>
+           
+            <div class="row no-margin">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.EndDate)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.EndDate)
+                    @Html.ValidationMessageFor(model => model.EndDate)
+                </div>
+            </div>
+           
+            <div class="row no-margin">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Description)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            
+        </div>
+    </fieldset>
+</div>
+    <br />
+
+    @*<div class="row" >
+        <div class="col-md-3">
+           
+        </div>
+    </div>*@
+        }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,65 @@
+﻿@model FundRaising.Models.Student
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+<div>
+    <div class="row side-marg" >
+        @if (ViewBag.Message != null)
+        {
+            <h2 id="customer">@ViewBag.Message</h2>
+        }
+        else
+        {
+            <h2 id="customer">Welcome To Our website</h2>
+        }
+      
+
+
+        @if (Model.image != null && Model.image != "")
+        {
+            <div class="col-md-4">
+
+                <img  src="@Model.image" alt="no image available" style="width:100%" />
+                <div class="row" style="margin-right:0px;margin-left:0px;">
+                 @if (Model.StudentID != "0000007")
+                 {
+                    <div class="sold_goal col-md-4">
+                        Sold:
+                        Goal:@Model.DefaultGoal
+                    </div>
+                 }                       
+                </div>
+            </div>
+        }
+            @if (Model.Message != null)
+            {
+                <div class="col-md-4 cust_img">
+                    @if (Model.StudentID != "0000007")
+                    {
+                        <span>A message From :</span><b>@Model.FirstName  &nbsp; @Model.LastName </b> <br /><br />
+                    }                   
+                    @Html.Raw(Model.Message)
+                </div>
+            }
+
+
+        @*}
+        else
+        {
+            if (@Model.Message != null)
+            {
+                <div class="col-md-4" style="width: 450px;">
+                    A message From :<b>@Model.StudentName </b> <br /><br />
+                    @Html.Raw(Model.Message)
+                </div>
+            }
+
+        }*@
+    </div>
+
+       
+</div>
+
+
+

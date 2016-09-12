@@ -1,0 +1,56 @@
+﻿@model IEnumerable<FundRaising.ViewModels.ProductViewModel>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Products";
+}
+
+
+<script>
+
+    function Deleteconfirm(id, name) {
+        var d = confirm("Are you sure you want delete the Product with product ID: " + name);
+        if (d) {
+            $.ajax({
+                url: "/Product/Delete",
+                data: { id: id, description: name },
+                type: "POST",
+                success: function () {
+                    loadMagazines();
+                },
+                error: function () {
+
+                }
+            });
+        }
+    }
+</script>
+
+<p>
+    <a href="#" id="create" onclick="gotoPrevious('/Product/Create')">Create New</a> | <a href="#" id="Upload" onclick="uploadProducts()">Upload Products</a>
+
+    <a href="#" onclick="loadProducts()">Products</a>|<a href="#" onclick="loadMagazines()">Magazines</a>  
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<script>
+    function loadMagazines() {
+        debugger;
+            $('#data-container').load('/product/products?option=1', function () {
+                var htmlString = '<h2 class="row text-center h2_margin">Magazines</h2>';
+                $('#DemoDiv').html(htmlString);
+                $('#create').attr('onclick', 'gotoPrevious("/Product/Create?option=1")');
+            });
+    }
+    function loadProducts()
+    {
+        $('#data-container').load('/product/products?option=0', function () {
+            var htmlString = '<h2 class="row text-center h2_margin">Products</h2>';
+            $('#DemoDiv').html(htmlString);
+            $('#create').attr('onclick', 'gotoPrevious("/Product/Create?option=0")');
+        });
+    }
+</script>
+
+<div id="data-container">
+    @Html.Action("Products")
+</div>
+

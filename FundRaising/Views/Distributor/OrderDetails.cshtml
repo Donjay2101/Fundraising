@@ -1,0 +1,30 @@
+﻿@model IEnumerable<FundRaising.ViewModels.OrderViewModel>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Order Details";
+}
+<div style="padding-bottom: 8px;">
+    <a href="#" onclick="goBack()" class="linkbtn text-center">Back</a>
+</div>
+
+<div>
+    @Html.Grid(Model).Columns(columns =>
+                    {
+                        columns.Add(c => c.ProductName).Titled("Product Name");
+                        columns.Add(c => c.Quantity).Titled("Quantity");
+                        columns.Add(c => c.UnitPrice).Format("{0:C}") .Titled("Per Unit Price");
+                        columns.Add()
+                                                     .Encoded(false)
+                                                     .Sanitized(false)
+                                                     .SetWidth(30)
+                                                     .Css("hidden-xs") //hide on phones
+                                                     .RenderValueAs(c =>
+                                                        @<div id="balloon" class="balloonClass">
+                                                            <b>
+                                                                @string.Format("{0:C}", (c.Quantity * c.UnitPrice)) 
+                                                            </b>
+                                                        </div>).Titled("Total");
+                    }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
+
+</div>
+

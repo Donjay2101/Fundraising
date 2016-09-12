@@ -1,0 +1,240 @@
+﻿@model FundRaising.Models.Student
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = ViewBag.Layout;
+}
+
+<script>
+    function Validate() {
+        var htmlString = "<ul>";
+        var studentName = $('#FirstName').val();
+        //alert(studentName);
+        if (studentName == '' || studentName == undefined) {
+            htmlString += "<li> Student Name required</li>";
+        }
+        var EmailAddress = $('#EmailAddress').val();
+
+        if (EmailAddress == '' || EmailAddress == undefined) {
+
+            htmlString += "<li> Email Address required</li>";
+        }
+
+        var reg = /^\w+([-+.']\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+        if (!reg.test(EmailAddress)) {
+            htmlString += "<li> enter valid email.</li>";
+        }
+
+        if ($('#teacher').val() == 'yes') {
+            var teacherName = $('#TeacherName').val();
+            if (teacherName == '') {
+                htmlString += "<li> Teacher Namer required</li>";
+            }
+        }
+
+        var Grade = $('#Grade').val();
+        if (Grade == '' && Grade == undefined && Grade<1) {
+            htmlString += "<li> Grade required</li>";
+        }
+
+        //alert(isNaN(Grade));
+        if (isNaN(Grade) == true) {
+            htmlString += "<li> Grade should be number</li>";
+        }
+        var password = $('#Password').val();
+        if (password == '' || password == undefined) {
+            htmlString += "<li> password required</li>";
+        }
+
+        var cpassword = $('#ConfirmPassword').val();
+
+        if (cpassword == '' || cpassword == undefined) {
+            htmlString += "<li> confrim password required</li>";
+        }
+        if (password.length < 6) {
+
+            htmlString += "<li>password should contain minimum 6 charaters</li>";
+        }
+
+        if (password != cpassword) {
+
+            htmlString += "<li>password and confrim password should be same</li>";
+        }
+
+
+
+        var phone;
+        if ($("#cellRequired").val() == 'yes') {
+            phone = $('#Phone').val();
+            if (phone != undefined) {
+
+
+            }
+            // alert(isNaN(phone));
+            if (isNaN(phone) == true) {
+                htmlString += "<li> Phone cannot contain alphabet or specail Caharcters(Ex:'+,/,-') </li>";
+            }
+
+            if ($("#cellRequired").val() == "yes") {
+                if (phone == '' || phone == undefined) {
+                    htmlString += "<li> cell phone required</li>";
+                }
+            }
+        }
+
+        htmlString += "</ul>";
+        // alert(htmlString);
+        if (htmlString != "<ul></ul>") {
+            // alert(htmlString);
+            $("#errorsummary").html(htmlString);
+            $("#errorsummary").css('display', 'block');
+            return false;
+        }
+        else {
+            return true;
+        }
+
+
+
+    }
+</script>
+
+<div class=" studid_reg" style="margin-top:50px;">
+@using (Html.BeginForm("edit", "Student", FormMethod.Post, new { @onsubmit = "return Validate()" }))
+{
+    <div class="row">
+        <h2 class="text-center h2_margin">Your Information</h2>
+        <div class="col-md-3"></div>
+        
+        <div class=" col-md-6  text-center">
+
+
+           
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div id="errorsummary" style="display:none;color:red">
+                </div>
+                <fieldset>
+                    @*<legend>Student</legend>*@
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            <label>Parent's Email Address</label> <span class="error">*</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.EmailAddress)
+                            @*@Html.ValidationMessageFor(model => model.EmailAddress)*@
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            <label>Student's First Name</label> <span class="error">*</span>
+                           
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.FirstName)
+                            @*@Html.ValidationMessageFor(model => model.StudentName)*@
+                        </div>
+                    </div>
+
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            <label>Student's Lirst Name</label> <span class="error">*</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.LastName)
+                            @*@Html.ValidationMessageFor(model => model.StudentName)*@
+                        </div>
+                    </div>
+                   
+                    
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Grade)<span class="error">*</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.DropDownList("Grade", "select--")
+                            @*@Html.EditorFor(model => model.Grade)*@
+                            @*@Html.ValidationMessageFor(model => model.Grade)*@
+                        </div>
+                    </div>
+
+                    @if (ViewBag.teacher != null && ViewBag.teacher == "yes")
+                    {
+                        <div class="row no-margin">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.TeacherName)<span class="error">*</span>
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.TeacherName)
+                                @*@Html.ValidationMessageFor(model => model.TeacherName)*@
+                            </div>
+                        </div>
+                      
+                    }
+         
+                   
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Password)<span class="error">*</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Password)
+                            @*@Html.ValidationMessageFor(model => model.Password)*@
+                        </div>
+                    </div>
+                   
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ConfirmPassword)<span class="error">*</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.ConfirmPassword)
+                            @*@Html.ValidationMessageFor(model => model.ConfirmPassword)*@
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Phone)<span class="error">*</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Phone)
+                            @*@Html.ValidationMessageFor(model => model.Phone)*@
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.DefaultGoal)<span class="error">*</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.DefaultGoal)
+                            @*@Html.ValidationMessageFor(model => model.Phone)*@
+                        </div>
+                    </div>                                      
+                    @*@Html.HiddenFor(model => model.ID)*@
+                    @Html.HiddenFor(model => model.StudentID)
+                    @Html.HiddenFor(model => model.SchoolID)
+                    @Html.HiddenFor(model => model.image)
+                    @Html.HiddenFor(model => model.DefaultGoal)
+                   @Html.HiddenFor(model => model.Message)
+                     <input type="hidden" id="ID" name="ID" value="@ViewBag.ID">
+                    @*<input type="hidden" name="StudentID" value="@ViewBag.StudentID" />*@
+                    <input type="hidden" name="teacher" id="teacher" value="@ViewBag.teacher" />
+                    <input type="hidden" name="ParentRequired" id="ParentRequired" value="@ViewBag.ParentRequired" />
+                    <input type="hidden" name="cellRequired" id="cellRequired" value="@ViewBag.cellRequired" />
+
+                </fieldset>
+            
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 text-center">
+            <input type="submit" value="Edit" class="buttn" style="width:15%;margin-top: 20px; margin-left: 80px;" />@*<span>|</span>@Html.ActionLink("Back to List", "Index")*@
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+ }
+</div>   
+

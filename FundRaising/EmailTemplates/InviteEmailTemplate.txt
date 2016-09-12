@@ -1,0 +1,25 @@
+﻿<span style="color:red"> Please forward this email to your family and friends, they can follow the links below to your site and help support you. </span>
+<div>
+
+ <img src='cid:companyLogo' style='max-height:280px;float: left;margin-right: 10px;margin-bottom: 8px;'/>
+  
+
+  
+	<p><%msg%></p>
+
+This simple and easy to use site allows you to purchase great quality products while helping me raise money for my school. 
+
+plus I can win some great prizes as well!!!!!!. 
+</div>
+
+<hr/>
+
+<div>
+   To view the fundraising webstie:<span><a href="<%link%>">PLEASE CLICK HERE</a></span>
+   <p>
+
+   <span style="font-weight:bolder">Note:</span>if you have trouble connecting using above link, please cut and paste following web link to you web browser then hti enter key.
+   <%link%>
+   </p>
+</div>
+

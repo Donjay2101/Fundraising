@@ -1,0 +1,68 @@
+﻿@model FundRaising.Models.Category
+
+@{
+    ViewBag.Title = "Category";
+}
+
+<div class="container">
+
+    @using (Html.BeginForm("Create", "category", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset class="first-part">
+            <legend>Category<input class="mit-sub buttn update_btn" type="submit" value="Create" /><a href="#" onclick="goBack()" class="update_btn linkbtn" style="text-align:center;">Back</a></legend>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="row no-margin">
+                        <div class="editor-label cat_create">
+                            @Html.LabelFor(model => model.CategoryID)<span class="error">@Html.ValidationMessageFor(model => model.CategoryID)</span>
+                        </div>
+                        <div class="editor-field" style="margin-top: 10px;">
+                            @Html.EditorFor(model => model.CategoryID, new { @style = "width:70%;height:25px" })
+                            @*@Html.ValidationMessageFor(model => model.ID)*@
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="editor-label cat_create">
+                            @Html.LabelFor(model => model.CategoryName)<span class="error">@Html.ValidationMessageFor(model => model.CategoryName)</span>
+                        </div>
+                        <div class="editor-field" style="margin-top: 10px;">
+                            @Html.EditorFor(model => model.CategoryName, new { @style = "width:70%;height:25px" })
+                            @*@Html.ValidationMessageFor(model => model.CategoryName)*@
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="editor-label cat_create">
+                            @Html.LabelFor(model => model.Image)<span class="error">@Html.ValidationMessageFor(model => model.Image)</span>
+                        </div>
+                        <div class="editor-field" style="margin-top: 10px;">
+                            <input type="File" value="FileUpload" name="FileUpload" />
+                            @*@Html.ValidationMessageFor(model => model.Image)*@
+                        </div>
+                    </div>
+                   
+                   
+                  
+
+                 
+                   
+                </div>
+            </div>
+            @*<div class="row" style="margin-top:40px;">
+                <div class="col-md-3">
+                
+                </div>
+            </div>*@
+        </fieldset>
+    }
+
+</div>
+
+@*@Html.ActionLink("Back to List", "Index")*@
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

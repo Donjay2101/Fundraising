@@ -1,0 +1,19 @@
+﻿@model FundRaising.Models.Organization
+
+<dl>
+    <dt>
+        Org ID
+    </dt>
+    <dd>
+        @Model.ID
+    </dd>
+    <dt>
+        Org Name
+    </dt>
+    <dd>
+        @Model.Name
+    </dd>
+</dl>
+<p>
+    @Html.ActionLink("Edit order", "Index", "Home", new { }, new { @class = "btn btn-primary" })
+</p>

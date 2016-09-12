@@ -1,0 +1,51 @@
+﻿@model IEnumerable<FundRaising.ViewModels.CouponViewModel>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Coupons";
+}
+
+<script>
+
+    function Deleteconfirm(id) {
+        var d = confirm("Are you sure you want delete");
+        if (d) {
+            Delete(id,'Coupon');
+        }
+    }
+
+
+    $(document).on('change', '#inActivechkbox', function () {
+
+        debugger;
+        var option = $(this).is(':checked');
+        if(option)
+        {
+            $('#couponData').load('/Coupon/CouponData?option=false', function () { });
+            //$.ajax({
+            //    url: '',
+            //    data: { option: true },
+            //    success: function () {
+
+            //    },
+            //    error: function () {
+            //    }
+            //});
+        }
+        else
+        {
+            $('#couponData').load('/Coupon/CouponData?option=true', function () { });
+        }
+
+    });
+</script>
+  
+<div class="row no-margin">
+    @Html.ActionLink("Create New", "Create")
+</div>
+<div class="row no-margin">
+    <div class="inactive-coupons"><label>Inactive Coupons:</label> <input type="checkbox" id="inActivechkbox" /></div>
+</div>
+<div id="couponData">
+    @Html.Action("CouponData")
+</div>
+

@@ -1,0 +1,442 @@
+﻿@model FundRaising.Models.Order
+
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+
+<h2 id="checkout_header">Customer Order Detail</h2>
+<script>
+    //function shipAddress()
+    //{
+    //    if($(this).checked)
+    //    {
+
+    //    }
+    //}
+
+    $(document).ready(function () {
+        var location = window.location.href;
+        //  alert(location);
+        //  debugger;
+        if (location.includes('?')) {
+            var data = location.split('?');
+            var option = data[1].split('=');
+            if (option[1] == "1") {
+                $('#shipaddress').css('display', 'block');
+                $('#chkbox').removeAttr('checked');
+            }
+        }
+        $('#shipaddress').css('display', 'block');
+
+        var d = $('#ShipToSchool').val();
+
+        if(d=="true")
+        {
+            $("#shipaddress").attr('disabled', 'disabled');            
+            //This will disable everything contained in the div
+            $("#shipaddress").children().attr("disabled", "disabled");
+        }
+    });
+    $(document).on("change", "#chkbox", function () {
+        //alert('hello');
+        if ($(this).is(':Checked')) {
+            $('#shipaddress').css('display', 'none');
+        }
+        else {
+            $('#shipaddress').css('display', 'block');
+        }
+    });
+
+    function clearData() {
+        debugger;
+        var chkbox = $('#chkbox');
+        if (chkbox != undefined)
+        {
+            if($('#chkbox').is(':checked'))
+            {
+                var country = $('#Country').val();
+                
+                country = country.replace(' ', '');
+
+                $('#SCountry').val("");
+                if (country.toUpperCase() == "UNITEDSTATES" || country.toUpperCase() == "UNITED STATES" || country.toUpperCase() == "US" || country.toUpperCase() == "USA" || country.toUpperCase() == "UNITED STATES")
+                {
+                    sessionStorage.removeItem('CouponCode');
+                    sessionStorage.removeItem('CouponAmount');
+                    sessionStorage.removeItem('TotalAmount');
+                    sessionStorage.removeItem("Code")
+                    return true;
+                }
+                alert('Shipping Address Should be in United States only');
+                return false;
+            }
+            else
+            {
+
+                var country = $('#SCountry').val();
+                country = country.replace(' ', '');
+                if (country.toUpperCase() == "UNITEDSTATES" || country.toUpperCase() == "US" || country.toUpperCase() == "USA") {
+                                      
+                }
+                else
+                {
+                    alert('Shipping Address Should be in United States only');
+                    return false;
+                }
+                
+                var state= $('#SState').val();
+                if (state == undefined || state=='')
+                {
+                    alert('State field is required.Enter State');
+                    return false;
+                }
+                sessionStorage.removeItem('CouponCode');
+                sessionStorage.removeItem('CouponAmount');
+                sessionStorage.removeItem('TotalAmount');
+                sessionStorage.removeItem("Code")
+                return true;
+            }
+        }
+        else
+        {
+            var country = $('#Country').val();
+
+            if (country.toUpperCase() == "UNITEDSTATES" || country.toUpperCase() == "US" || country.toUpperCase() == "USA") {
+                sessionStorage.removeItem('CouponCode');
+                sessionStorage.removeItem('CouponAmount');
+                sessionStorage.removeItem('TotalAmount');
+                sessionStorage.removeItem("Code")
+                return true;
+            }
+            alert('Shipping Address Should be in United States only');
+            return false;
+        }
+        
+    }
+</script>
+<style>
+    .editor-label label {
+        color: #8C8786;
+        font-weight: 900;
+    }
+
+    .editor-field input.text-box, .editor-field select {
+        width: 100%;
+        background-color: #FFFAF8 !important;
+    }
+
+    .error {
+        font-size: 18px;
+    }
+   .no-margin{
+       margin-left:0!important;
+       margin-right:0!important;
+   }
+   textarea{
+       width: 100%;
+   }
+
+</style>
+<form action="checkout" method="Post" onsubmit="return clearData()">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend class="order">Personal Information</legend>
+        <div class="row">
+         
+            <div class="col-md-10">
+                <div class="row no-margin">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.EmailAddress)<span class="error">@Html.ValidationMessageFor(model => model.EmailAddress)</span>
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.EmailAddress)
+
+                    </div>
+
+                </div>
+
+
+                <div class="row no-margin">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.FirstName)<span class="error">@Html.ValidationMessageFor(model => model.FirstName)</span>
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.FirstName)
+
+                    </div>
+                </div>
+                <div class="row no-margin">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.LastName)<span class="error">@Html.ValidationMessageFor(model => model.LastName)</span>
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.LastName)
+
+                    </div>
+                </div>
+                <div class="row no-margin">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PhoneNumber)<span class="error">@Html.ValidationMessageFor(model => model.PhoneNumber)</span>
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PhoneNumber)
+                    </div>
+                </div>
+                @*<div class="editor-label">
+            @Html.LabelFor(model => model.CompanyName)<span class="error">@Html.ValidationMessageFor(model => model.CompanyName)</span>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CompanyName)
+
+        </div>*@
+                <fieldset>
+                    <legend class="order">Billing Address: </legend>
+                    <div class="row no-margin" style="height: 76px;">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Address1)<span class="error">@Html.ValidationMessageFor(model => model.Address1)</span>
+                        </div>
+                        <div class="editor-field">
+                            @*@Html.EditorFor(model => model.Address1)*@
+                            @Html.TextAreaFor(model => model.Address1, new { cols = "4", rows = "3" })
+                            @*<textarea id="Address1" cols="4" rows="3"  name="Address1"></textarea>*@
+
+                        </div>
+                    </div>
+                    @*<div class="row no-margin" style="height: 76px;">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Address2)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Address2)
+                @Html.TextAreaFor(model => model.Address2, new { cols = "4", rows = "3" })
+               <textarea id="Address2" cols="4" rows="3" name="Address2"></textarea>
+            </div>
+        </div>*@
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.City)<span class="error">@Html.ValidationMessageFor(model => model.City)</span>
+                        </div>
+                        <div class="editor-field">
+
+                            @Html.EditorFor(model => model.City)
+
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.State)<span class="error">@Html.ValidationMessageFor(model => model.State)</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.State)
+
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.PostalCode)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.PostalCode)
+
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Country)<span class="error">@Html.ValidationMessageFor(model => model.Country)</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Country)
+
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+   
+    </fieldset>
+    <div>
+        @if (ViewBag.ShipToSchool == true)
+        {
+            <div class="S2Smessage">
+
+                <h4 class="s2s-product">Ship To school Product selected</h4>
+                <p>
+                    your entire order above will be shipped to @ViewBag.SchoolName on their designated delivery date, usually 4-6 weeks after the end of sale.
+
+                </p>
+            </div>
+        }
+        <fieldset>
+            <legend class="order">Shipping Address: </legend>
+            <div class="row">
+                <div class="col-md-10">
+                    @if (ViewBag.ShipToSchool)
+                    {                        
+                        <div id="shipaddress" style="display:none">
+                            @*<div class="editor-label">
+                                    @Html.LabelFor(model => model.SCompanyName)<span class="error">@Html.ValidationMessageFor(model => model.SCompanyName)</span>
+                                </div>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.SCompanyName)
+
+                                </div>*@
+                            <div class="row no-margin" style="height: 76px;">
+                                <div class="editor-label">
+                                    <label>Address</label><span class="error">@Html.ValidationMessageFor(model => model.SAddress1)</span>
+                                </div>
+                                <div class="editor-field">
+                                    @*@Html.EditorFor(model => model.SAddress1)*@
+                                    <label>@Model.SAddress1</label>
+                                    @*@Html.LabelFor(model => model.SAddress1, new {cols="4",rows="3" })*@                                    
+                                </div>
+                            </div>
+                            @*<div class="row no-margin" style="height: 76px;">
+                                    <div class="editor-label">
+                                        @Html.LabelFor(model => model.SAddress2)
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.EditorFor(model => model.SAddress2)
+                                        <textarea id="SAddress2" cols="4" rows="3" name="SAddress2"></textarea>
+                                    </div>
+                                </div>*@
+                            <div class="row no-margin">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.SCity)<span class="error">@Html.ValidationMessageFor(model => model.SCity)</span>
+                                </div>
+                                <div class="editor-field">
+                                    <label>@Model.SCity</label>                                   
+                                </div>
+                            </div>
+                            <div class="row no-margin">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.SState)<span class="error">@Html.ValidationMessageFor(model => model.SState)</span>
+                                </div>
+                                <div class="editor-field">
+                                    <label>@Model.SState</label>
+                                    @*@Html.LabelFor(model => model.SState)*@
+
+                                </div>
+                            </div>
+                            <div class="row no-margin">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.SPostalCode)<span class="error">@Html.ValidationMessageFor(model => model.SPostalCode)</span>
+                                </div>
+                                <div class="editor-field">
+                                    <label>@Model.SPostalCode</label>
+                                </div>
+                            </div>
+                            <div class="row no-margin">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.SCountry)<span class="error">@Html.ValidationMessageFor(model => model.SCountry)</span>
+                                </div>
+                                <div class="editor-field">
+                                    <label>@Model.SCountry</label>
+
+                                </div>
+                            </div>
+                           
+                        </div>
+                        
+                    }
+                    else
+                    {
+                        <div class="row no-margin">
+
+                            <input type="checkbox" id="chkbox" /><span>Check here if your billing and shipping address are the same.</span>
+                        </div>
+                        <div id="shipaddress" style="display:none">
+                            @*<div class="editor-label">
+                                    @Html.LabelFor(model => model.SCompanyName)<span class="error">@Html.ValidationMessageFor(model => model.SCompanyName)</span>
+                                </div>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.SCompanyName)
+
+                                </div>*@
+                            <div class="row no-margin" style="height: 76px;">
+                                <div class="editor-label">
+                                    <label>Address</label><span class="error">@Html.ValidationMessageFor(model => model.SAddress1)</span>
+                                </div>
+                                <div class="editor-field">
+                                    @*@Html.EditorFor(model => model.SAddress1)*@
+                                    @Html.TextAreaFor(model => model.SAddress1, new { @class = "text-box single-line", cols = "4", rows = "3" })
+
+                                    
+
+                                </div>
+                            </div>
+                            @*<div class="row no-margin" style="height: 76px;">
+                                    <div class="editor-label">
+                                        @Html.LabelFor(model => model.SAddress2)
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.EditorFor(model => model.SAddress2)
+                                        <textarea id="SAddress2" cols="4" rows="3" name="SAddress2"></textarea>
+                                    </div>
+                                </div>*@
+                            <div class="row no-margin">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.SCity)<span class="error">@Html.ValidationMessageFor(model => model.SCity)</span>
+                                </div>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.SCity)
+
+                                </div>
+                            </div>
+                            <div class="row no-margin">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.SState)<span class="error">@Html.ValidationMessageFor(model => model.SState)</span>
+                                </div>
+                                <div class="editor-field">
+                                    @Html.DropDownList("SState","Select--")
+                                    @*@Html.EditorFor(model => model.SState)*@
+
+                                </div>
+                            </div>
+                            <div class="row no-margin">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.SPostalCode)<span class="error">@Html.ValidationMessageFor(model => model.SPostalCode)</span>
+                                </div>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.SPostalCode)
+                                </div>
+                            </div>
+                            <div class="row no-margin">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.SCountry)<span class="error">@Html.ValidationMessageFor(model => model.SCountry)</span>
+                                </div>
+                                <div class="editor-field">
+                                   @Html.DropDownList("SCountry","Select--")
+                                </div>
+                            </div>
+                        </div>
+                    }
+                   
+                </div>
+            </div>
+
+
+
+
+
+        </fieldset>
+    </div>
+    @*@if (ViewBag.ShipToSchool == null)
+    {
+       
+    }*@
+    <input type="hidden" id="ShipToSchool" value="@ViewBag.ShipToSchool" />
+    <input type="submit" value="Proceed" id="chkout" style="padding: 6px;border: none;width:90px;margin-bottom: 50px;" />
+   
+</form>
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+

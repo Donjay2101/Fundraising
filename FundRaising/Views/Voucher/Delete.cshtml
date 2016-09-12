@@ -1,0 +1,61 @@
+﻿@model FundRaising.Models.Voucher
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Voucher</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CouponType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CouponType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Value)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Value)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CouponUsage)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CouponUsage)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StartDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EndDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndDate)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

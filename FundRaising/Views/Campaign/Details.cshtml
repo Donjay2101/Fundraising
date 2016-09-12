@@ -1,0 +1,49 @@
+﻿@model FundRaising.Models.Campaign
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="container">
+    <fieldset>
+        <legend>Campaign</legend>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.OrganizatonID)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.OrganizatonID)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.CampaignName)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.CampaignName)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.CampaignStartDate)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.CampaignStartDate)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.CampaignEndDate)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.CampaignEndDate)
+                </div>
+            </div>
+        </div>
+       <div class="row" style="margin-top:40px;">
+           <div class="col-md-3">
+               @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+               @Html.ActionLink("Back to List", "Index")
+           </div>
+       </div>
+    </fieldset>
+    
+
+</div>

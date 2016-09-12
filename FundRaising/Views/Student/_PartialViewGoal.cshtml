@@ -1,0 +1,53 @@
+﻿
+<script>
+    function GoToNext()
+    {
+        var data = $('#txtGoal').val();
+        var option = $('#option').val();
+        var  studentID= $('#sID').val();
+        if (isNaN(data))
+        {
+            alert('Goal should be in number');
+            return;
+        }
+       // alert(option);
+        //alert(studentID);
+        window.location.href = "/student/Personalization?studentID="+studentID+"&option="+option;
+    }
+
+</script>
+<form method="post">
+    <div class="container" id="cont">
+        <h2 class="text-center success">Seller's Registration-Set Your Goal</h2>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 text-center">
+                <span class="textover_studid" style="font-size: 20px;">How will you reach your goal?</span>
+                <br />
+
+                <h4 class="text-center normal_text">Everybody needs a goal. It helps us stay on track and gives something to look forward to. What will your goal be?</h4>
+                <br />
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 text-center">
+                <label class="lab" style="padding-right: 12px;">Sell</label><input type="text" autofocus id="txtGoal" value="@ViewBag.Goal" name="Goal" class="textfield" style="width:25%;" />  <span>@ViewBag.GoalType</span>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 text-center">
+                <input type="submit" value="Submit" onclick="GoToNext()" id="submit" class="buttn" style="width:25%;margin-top: 15px; margin-left: -12px;" />
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+    <input type="hidden" value="@ViewBag.Option" id="option" name="option" />
+    <input type="hidden" value="@ViewBag.StudentID" id="sID" name="sID" />
+</form>
+
+

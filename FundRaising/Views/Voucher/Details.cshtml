@@ -1,0 +1,68 @@
+﻿@model FundRaising.Models.Voucher
+
+@{
+    ViewBag.Title = "Voucher";
+}
+
+
+<div class="container">
+    <fieldset>
+        <legend>Voucher</legend>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Code)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Code)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.CouponType)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.CouponType)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Value)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Value)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.CouponUsage)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.CouponUsage)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.StartDate)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.EndDate)
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:40px;">
+            <div class="col-md-3">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+                @Html.ActionLink("Back to List", "Index")
+
+
+            </div>
+        </div>
+       
+    </fieldset>
+</div>
+
+   

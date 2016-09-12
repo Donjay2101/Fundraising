@@ -1,0 +1,51 @@
+﻿@model IEnumerable<FundRaising.Models.Campaign>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizatonID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CampaignName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CampaignStartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CampaignEndDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganizatonID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CampaignName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CampaignStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CampaignEndDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

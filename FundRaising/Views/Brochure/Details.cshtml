@@ -1,0 +1,63 @@
+﻿@model FundRaising.Models.Brochure
+
+@{
+    ViewBag.Title = "Brochure";
+}
+
+
+<script>
+    $(document).ready(function () {
+
+        var name = $("#HiddenBrochureName").val();
+        var ID = $("#HiddenBrochureID").val();
+
+        var htmlString = "<a href='/Brochure'>Brochures</a> >>";
+       
+        $("#sitemap").html(htmlString);
+    });
+</script>
+
+
+<fieldset>
+    <legend>Brochure</legend>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.BrochureID)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.BrochureID)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.BrochureName)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.BrochureName)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="display-label" style=" width: 148px;">
+                @Html.DisplayNameFor(model => model.Description)
+            </div>
+            <div class="display-field" style="width: 600px;
+                 height: 65px;">
+                @Html.DisplayFor(model => model.Description)
+            </div>
+
+        </div> 
+        </div>
+</fieldset>
+<div class="row" style="margin-top:25px;">
+    <div class="col-md-3">
+        @Html.ActionLink("Edit", "Edit", new {  id=Model.ID }) |
+        @*<a href="#" onclick="goBack()">Back</a>*@
+    </div>
+</div>
+<div>
+    @Html.Partial("_Category",Model.CategoryList)
+</div>
+

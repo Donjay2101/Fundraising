@@ -1,0 +1,90 @@
+﻿@model FundRaising.Models.Category
+
+@{
+    ViewBag.Title = "Category";
+}
+
+<script>
+    $(document).ready(function () {
+
+        var name = $("#HiddenBrochureName").val();
+        var ID = $("#HiddenBrochureID").val();
+        //var htmlString = ;
+        var url = window.location.href;
+        if (url.includes('returnUrl'))
+        {
+            if ((CID != undefined && ID > 0) || (CID > 0 && ID > 0) || CID != undefined || ID != undefined) {
+                var htmlString = "<a href='/Brochure'>Brochures</a> >>" + "<a href='/Brochure/Details?id=" + ID + "'>" + name + "</a> >>";
+                $("#sitemap").html(htmlString);
+            }
+        }
+        
+    });
+</script>
+
+<div class="container">
+    @using (Html.BeginForm("Edit", "category", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Category<input type="submit" value="Update" class="buttn update_btn" /><a href="#" onclick="goBack()" class="update_btn linkbtn" style="text-align:center;" >Back</a></legend>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.CategoryID)<span class="error">@Html.ValidationMessageFor(model => model.ID)</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.CategoryID)
+                            @*@Html.ValidationMessageFor(model => model.ID)*@
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.CategoryName)<span class="error">@Html.ValidationMessageFor(model => model.CategoryName)</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.CategoryName)
+                            @*@Html.ValidationMessageFor(model => model.CategoryName)*@
+                        </div>
+
+                    </div>
+                    <div class="row no-margin">
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Image)<span class="error">@Html.ValidationMessageFor(model => model.Image)</span>
+                        </div>
+                        <div class="editor-field">
+                            <input type="File" value="FileUpload" name="FileUpload" />
+                            @*@Html.ValidationMessageFor(model => model.Image)*@
+                        </div>
+                        </div>
+                    </div>
+            </div>
+            @Html.HiddenFor(model => model.ID)
+            @*<div class="row">
+                <div class="col-md-3">
+             
+                </div>
+            </div>*@
+
+        </fieldset>
+
+
+    <div class="top_grid" id="gridproducts" style="padding-top: 0px;">
+        <h2 class="row text-center h2_margin">Products</h2>
+        @Html.Partial("_Products", Model.products)
+    </div>
+        if (@ViewBag.returnUrl != null)
+        {
+        <input type="hidden" id="returnUrl" name="returnUrl" value="@ViewBag.returnUrl" />
+    }
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

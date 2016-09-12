@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Campaign Completed";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+
+<style>
+    .finish{
+    padding: 100px;
+    font-size: 18px;
+    background: #F9F9F9;
+    border-radius: 5px;
+    border: 1px solid #F7F1F1;
+    }
+</style>
+<div id="finishpage">
+    <h2 id="checkout_header" class="text-center">Campaign Completed</h2>
+    <p class="text-center finish">
+        Sorry, the fundraising campaign for <b>@ViewBag.School</b> completed on <b>@ViewBag.Date</b>.
+        <br />
+        <br />
+        Please check back with us next year!
+    </p>
+</div>

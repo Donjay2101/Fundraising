@@ -1,0 +1,15 @@
+﻿
+Hello <%customer%>,						
+<br/>
+             Thankyou for supporting  <b><%School%></b> and  <b><%Student%></b>.
+
+			 <br/>
+			 <br/>
+ Please save the attached receipt for further information.
+ <br/>
+ <br/>
+ <br/>
+
+ Thanks and Regards
+ Fundraising.infodatixhosting.com
+   

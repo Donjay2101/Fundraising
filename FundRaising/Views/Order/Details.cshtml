@@ -1,0 +1,148 @@
+﻿@model FundRaising.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Order</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EmailAddress)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EmailAddress)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Country)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Country)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FullName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FullName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CompanyName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CompanyName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Address1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Address1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Address2)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Address2)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.City)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.City)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.State)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.State)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PostalCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PostalCode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PhoneNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PhoneNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SCountry)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SCountry)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SCompanyName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SCompanyName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SAddress1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SAddress1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SAddress2)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SAddress2)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SCity)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SCity)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SState)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SState)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SPostalCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SPostalCode)
+    </div>
+
+    @*<div class="display-label">
+         @Html.DisplayNameFor(model => model.Total)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Total)
+    </div>*@
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

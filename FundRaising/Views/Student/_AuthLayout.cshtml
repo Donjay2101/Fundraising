@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "_AuthLayout";
+    Layout = "~/Views/Student/_Layout.cshtml";
+}
+
+<style>
+    #cont{
+            width: 100%;
+    }
+</style>
+<script>
+    function home()
+    {
+
+        var ID = readCookie("StudentID");
+       // var stuID = readCookie('CustomStudentID');
+        //id = $('#studentID').val();
+        window.location.href = '/Student/Index/' + ID;
+    }
+    function goal()
+    {
+        debugger;
+        var id = readCookie("StudentID");
+        //id = $('#studentID').val();
+        window.location.href = '/Student/GoalSetup?studentID='+id+"&option=0";
+    }
+
+
+    function personalize()
+    {
+        var id = readCookie("StudentID");
+        //id = $('#studentID').val();
+        window.location.href = '/Student/personalization?studentID=' + id + "&option=0";
+    }
+
+    function info() {
+        var id = readCookie("StudentID");
+        //id = $('#studentID').val();
+        window.location.href = '/Student/edit?ID=' + id;
+    }
+
+
+    function MyPage() {
+       // var id = readCookie("StudentID");
+        //id = $('#studentID').val();
+       // debugger;
+        var stuID = $('#stuID').html();
+        window.location.href = '/Customer/index/' + stuID;
+    }
+
+    function trackOrder()
+    {
+        var id = readCookie("StudentID");
+        //alert(ID);
+        //id = $('#studentID').val();
+        window.location.href = "/Student/OrderDetails/" + id;
+    }
+
+    $(document).ready(function () {
+
+        //console.log($('#logoutForm'));
+        var htmlString = "Welcome @ViewBag.StudentName &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a style='color:white' href=\"javascript:document.getElementById('logoutF').submit()\">Log off</a>";
+        $('#logoutF').append(htmlString);
+    });
+</script>
+<div class="container" style="margin-top: 30px;">
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="nonbullet" id="stud_info">
+                    <li>Student Name:  @ViewBag.StudentName</li>
+                    <li>Student ID:<span id="stuID">@ViewBag.StudentID</span> </li>
+                    <li>School: @ViewBag.SchoolName</li>
+                    <li>School ID: @ViewBag.SchoolID</li>
+                </ul>
+                <ul class="nonbullet" id="stud">
+                    <li class="stud_menu"><a href="#" onclick="home()">Home</a> </li>
+                    @*<li class="stud_menu"> <a href="#" onclick="goal()">Set Your Goal</a></li>*@
+                    <li class="stud_menu"><a href="#" onclick="personalize()">Personalize/Send Email</a></li>
+                    <li class="stud_menu">Social Media</li>
+                    <li class="stud_menu"><a href="#" onclick="trackOrder()">Track your sales</a> </li>
+                    <li class="stud_menu"><a href="#" onclick="info()">My Info</a> </li>
+                    <li class="stud_menu"><a href="#" onclick="MyPage()">Visit My Site</a></li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+             @RenderBody()
+            </div>
+        </div>
+        <input type="hidden" value="@ViewBag.ID" id="studentID" />  
+    </div>
+

@@ -1,0 +1,252 @@
+﻿@model FundRaising.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+
+
+
+<script>
+
+    //$(document).ready(function(){
+    //    //var  asd=;
+        
+       
+
+    //    //console.log(asd);
+    //    //$('#desc').html();
+    //});
+
+    function AddToCart(ID)
+    {
+        //var productID = $('#productID').val();
+       // alert(ID);
+       // var categoryID=readCookie('categoryCookie');
+        //////if()
+        debugger;
+        
+        var quantity = parseInt($("#Quantity").val());
+        var availQuantity = parseInt($('#availableQuantity').html());
+        if (isNaN(availQuantity))
+        {
+            availQuantity = -0;
+        }
+
+        if ((availQuantity > 0 || availQuantity == -0) && (availQuantity >= quantity || availQuantity == -0))
+        {
+            var elem = $('#subscriptionPart');
+            var issueValue=0;
+            if (elem != undefined)
+            {
+
+                var radios=$('.rad');
+                for(i=0;i<radios.length;i++)
+                {
+                    if ($(radios[i]).is(':checked'))
+                    {
+                        issueValue = $(radios[i]).val();
+                        ID = $(radios[i]).attr('productid');
+                    }
+                }
+
+            }
+            var shiptoschoolonly = $('#shiptoschoolonly').val();
+            if (shiptoschoolonly == 1)
+            {
+                if(!confirm('This product only ships to the school. Adding this cart to order will require the order to be shipped to the school'))
+                {
+                    return;
+                }
+            }
+           
+            
+            
+            //if (parseInt(qtyAvailable) < quantity || parseInt(qtyAvailable) <= 0)
+            //{
+            //    alert('');
+            //}
+            $.ajax({
+                url: "/ShoppingCart/AddtoCart",
+                data: { ID: ID, Quantity: quantity, IssueValue: issueValue },
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                success: function (cartData) {
+                    if(cartData=='OOS')
+                    {
+                        alert('Product is out of stock.');
+                    }
+                    //else if(cartData=='ShipToSchool')
+                    //{
+                    //    alert('Product can be shipped  to your address,cart has products which will be shipped to your school only');
+                    //}
+                    //else if(cartData=='ShipToSchool1')
+                    //{
+                    //    alert('Product can be shiped to school only');
+                    //}
+                    else
+                    {
+                        // alert('hello');
+                        $("#updateicon").fadeIn(2000, function () {
+
+                        });
+
+                        setTimeout(function(){
+                            $("#updateicon").fadeOut(2000, function () {
+
+                            });
+
+                        },5000);
+
+                        var availQuantity=$('#availableQuantity').html();
+                        // alert(availQuantity);
+                        //alert(quantity);
+                        $('#availableQuantity').html(availQuantity - quantity);
+
+
+                        var itemID = $('#itemID').val();
+                        sessionStorage.setItem(itemID, (availQuantity - quantity));
+
+                    }
+                    $('.count').html(cartData.Count);
+                },
+                error: function () {
+                    alert('not added successfully');
+                }
+            });
+        }
+        else
+        {
+            $("#updateicon .msg").html("cannot add to cart.Product not available.");
+            $("#updateicon .msg").css('height','68px');
+            $("#updateicon").fadeIn(100, function () {
+
+            });
+
+            setTimeout(function(){
+                $("#updateicon").fadeOut(1000, function () {
+
+                });
+
+            },5000);
+        }
+
+    }
+
+    $(document).on('click', 'input[name="rg1"]', function () {
+
+        //var id = $(this).attr('productid');
+        //$('#itemID').val(id);
+    });
+
+    $(document).ready(function(){
+        //alert('');
+        var data=$('#categoryID').val();
+        var splitdata=data.split('-');
+        var stuid=$('#studentID').val();
+
+        var htmlString="<a href='/customer/Index/"+stuid+"'>Home</a > >> <a href='/store/Browse?CategoryID="+splitdata[0]+"'>"+splitdata[1]+"</a>";
+        $('#sitemap').html(htmlString);
+        debugger;
+        var itemID = $('#itemID').val();
+        var qtyAvailable = sessionStorage.getItem(itemID);
+        if (qtyAvailable != '' && qtyAvailable != undefined) {
+            $('#availableQuantity').html(qtyAvailable);
+        }
+
+    });
+</script>
+
+<div>
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <h3 id="customer">@Model.Description</h3>
+            <div id="image">
+                <img src="@Model.ImageUrl" class="detail-pro-img"/>
+            </div>
+            <div class="row space"></div>
+        </div>
+        <div class="col-md-5 col-sm-5 col-xs-12">
+            <div id="details" >
+                @if (ViewBag.caterogy != null)
+                {
+                    @*var categoryInfo =ViewBag.CategoryID;
+                    string [] data=categoryInfo.split("-");
+                    <b>@data[0] @categoryInfo </b>*@
+                    if (ViewBag.caterogy == 17)
+                    {
+                        <div id="subscriptionPart">
+                            <div class="row">
+                                @foreach (var item in Model.MagazinePriceList)
+                                {
+                                   
+                                    <div class="col-md-8"><h5 class="grey"><input type="radio" class="rad"  value="@item.Price-@item.Issue" productid="@item.ProductID" name="rg1" /> @item.Issue <span>issues for: </span> </h5></div>
+                                    <div class="col-md-3 top-pad">@String.Format("{0:C}", item.Price)</div>
+                                }
+                                @*<div class="row white">
+                                    <div class="col-md-8"><h5 class="grey"><input type="radio" class="rad" value="@Model.Price1-@Model.Issue1" name="rg1" /> @Model.Issue1 <span>issues for: </span> </h5></div>
+                                    <div class="col-md-3 top-pad">@String.Format("{0:C}", Model.Price1)</div>
+                                </div>
+                                <div class="row grey-1">
+                                    <div class="col-md-8"><h5 class="grey"><input type="radio" class="rad" value="@Model.Price2-@Model.Issue2" name="rg1" />@Model.Issue2 <span>issues for: </span></h5></div>
+                                    <div class="col-md-3 top-pad">@String.Format("{0:C}", Model.Price2)</div>
+                                </div>
+                                <div class="row white">
+                                    <div class="col-md-8"><h5 class="grey"><input type="radio" class="rad" value="@Model.Price3-@Model.Issue3" name="rg1" />@Model.Issue3 <span>issues for: </span></h5></div>
+                                    <div class="col-md-3 top-pad">@String.Format("{0:C}", Model.Price3)</div>
+                                </div>
+                                <div class="row grey-1">
+                                    <div class="col-md-8"><h5 class="grey"><input type="radio" class="rad" value="@Model.Price4-@Model.Issue4" name="rg1" />@Model.Issue4 <span>issues for: </span></h5></div>
+                                    <div class="col-md-3 top-pad">@String.Format("{0:C}", Model.Price4)</div>
+                                </div>*@
+                            </div>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <h5><b>Item Number   </b>: @Model.ItemNumber</h5>
+                        <h5><b>Product Type  </b>:  @Model.productType</h5>
+                        <h5> <b>Product Price </b>: @string.Format("{0:C}", Model.CustomerRetailPrice)   </h5>
+
+                        if (Model.Inventory)
+                        {
+                            <h5>
+                                <b>Quantity Available:</b>
+                                @if (Model.InventoryAmount > 0)
+                                {
+                                    <span id="availableQuantity"> @Model.InventoryAmount</span>
+                                }
+                                else
+                                {
+                                    <span id="availableQuantity">0</span>
+                                }
+                            </h5>
+                        }
+
+
+                    }
+
+                }
+                <input type="hidden" id="shiptoschoolonly" value="@ViewBag.ShipToSchooolOnly" />
+                <input type="hidden" id="itemID" value="@Model.ID" />
+                <div class="space hidden-xs">
+                    
+                </div>
+                <div>
+                    <span>Quantity</span><input type="number" min="1" value="1" id="Quantity" name="Quantity" class="quantity" />
+                </div>
+                <div id="AddToCart"> <a href="#" onclick="AddToCart(@Model.ID)" id="addToCart">Add To Cart</a></div>
+            </div>
+        </div>  
+              
+        <input type="hidden" id="categoryID" value="@ViewBag.caterogyID">
+
+
+    </div>
+    <div  class="row"> 
+        <div id="desc" style="border-top: 1px solid #ECE9E9; PADDING: 19px;">
+            @Html.Raw(Model.DetailDescription)            
+        </div>
+    </div>
+</div>

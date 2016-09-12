@@ -1,0 +1,126 @@
+﻿@model IEnumerable<FundRaising.ViewModels.StudentOrderViewModel>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Student/_AuthLayout.cshtml";
+}
+
+
+@*<div style="padding-bottom: 8px;">
+        <a href="#" onclick="goBack();" class="linkbtn text-center">Back</a>
+    </div>*@
+
+<style>
+    #progressBar {
+        width: 100%;
+        height: 100px;
+        border: 1px solid #C5C5C5;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 3px 3px 3px #CAC7C7;
+    }
+</style>
+
+<script>
+
+    @*$(document).ready(function () {
+
+        //no of Items sold by Student
+        var count=@ViewBag.Count;
+
+        //Goal of Student
+        var Goal=@ViewBag.Goal;
+
+
+        //Precentage of color to Fill
+        var per=(count/Goal)*100;
+        per +="%";
+        $('#colorFill').css("width",per);
+        //alert(@ViewBag.GoalType);
+        if(@ViewBag.GoalType=='1')
+        {
+            $('#count').html('$ '+@ViewBag.Count);
+            $('#goal').html('$ '+@ViewBag.Goal);
+
+        }
+        else
+        {
+            $('#count').html(@ViewBag.Count+' items');
+            $('#goal').html(@ViewBag.Goal+' items');
+
+        }
+        //alert(Goal);
+
+    });*@
+    function getOrders(ID)
+    {
+        window.location.href="/Student/Orders"+ID;
+    }
+
+</script>
+<style>
+.box {
+    border: 1px solid #C7C2C2;
+    box-shadow: 2px 2px 2px 2px #D2CFCF;
+    background: white;
+    border-radius: 5px;
+    height: 60px;
+    width: 190px;
+    padding-top: 15px;
+    margin-top: 10px;
+}
+.prgbr{
+    background: #0A6B59;
+    height: 100px;
+    margin-left: 0px;
+    margin-right: 0px;
+    position: relative;
+    border-radius: 5px;
+}
+</style>
+
+<div>
+    <div id="progressBar" style="position:relative">
+        <div class="row prgbr" id="colorFill">
+        </div>
+        <div class="row" style="position:absolute;top: 10px;">
+            <div class="col-md-6 box text-center" style="left: 30px;">
+                <span>Sold Items:</span>
+                <span id="count">@ViewBag.Count</span>
+            </div>
+            @*<div class="col-md-4" id="colorFill" style="background:green;height:100px">
+
+        </div>*@
+            <div class="col-md-6  box" style="left: 460px;">
+                <span>Goal:</span>
+                <span id="goal">@ViewBag.Goal</span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.Grid(Model).Columns(columns =>
+                    {
+                        columns.Add()
+               .Encoded(false)
+               .Sanitized(false)
+               .SetWidth(30)
+               .Css("hidden-xs") //hide on phones
+               .RenderValueAs(c =>
+                @<div id="balloon" class="balloonClass">
+                    <b>
+                        <a href="#" onclick="getOrders(@c.OrderID)" style="color:#54A792" class="modal-link">@c.OrderID</a>
+                    </b>
+                </div>).Titled("Order ID");
+                        //columns.Add(c => c.OrderID).Titled("Order ID");
+                        columns.Add(c => c.FirstName).Titled("First Name").Filterable(true);
+                        columns.Add(c => c.LastName).Titled("Last Name").Filterable(true);
+                        columns.Add(c => c.createdDate).Titled("Created Date");
+                        columns.Add(c => c.ProductTotal).Titled("Product Total");
+                        columns.Add(c => c.Items).Titled("#Items");
+
+                    }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
+
+</div>

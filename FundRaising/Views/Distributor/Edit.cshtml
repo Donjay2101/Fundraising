@@ -1,0 +1,363 @@
+﻿@model FundRaising.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Distributor";
+}
+
+@*<h2>Register</h2>*@
+<style>
+.editor-field {
+    height: 30px;
+    width: 55% !important;
+    float: right;
+    padding: 3px;
+}
+  .editor-label {
+    width: 45% !important;
+    float: left;
+    line-height: 24px;
+}
+</style>
+@using (Html.BeginForm("Edit", "Distributor", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading  text-center">EDIT INFO</div>
+            <div class="panel-body">
+                <div class="row" style="margin-right: -174px;margin-left: 30px;">
+                    <div class="col-md-5">
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.CompanyName) <span class="color:red">@Html.ValidationMessageFor(model => model.CompanyName)</span>
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.CompanyName)
+
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.UserName)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.UserName)
+
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Password)<span class="error">@Html.ValidationMessageFor(model => model.Password)</span>
+                            </div>
+                            <div class="editor-field">
+                                <input type="text" name="Password" id="Password" value="@Model.Password" class="text-box single-line" />
+                                @*@Html.EditorFor(model => model.Password)*@
+
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.ConfirmPassword)
+                            </div>
+                            <div class="editor-field">
+                                @*@Html.EditorFor(model => model.ConfirmPassword)*@
+                                <input type="text" name="ConfirmPassword" id="ConfirmPassword" value="@Model.ConfirmPassword" class="text-box single-line" />
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.PhoneNumber)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.PhoneNumber)
+
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.EmailAddress)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.EmailAddress)
+
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.FaxNumber)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.FaxNumber)
+
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Address1)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.Address1)
+
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Address2)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.Address2)
+
+                            </div>
+                        </div>
+
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.City)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.City)
+
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.State)
+                            </div>
+                            <div class="editor-field">
+                                @Html.DropDownList("State", "select--")
+                            </div>
+                        </div>
+                        @*<div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Country)
+                            </div>
+                            <div class="editor-field">
+                                @Html.DropDownList("Country", "select--")
+                            </div>
+                        </div>*@
+
+                       
+                        @*<div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.PricingLevel)
+                            </div>
+                            <div class="editor-field">
+                                @Html.DropDownList("PricingLevel", "select--")*@
+                                @*@Html.EditorFor(model => model.PricingLevel)
+                @Html.ValidationMessageFor(model => model.PricingLevel)*@
+                            @*</div>
+                        </div>*@
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Enabled)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.Enabled)
+
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.ImagePath)
+                            </div>
+                            <div class="editor-field" style="height: 127px;">
+                                <input type="file" name="FileUpload" value="FileUpload" />
+                                <img src="@Model.ImagePath" name="ImagePath1" class="dist_edit_img" />
+                                <input type="hidden" value="@Model.ImagePath" name="ImagePath" />
+                            </div>
+                        </div>
+                      
+                     
+                    </div>
+                    <div class="col-md-5">
+                        @*<div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.ShipToSchoolFee)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.ShipToSchoolFee)
+
+                            </div>
+                        </div>*@
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.ParticipantOption)
+                            </div>
+                            <div class="editor-field">
+                                @Html.DropDownList("ParticipantOption", "select--")
+                                @*@Html.EditorFor(model => model.ParticipantOption)
+                @Html.ValidationMessageFor(model => model.ParticipantOption)*@
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.GoalType)
+                            </div>
+                            <div class="editor-field">
+                                @Html.DropDownList("GoalType", "select--")
+
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.OrganzationGoal)<span style="color:red">@Html.ValidationMessageFor(model => model.OrganzationGoal)</span>
+                            </div>
+                            <div class="editor-field">
+                                <input type="number" name="OrganzationGoal" id="OrganzationGoal" value="@Model.OrganzationGoal" class="text-box single-line" />
+                                @*@Html.EditorFor(model => model.OrganzationGoal)*@
+
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.DefaultProductCatalog)
+                            </div>
+                            <div class="editor-field">
+                                @Html.DropDownList("DefaultProductCatalog", "select--")
+                                @*@Html.EditorFor(model => model.DefaultProductCatalog)
+                @Html.ValidationMessageFor(model => model.DefaultProductCatalog)*@
+                            </div>
+                        </div>
+                        @*<div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.DefaultSToSCatalog)
+                            </div>
+                            <div class="editor-field">
+                                @Html.DropDownList("DefaultSToSCatalog", "select--")
+                           
+                            </div>
+                        </div>*@
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.FreeShipment)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.FreeShipment)
+                                @*@Html.DropDownList("FreeShipment", "select--")*@
+                                @*@Html.EditorFor(model => model.FreeShipment)
+                @Html.ValidationMessageFor(model => model.FreeShipment)*@
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.ShipToSchool)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.ShipToSchool)
+
+                            </div>
+                        </div>
+                        @*<div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.ParentCertification)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.ParentCertification)
+
+                            </div>
+                        </div>*@
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.ParentRequired)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.ParentRequired)
+
+                            </div>
+                        </div>
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.CellPhoneRequired)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.CellPhoneRequired)
+
+                            </div>
+                        </div>
+                        @*<div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.EventID)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.EventID)
+
+                            </div>
+                        </div>*@
+                        @*<div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.ParticipateCost)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.ParticipateCost)
+
+                            </div>
+                        </div>*@
+                      
+                      
+                      
+
+                        @*<div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.FAQ)
+                            </div>
+                            <div class="editor-field">
+                                @Html.DropDownList("FAQ", "select--")
+                            </div>
+                        </div>*@
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.CollectTeacher)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.CollectTeacher)
+
+                            </div>
+                        </div>
+
+                        @*<div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.StudentAddress)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.StudentAddress)
+
+                            </div>
+                        </div>*@
+                        @*<div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.CellPhone)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.CellPhone)
+
+                            </div>
+                        </div>*@
+                       
+                        <div class="full-main-edit">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.AutoAssignParticipantID)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.AutoAssignParticipantID)
+
+                            </div>
+                        </div>
+                        @Html.HiddenFor(model=>model.userID)
+                        <input class="mit-sub pull-right ctr" type="submit" value="Update" style="background-color:#006666;margin-right:0px;" />|
+                        <input class="mit-sub pull-right ctr" type="button" value="Back to list" style="background-color:#006666;margin-right:4px;" onclick="window.location.href='/distributor/index'" />
+                        
+                        <input type="hidden" value="@ViewBag.Option" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

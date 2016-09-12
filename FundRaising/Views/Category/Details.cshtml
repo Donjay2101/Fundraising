@@ -1,0 +1,52 @@
+﻿@model FundRaising.Models.Category
+
+@{
+    ViewBag.Title = "Category";
+}
+
+<script>
+    $(document).ready(function () {
+
+        //var name = $("#HiddenBrochureName").val();
+        //var ID = $("#HiddenBrochureID").val();
+        ////var htmlString = ;
+        //var htmlString = "<a href='/Brochure'>Brochures</a> >>"+"<a href='/Brochure/Details?id=" + ID + "'>" + name + "</a> >>";
+        //$("#sitemap").html(htmlString);
+    });
+</script>
+<div class="container">
+    <fieldset class="first-part">
+        <legend>Category</legend>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.CategoryName)
+                </div>
+                <div class="display-field" id="CategoryName">
+                    @Html.DisplayFor(model => model.CategoryName)
+                </div>
+
+           
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Image)
+                </div>
+                <div class="display-field" style="height: 160px; width: 206px;">
+                    <img src="@Model.Image" style="height:inherit;width:inherit" alt=" no image available" />
+                    @*@Html.DisplayFor(model => model.Image)*@
+                </div>
+            </div>
+        </div>
+        <di class="row">
+            <div class="col-md-3">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+                <a href="#" onclick="goBack()">Back</a>
+
+          </div>
+
+</fieldset>
+</div>
+
+<div class="top_grid">
+    @Html.Partial("_Products",Model.products)
+</div>

@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Personalization";
+    Layout = ViewBag.Layout;
+}
+<script src="~/Scripts/ImageTools.js"></script>
+<script>
+
+    function getData() {
+        var div = document.getElementsByClassName("toggle");
+        //alert('hello');
+        div[0].click();
+        // $("#input").html(TINY.editor.edit.prototype.toggle(0,div[0]));
+        //alert(TINY.editor.edit.prototype.toggle(0,div[0]));        
+        //console.log(TINY.editor.edit.prototype.toggle(0,div[0]));
+        //return false;
+    }
+
+
+    $(document).on('change', '#imgFile', function () {
+        var file, img;
+        var _URL = window.URL;
+        debugger;
+        //alert('hello');
+        //console.log(this.files[0]);
+        //ImageTools.resize(this.files[0], {
+        //    width: 150, // maximum width
+        //    height: 150 // maximum height
+        //}, function (blob, didItResize) {
+        //   // console.log(didItResize);
+        //   // $('#testimg').src = _URL.createObjectURL(blob);
+        //    // didItResize will be true if it managed to resize it, otherwise false (and will return the original file as 'blob')
+        //    document.getElementById('testimg').src = window.URL.createObjectURL(blob);
+        //    $('#imgFile').files[0] = blob;
+        //    // you can also now upload this blob using an XHR.
+        //});
+        
+       
+        //console.log(this.files[0]);
+        ////console.log(this.files[0].size);
+        //if ((file = this.files[0])) {
+        //    img = new Image();
+        //    img.onload = function () {
+        //        alert("Width:" + this.width + "   Height: " + this.height);//this will give you image width and height and you can easily validate here....
+        //    };
+        //    $('#testimg').src=_URL.createObjectURL(file);
+            //img.src = 
+        //}
+
+    });
+
+    //});
+
+
+
+</script>
+<div class="row">
+     
+    <div class="col-md-10 normal_text">
+        <h1>Seller's Registration - Personalization</h1>
+        <form method="post" id="form1" enctype="multipart/form-data" onsubmit="getData();">
+            <div>
+                <p>
+                    Personalize  your website and Email ! <span style="color:red">Please complete this step</span> even if you dont change any settings below. all that will happen is<br />
+                    we will forward you an email that you can forward to your family and friends if you like. If you dont want to do this simply delete the mail.
+                </p>
+                <p>
+                    the very next screen provides you will links to facebook, twitter and the like. If you quit now, you will not be able to do this and you will not reach to your dashboard
+                </p>
+                @if (ViewBag.Message != null && ViewBag.Message != "")
+                {
+                    <div>
+                        <h3 class="success"><b> Step 1 </b>: Create a personal message below </h3>
+                        @*@Html.TextArea("message",)*@
+
+                        <textarea name="message" rows="10" cols="50" style="width:100%" id="input">
+                            @ViewBag.Message
+                        </textarea>
+
+
+
+                    </div>
+                }
+                @if (@ViewBag.Image != null)
+                {
+                    <div>
+
+
+                        <h3 class="success"><b> Step 2</b> : upload your photo or other Image</h3>
+                        <p>
+                            you can persoanlize your website and email by uploading and image of yourself, your team, school, Favourite pet etc.This image will be used in
+                            your email and on your personalized website. It will not  be shared with anyone or company outside of this limited usage, your privacy is assured.
+                        </p>
+
+                        <p>
+                            Participant's photo: the size of the photo is limited to 150,000 bytes or 150k, also resizze the photo to 300px X 300px for best results, if the system
+                            complains about that your image is too large then youc an crop it reduce the size of your photo using software in your computer such as "Paint" on a window based system.
+                        </p>
+
+                        <p> ipad: please note that ipad does not allow the uploading of images, hence if your are registering with ipad then Image uplaod button will not appear.</p>
+                        <div class="text-center">
+                            <span class="textover_studid">Seller's photo</span><br />
+                            <span style="color:red">@ViewBag.error</span>
+                            <div class="row text-center">
+                                <input type="File" value="FileUpload" name="FileUpload" id="imgFile" style="display: initial; margin-top: 10px; margin-bottom: 13px; margin-left: 93px;" />
+                            </div>
+
+                            @*<img src="" id="testimg"  alt="no image available" />*@
+                            @if (@ViewBag.Image != "")
+                            {
+                                <img src="@ViewBag.Image" style="width:300px;height:300px" alt="no image available" />
+                            }
+
+
+
+                        </div>
+
+                    </div>
+                }
+                <div>
+                    @if (ViewBag.Image != null && ViewBag.Message != null && ViewBag.Message != "")
+                    {
+                        <h3 class="success"><b>Step 3</b> : send Mail</h3>
+                    }
+                    else if (ViewBag.Image == null && ViewBag.Message != null && ViewBag.Message != "")
+                    {
+                        <h3 class="success"><b>Step 2</b> : send Mail</h3>
+                    }
+                    else
+                    {
+                        <h3 class="success"><b>Step 1</b> : send Mail</h3>
+                    }
+                    <p>
+                        Click on "CONTINUE TO COMPALETE REGISTRATION" below to recieve your personalized mail to forward to your family and friends,
+                        Check your SPAM to make sure it doesnt caught there if it does'nt land on your mailbox in few minutes.
+                    </p>
+                    <p>
+                        when you recieve the email from us containing your personalized message and image. forward it to everyone in your contact list who you think is willing to help
+                        and support you in your fundraising quest.
+                    </p>
+                </div>
+
+                @*<div>
+                    <h3 class="success"><b> Step 4</b>:Forward Mail </h3>
+                    <p>
+
+                    </p>
+                </div>*@
+                <div class="text-center">
+                    <input type="submit" value="continue to complete registration>>" class="buttn" style="width:40%" />
+                </div>
+                <input type="hidden" value="@ViewBag.ID" id="studentID" name="ID" />
+                <input type="hidden" value="@ViewBag.Option" id="option" name="option" />
+            </div>
+        </form>
+
+    </div>
+</div>

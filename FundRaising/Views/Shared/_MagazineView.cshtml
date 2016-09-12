@@ -1,0 +1,49 @@
+﻿@model IEnumerable<FundRaising.ViewModels.ProductViewModel>
+@using GridMvc.Html
+
+
+
+@Html.Grid(Model).Columns(columns =>
+                    {
+                        columns.Add()
+               .Encoded(false)
+               .Sanitized(false)
+               .SetWidth(30)
+               .Css("hidden-xs") //hide on phones
+               .RenderValueAs(c =>
+            @<div id="balloon" class="balloonClass">
+                <b>
+                    @Html.ActionLink("Edit", "Edit", new { id = c.ID,option=1 }, new { @class = "modal_link", @Id = "editlink" })
+                </b>
+            </div>);
+                        columns.Add()
+                                   .Encoded(false)
+                                   .Sanitized(false)
+                                   .SetWidth(30)
+                                   .Css("hidden-xs") //hide on phones
+                                   .RenderValueAs(c =>
+                                @<div id="balloon" class="balloonClass">
+                                    <b>
+                                        <a href="#" onclick="Deleteconfirm('@c.ID','@c.Name')">Delete</a>
+                                    </b>
+                                </div>);
+                        @*columns.Add()
+                                                      .Encoded(false)
+                                                      .Sanitized(false)
+                                                      .SetWidth(30)
+                                                      .Css("hidden-xs") //hide on phones
+                                                      .RenderValueAs(c =>
+                                                    @<div id="balloon" class="balloonClass">
+                                                        <b>
+                                                            <a href="#" value="@c.ID" onclick="copyProduct(this)">Copy</a>
+                                                        </b>
+                                                    </div>);*@
+    columns.Add(c => c.ItemNumber).Titled("Item Number");
+    columns.Add(c => c.Name).Titled("Name");    
+    columns.Add(c => c.sInventoryAmount).Titled("Inventory");
+    columns.Add(c => c.sProductType).Titled("Product Type");
+
+
+}).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
+
+<script src="~/Scripts/gridmvc.min.js"></script>

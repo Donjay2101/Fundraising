@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "ErrorView";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+
+
+@Html.Raw(ViewBag.Message)
+ 
+
+<br />
+
+@if (ViewBag.Transaction == "true")
+{
+    <span>Click here: <a href="/customer/complete/0">back to orders</a></span>
+
+}

@@ -1,0 +1,50 @@
+﻿<script>
+    function select(ID)
+    {
+        window.location.href = '/Customer/SelectBrochureP?BrochureID=' + ID;
+    }
+</script>
+<style>
+  .cat{
+    color: white;
+    background: #21394A;
+    padding: 8px;
+    padding-right: 50px;
+    padding-left: 40px;
+    text-decoration: none;
+    }
+  .cat:hover{
+      color:white;
+      background: #F7960B;
+  }
+</style>
+@if (@ViewBag.Catalog1 != null)
+{
+    <div class="p-one" style="padding: 20px;">
+        <a href="#" onclick="select('@ViewBag.Catalog1.ID')" class="cat">Choose Catalog A</a><br /><br />
+        <span style="    color: #8A8282;
+    text-align: center;
+    font-weight: 700;">@ViewBag.Catalog1.BrochureName</span>
+    <br />
+    <p>
+        @ViewBag.Catalog1.Description
+    </p>
+</div>
+}
+@if (@ViewBag.Catalog2 != null)
+{
+    <div class="p-one" style="padding: 20px;">
+        <a href="#" onclick="select('@ViewBag.Catalog2.ID')" class="cat" >Choose Catalog B</a><br /><br />
+        <span style="color: #8A8282;
+    text-align: center;
+    font-weight: 700;padding-right:0px;">@ViewBag.Catalog2.BrochureName</span>
+    <br />
+    <p>
+        @ViewBag.Catalog2.Description
+    </p>
+</div>
+
+}
+    @*<input type="submit" value="" />
+
+        <input type="submit" value="" />*@

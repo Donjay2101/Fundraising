@@ -1,0 +1,223 @@
+﻿@model FundRaising.Models.Organization
+
+@{
+    ViewBag.Title = "School";
+}
+
+
+
+<fieldset>
+    <legend>Organization</legend>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Distributor)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Distributor)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.ContactName)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ContactName)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Address1)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Address1)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Address2)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Address2)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.City)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.City)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.State)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.State)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Postal)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Postal)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Country)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Country)
+        </div>
+        </div>
+    <div class="main-edit" style="clear:both;">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Phone)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Phone)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.WelcomeMessage)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.WelcomeMessage)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Catalog)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Catalog)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.ShipToSchool)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ShipToSchool)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.ShioToSchoolOnly)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ShioToSchoolOnly)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.ShipToSchoolCatalog)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ShipToSchoolCatalog)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.LoginID)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.LoginID)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Password)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Password)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.ParticipantOption)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ParticipantOption)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.PricingLevel)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.PricingLevel)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.FreeShippingAmount)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.FreeShippingAmount)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.AutoAssignParticipantID)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.AutoAssignParticipantID)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.CollectTeacherGrade)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CollectTeacherGrade)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.CollectCellPhone)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CollectCellPhone)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.CellPhoneRequired)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CellPhoneRequired)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.GoalType)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.GoalType)
+        </div>
+        </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.DefaultGoal)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.DefaultGoal)
+        </div>
+        </div>
+</fieldset>
+<p class="list_back">
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

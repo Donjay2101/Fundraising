@@ -1,0 +1,56 @@
+﻿@model Dictionary<int, FundRaising.ViewModels.ProductShopViewModel>
+@*<script>
+    $(document).ready(function () {
+        $('#product').hover(function () {
+            $('.price').addClass('info')
+        });
+    });
+</script>*@
+<style>
+    /*.list-group-item >:hover{
+     border:1px solid  #F7960B;
+    }*/
+   .info{
+        background-color:#F7960B;
+   }
+</style>
+
+
+@foreach (var item in Model)
+{
+        <li class="list-group-item p-one product-img" id="product" >
+            <a href="/store/details/@item.Value.ID">
+                <div style="padding:10px;">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:center">
+                            <img src="@item.Value.ImageUrl" alt="no image available" class="pro-img">
+                        </div>
+                    </div>
+                    @if (@ViewBag.CategoryID != null)
+                    {
+                        var cat = ViewBag.CategoryID;
+                       // string[] data = cat.split("-");
+                        
+                            <div class="row">
+                                <div class="col-md-12 price">
+                                    <span class="name pro-name">@item.Value.Description</span>
+                                    <div>
+                                        @if (cat != 17)
+                                        {
+                                            <span class="price">Price:</span><span class="text-muted">@string.Format("{0:C}", @item.Value.CustomerRetailPrice)</span><br />
+                                            @*<span style="color: #CA2C0A;">Type:</span><span class="text-muted">@item.Value.productType</span><br />*@
+                                        }
+
+
+                                    </div>
+                           
+                                </div>
+                            </div>                       
+                    }
+                  
+                </div>
+                <div class="clearfix"></div>
+            </a>
+        </li>
+
+}

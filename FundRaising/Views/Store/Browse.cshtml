@@ -1,0 +1,73 @@
+﻿@using FundRaising.ViewModels
+@{
+    ViewBag.Title = "Browse";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+
+
+<script>
+    $(document).ready(function () {
+        var id=$('#studentID').val();
+
+        $("#sitemap").html("<a href='/customer/index/" + id + "'>Home</a>");
+    })
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("div#loading").hide();
+    });
+
+   // data=$("#CategoryID").val();
+   // alert(data);
+    var moreRowsUrl = '/store/browse/'; @*'@Url.Action("Browse", "Store", new { CategoryID = data})'*@
+    $(window).scroll(ulScrollHandler);
+</script>
+<style>
+.panel-default>.panel-heading {
+    color: #21394A!important;
+    background-color: rgb(222, 222, 222)!important;
+    border-color: rgba(167, 165, 165, 0.3)!important;
+}
+
+</style>
+@*<h2 id="customer">Browse</h2>*@
+
+
+
+<div class="row">
+    <div class="col-xs-12  col-md-8" style="width:100%">
+        <div class="panel panel-default" style="border:none">
+            <div class="panel-heading c-list p-one" style=" padding-top: 2px;">
+                <span class="title">Products</span>
+            </div>
+            <ul class="infinite-scroll" style="margin-top:10px">
+                    @Html.Partial("_ProductView", (ViewBag.products as Dictionary<int, ProductShopViewModel>))
+            </ul>
+        </div>       
+    </div>
+</div>
+<div class="row">
+    @Html.Partial("_Loading")
+</div>
+
+
+<input type="hidden" value="@ViewBag.CategoryID" id="CategoryID" />
+
+
+
+@*<ul class="nonbullet">
+    @foreach (var item in Model.products)
+    {
+        <li id="prod_descrptn" style="float:left">
+            <a href="/Store/Details/@item.ID">
+                <img alt="no image Available" src="" class="cust_img" />
+                <br />
+                <br />
+                <span>@item.Description</span>
+            </a>
+                
+        </li>
+    } 
+</ul>*@
+

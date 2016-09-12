@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Student/_Layout.cshtml";
+}
+
+<script>
+    function Validate()
+    {
+        element = document.getElementById('txtSchoolID');
+        if (element.value != "" && element.value != undefined)
+        {
+            if (type == 'number')
+            {
+                if (element.isNaN) {
+                    return false;
+                }
+
+            }
+            return true;            
+        }
+        alert('School ID required');
+        return false;   
+    }
+</script>
+
+<form action="/Student/Register" method="post" onsubmit="return Validate()">
+    <div class="container">
+        <h1>Student Registration-School ID</h1>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 textover_studid text-center">Please enter your School ID,it will be all numeric.</div>
+                <div class="col-md-3"></div>
+            </div>
+        <div class="row studid_reg">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+               <label class="lab">School ID(from information letter)</label> 
+                <input type="text" id="txtSchoolID" autofocus name="schoolID" class="textfield" />
+            </div>
+            <div class="col-md-3"></div>
+          
+                   
+            </div>
+        </div>
+    <div class="row text-center">
+        @if (ViewBag.Result != null && ViewBag.Result == 0)
+        {
+            <span style="color:red"> sorry! selected organization does not have any active Campaign try again next year.</span>
+        }
+    </div>
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                    <input type="submit" id="btn" value="submit" class="buttn" style="width:60%;margin-top: 15px;" />
+                </div></div>
+                <div class="col-md-5"></div>
+               
+        @Html.AntiForgeryToken()
+    </div>
+</form>
+

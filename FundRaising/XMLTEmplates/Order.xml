@@ -1,0 +1,97 @@
+﻿<?xml version="1.0"?>
+<GatewayInterface>
+   <APICredentials>
+     <Username>oscillate_infotech_-__hAf58629</Username>
+     <PayloadSignature>5z65M4HtHJJJ9C6bwT7U</PayloadSignature>
+     <TargetGateway>96493</TargetGateway>
+   </APICredentials>
+    <AuthTransaction>
+        <!-- Optional.  Supplying AuthCode results in Force transaction -->    
+        <AuthCode>1234567</AuthCode>
+        <!-- Optional.  Supplying Preauth results in Pre-Auth transaction --> 
+        <Preauth/>
+        <CustomerData>
+            <Email>kevin@demoemail.com</Email>
+            <!-- Optional -->
+            <CustId>ABC12345</CustId>
+            <BillingAddress>
+                <Address1>test</Address1>
+                <Address2>test2</Address2>
+                <FirstName>John</FirstName>
+                <LastName>Smith</LastName>
+                <City>Bountiful</City>
+                <State>UT</State>
+              
+                <Country>USA</Country>
+                <Phone>801-555-1212</Phone>
+            </BillingAddress>            
+            <!-- Optional ShippingAddress -->            
+            <ShippingAddress>
+                <Address1>test</Address1>
+                <Address2>test2</Address2>
+                <FirstName>John</FirstName>
+                <LastName>Smith</LastName>
+                <City>Bountiful</City>
+                <State>UT</State>
+               <!--  <Zip>84032</Zip> -->
+                <Country>USA</Country>
+                <Phone>801-555-1212</Phone>
+            </ShippingAddress>
+        </CustomerData>
+        <!-- Can either supply OrderItems or Total and Description -->
+        <OrderItems>
+            <Item>
+                <Description>test</Description>
+                <Cost>10.00</Cost>
+                <Qty>1</Qty>
+            </Item>
+        </OrderItems>
+        <Total>10.00</Total>
+        <!-- <Description>desc</Description>    -->     
+        <AccountInfo>
+            <!-- Can supply either CardAccount or CheckAccount -->
+            <CardAccount>
+                <!-- Supply AccountNumber, ExpirationMonth and ExpirationYear or TrackData -->                            
+                <AccountNumber>5454545454545454</AccountNumber>
+                <ExpirationMonth>01</ExpirationMonth>
+                <ExpirationYear>2000</ExpirationYear>
+                <!-- Optional -->                                
+                <CVVNumber>123</CVVNumber>
+                <!-- Track Data if running swipe transaction -->                
+               <!--  <TrackData>TRACK DATA</TrackData>
+					Supply Ksn, Pin along with TrackData for Debit transactions              
+                <Ksn>12345</Ksn>
+                <Pin>1234</Pin> -->
+            </CardAccount>
+                
+        </AccountInfo>
+                     
+        <TransactionControl>
+         <SendCustomerEmail>FALSE</SendCustomerEmail> <!-- TRUE/FALSE -->
+         <SendMerchantEmail>FALSE</SendMerchantEmail> <!-- TRUE/FALSE -->           
+         <TestMode>TRUE</TestMode> <!-- TRUE/FALSE -->
+            <EmailText>
+                <EmailTextItem>test1</EmailTextItem>
+                <EmailTextItem>test1</EmailTextItem>
+                <EmailTextItem>test1</EmailTextItem>
+                <EmailTextItem>test1</EmailTextItem>
+                <EmailTextItem>test1</EmailTextItem>
+                <EmailTextItem>test1</EmailTextItem>
+                <EmailTextItem>test1</EmailTextItem>
+                <EmailTextItem>test1</EmailTextItem>
+                <EmailTextItem>test1</EmailTextItem>
+                <EmailTextItem>test1</EmailTextItem>
+            </EmailText>
+        </TransactionControl>
+        <!-- Optional. This information will be saved on our
+        servers and is available in the XML transaction report. This is
+        useful if you want to save your own transaction meta-data with a
+        transaction. -->
+        <VendorData>
+          <Element>
+            <Name>repId</Name>
+            <Value>1234567</Value>
+          </Element>
+        </VendorData>        
+    </AuthTransaction>
+</GatewayInterface> 

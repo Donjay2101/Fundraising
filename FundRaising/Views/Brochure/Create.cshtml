@@ -1,0 +1,96 @@
+﻿@model FundRaising.Models.Brochure
+
+@{
+    ViewBag.Title = "Brochure";
+}
+
+
+@*<script>
+    $(document).ready(function () {
+        $(".buttn").click(function () {
+            $(".error").show();
+        });
+    });
+</script>*@
+<style>
+    .editor-field {
+    height: 30px;
+    width: 59%;
+    float: right;
+    padding: 3px;
+}
+    .editor-label, .display-label {
+    width: 41%;
+    float: left;
+    line-height: 24px;
+}
+</style>
+@using (Html.BeginForm("Create","Brochure",FormMethod.Post,new{onsubmit="getData()"})) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="container">
+        <fieldset>
+            <legend>Brochure<input type="submit" value="Create" class="buttn update_btn" /><a href="#" onclick="goBack()" class="linkbtn update_btn" style="text-align:center">Back</a></legend>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.BrochureID)<span style="padding-left:0;padding-right:0" class="error">@Html.ValidationMessageFor(model => model.BrochureID)</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.BrochureID)
+                            @*@Html.ValidationMessageFor(model => model.BrochureID) *@
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="editor-label" style="color: #54A792;font-weight: 600;">
+                            Brochure Name<span style="padding-left:0;padding-right:0" class="error">@Html.ValidationMessageFor(model => model.BrochureName)</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.BrochureName)
+                            @*@Html.ValidationMessageFor(model => model.BrochureName)*@
+                        </div>
+                    </div>
+   
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="editor-label" style="width:70px;">
+                                @Html.LabelFor(model => model.Description)<span class="error">@Html.ValidationMessageFor(model => model.Description)</span>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+
+                            <div style="width:100%;">                             
+                                @Html.TextBoxFor(model => model.Description, new { @class = "brochr-description" })                            
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+               
+            </div>
+
+           @*<div class="row" style="margin-top:40px;">
+               <div class="col-md-3">
+                   <input type="submit" value="Create" class="buttn" /><span>|</span><a href="#" onclick="goBack()">Back to list</a>
+               </div>
+           </div>*@
+
+
+            @*<div class="editor-label">
+                    @Html.LabelFor(model => model.products)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.products)
+                    @Html.ValidationMessageFor(model => model.products)
+                </div>*@
+           
+        </fieldset>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

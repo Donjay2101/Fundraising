@@ -1,0 +1,20 @@
+﻿@model IEnumerable<FundRaising.Models.Category>
+
+<div id="large-screen-menu" class="hidden-xs">
+    <ul class="nonbullet" id="category" style="padding-left: 9px;">
+        @foreach (var item in Model)
+        {
+            <li class="cat_menu"> <a href="/store/Browse?CategoryID=@item.ID">@item.CategoryName</a></li>
+        }
+    </ul>
+</div>
+
+<div id="mobile-menu">
+    <select id="cmbCategory" class="form-control">
+        <option value="">Please select category </option>
+        @foreach (var item in Model)
+        {
+            <option value="/store/Browse?CategoryID=@item.ID">@item.CategoryName</option>
+        }
+    </select>
+</div>

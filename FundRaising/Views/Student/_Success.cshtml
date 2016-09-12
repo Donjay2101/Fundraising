@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "_Success";
+    Layout = "~/Views/Student/_Layout.cshtml";
+}
+
+<script>
+    function GoToUrl()
+    {
+       
+        var id = $("#studentID").val();
+        //alert('student/Goalsetup?studentID=' + id);    
+        window.location.href = '/Student/GoalSetUp?studentID=' + id+"&option=1";
+        
+
+    }
+</script>
+<div class="container">
+    <h2 class="success text-center">Success</h2>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 text-center">
+            <p class="text-center normal_text"><span class="textover_studid" style="padding:0px;">Important, you are not done yet.</span>Please Continue Registration by clicking "CONTINUE REGISTRATION" button below. </p>
+            <p class="text-center normal_text">
+                We have saved your name and your email address and have sent an email to your account to verify your email account.When you have receive that email, All you need to do is click on the link to verify your email address.
+                If you don't receive that email, it may be in your SPAM folder or it's possible your email service just Tossed it away.That's happening a lot more these days
+            </p>
+            <p class="text-center normal_text">In any case, Please continue your registration by Clicking "CONTINUE REGISTRATION" button below.</p>
+            <p class="text-center normal_text">Thanks!</p>
+            <a href="#" onclick="GoToUrl()" class="continue_regA"> Continue Registration </a>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+<input type="hidden" id="studentID" value="@ViewBag.studentID" /> 

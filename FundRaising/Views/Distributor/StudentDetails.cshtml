@@ -1,0 +1,231 @@
+﻿@model FundRaising.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    
+    function Deactiviate(ID,name)
+    {
+
+        var d = confirm("Are you sure you want Deactivate " + name);
+        if (d) {
+            $.ajax({
+                url: "/Distributor/Processing",
+                data: { ID: ID ,Option:0},
+                success: function () {
+                    alert('Student deactivated');
+                    var chk = document.getElementsByClassName('check-box');
+                    chk[0].removeAttribute('disabled');
+                    chk[0].checked = false;
+                    chk[0].setAttribute('disabled', 'disabled');
+                    //window.location.href='/Distributor/students';
+                },
+                error: function () {
+                }
+            });
+        }
+    }
+
+    function Activate(ID, name) {
+
+        var d = confirm("you are activating " + name);
+        if (d) {
+            $.ajax({
+                url: "/Distributor/Processing",
+                data: { ID: ID, Option: 1 },
+                success: function () {
+                    alert('Student activated');
+                    var chk = document.getElementsByClassName('check-box');
+                    chk[0].removeAttribute('disabled');
+                    chk[0].checked = true;
+                    chk[0].setAttribute('disabled','disabled');
+                    //window.location.href = '/Distributor/students';
+                },
+                error: function () {
+                }
+            });
+        }
+    }
+
+    function Deleteconfirm(id, name) {
+        var d = confirm("Are you sure you want delete the student with Name: " + name);
+        if (d) {
+            // alert('hello');
+            $.ajax({
+                url: "/Brochure/DeleteStudent",
+                data: { id: id },
+                datatype: "JSON",
+                type: "POST",
+                success: function (data) {
+                    alert('data deleted successfully');
+                    window.location.href='/Distributor/students';
+                },
+                error: function () {
+                    alert('something went wrong please try after sometime');
+                }
+
+            });
+        }
+    }
+
+    function sendMail(ID) {
+        $('#loader').css('display','block');
+        $.ajax({
+            url: "/distributor/ResendMail",
+            data: { ID: ID },
+            success: function () {
+                alert('Mail has been sent to student');
+                $('#loader').css('display', 'none');
+            },
+            error: function () {
+                alert('something went wrong');
+            }
+        });
+    }
+</script>
+<style>
+    .link{
+    /*border: 1px solid;
+    padding: 10px;
+    border-radius: 3px;*/
+    }
+    #linkdiv >.row{
+        height:42px;
+        border:1px solid rgba(0, 102, 102, 0.28);
+        text-align:center;
+        margin-left:10px;
+        margin-bottom:1px;
+        /*padding-top: 10px;*/
+        border-radius:5px;
+        box-shadow:3px 3px 3px rgba(165, 165, 165, 0.53);
+    }
+    #linkdiv >.row a{
+        display:block;
+            padding: 10px;
+    }
+
+    #linkdiv>div.row :hover{
+        color:#006666!important;
+        background:#D9ECD9;
+    }
+</style>
+
+
+
+<div class="row">
+    <h2></h2>
+  
+        
+     @*<input type="button" value="" id="Edit" />*@
+  
+        <fieldset>
+            <legend>Student Details <a href="/distributor/Students" class="update_btn linkbtn text-center" >Back</a><a href="/Student/edit?ID=@Model.StudentID&option=1" class="update_btn linkbtn text-center">Edit </a></legend>
+            <div class="col-md-6 col-sm-6" >
+                <div class="display-label">
+                    Student ID
+                </div>
+                <div class="display-field">                    
+                    @Html.DisplayFor(model => model.StudentID)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.FirstName)
+                </div>
+
+                <div class="display-label">
+                   Last Name
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.LastName)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.EmailAddress)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.EmailAddress)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.TeacherName)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.TeacherName)
+                </div>
+
+                <div class="display-label">
+                    Status
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Active)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Grade)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Grade)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Password)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Password)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Phone)
+                </div>
+                <div class="display-field">
+                    @if (@Model.Phone != null)
+                    {
+                        @Html.DisplayFor(model => model.Phone)
+                    }
+
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-md-offset-3"  id="linkdiv">
+
+                <div class="row" style="">
+                    <img src="~/Images/loader.gif" id="loader" style="float:left;width:11%;display:none" alt="loader" />
+                    <a class="link" href="#" onclick="sendMail(@Model.ID)">Resend Password Email to student</a>  <br />
+                </div>
+                <div class="row" style="">
+                    <a class="link" href="/Student/Index/@Model.StudentID">Login to Student's Dashboard</a><br />
+                </div>
+                <div class="row">
+                    <a class="link" href="/Customer/Index/@Model.StudentID">Login to Student's Website</a><br />
+                </div>
+                <div class="row">
+                    <a class="link" href="#" onclick="Deactiviate('@Model.ID','@Model.FirstName')">Deactivate Student</a><br />
+                </div>
+                <div class="row">
+                    <a class="link" href="#" onclick="Deleteconfirm('@Model.ID','@Model.FirstName')">Delete Student</a><br />
+                </div>
+                <div class="row">
+                    <a class="link" href="#" onclick="Activate('@Model.ID','@Model.FirstName')">Activate Student</a><br />
+                </div>
+            </div>
+</fieldset>
+            @*@Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ })*@
+
+    <hr />
+    <div id="MenuControl">
+
+    </div>
+    <script>
+
+    </script>
+</div>
+    
+  
+
+  

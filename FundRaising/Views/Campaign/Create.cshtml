@@ -1,0 +1,89 @@
+﻿@model FundRaising.Models.Campaign
+
+@{
+    ViewBag.Title = "Create";
+}
+<script>
+    $(document).ready(function () {
+        $('#CampaignStartDate').datepick({ dateFormat: 'yyyy-mm-dd' });
+        $('#CampaignEndDate').datepick({ dateFormat: 'yyyy-mm-dd' });
+    });
+
+    function checkDate()
+    {
+        var startDate = $('#CampaignStartDate').val();
+        var endDate = $('#CampaignEndDate').val();
+
+        startDate = new Date(startDate);
+        endDate = new Date(endDate);
+
+        if(startDate>endDate)
+        {
+            alert('Campaign start date cannot be greater than campaign end date');
+            return false;
+        }
+        return true;
+    }
+</script>
+<div class="container">
+    @using (Html.BeginForm("Create", "Campaign", FormMethod.Post, new { onsubmit="return checkDate()"}))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="row">
+            <div class="col-md-5">
+                <fieldset>
+                 
+                    @*<div class="editor-label">
+                         @Html.LabelFor(model => model.ID)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.ID)
+                            @Html.ValidationMessageFor(model => model.ID)
+                        </div>*@
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.CampaignName)<span class="error">@Html.ValidationMessageFor(model => model.CampaignName)</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.CampaignName)
+                            @*@Html.ValidationMessageFor(model => model.CampaignName)*@
+                        </div>
+                    </div>
+                  
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.CampaignStartDate)<span class="error">@Html.ValidationMessageFor(model => model.CampaignStartDate)</span>
+                        </div>
+                        <div class="editor-field">
+                            <input type="text" id="CampaignStartDate" data-val="true" name="CampaignStartDate" class="calendar input-validation-error" />
+                            @*@Html.EditorFor(model => model.CampaignStartDate)*@
+                            @*@Html.ValidationMessageFor(model => model.CampaignStartDate)*@
+                        </div>
+                    </div>
+                    
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.CampaignEndDate)<span class="error">@Html.ValidationMessageFor(model => model.CampaignEndDate)</span>
+                        </div>
+                        <div class="editor-field">
+                            <input type="text" id="CampaignEndDate" data-val="true" name="CampaignEndDate" class="calendar input-validation-error" />
+                            @*@Html.EditorFor(model => model.CampaignEndDate)*@
+                            @*@Html.ValidationMessageFor(model => model.CampaignEndDate)*@
+                        </div>
+                    </div>
+                   
+                </fieldset>
+            </div>
+        </div>
+    <input type="hidden" id="url" name="returnUrl" value="@ViewBag.returnUrl" />
+        <div class="row" style="margin-top:40px;">
+            <div class="col-md-3">
+                <input type="submit" value="Create" class="buttn" /><span>|</span><a href="#" onclick="goBack()">Back to list</a>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

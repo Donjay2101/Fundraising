@@ -1,0 +1,32 @@
+﻿<script src="~/Scripts/Common.js"></script>
+
+<script>
+    function goToHome()
+    {        
+        var studentID = readCookie('StudentID');
+       // alert(studentID);
+        window.location.href = '/Customer/Index/' + studentID;
+    }
+</script>
+@{
+    ViewBag.Title = "Complete";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+
+
+@{
+    ViewBag.Title = "Complete";
+}
+
+@{
+    ViewBag.Title = "Checkout Complete"; }
+<h2>Checkout Complete</h2>
+<p>Thanks for your order! Receipt has been sent to your registered Email Id, kindly take a look and keep it for further reference. </p>
+<br />
+<p>
+    Order will dispatch to you soon.
+</p>
+
+<p>
+    How about shopping for some more products. <a href="#" onclick="goToHome()">click here </a> to start.
+</p>

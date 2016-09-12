@@ -1,0 +1,352 @@
+﻿@model FundRaising.Models.Organization
+
+@{
+    ViewBag.Title = "School";
+}
+
+<script>
+    function CheckData()
+    {
+       // alert('asd');
+        var elems = $('select');
+
+        for (i=0; i < elems.elems;i++)
+        {
+            //alert(elems[i].val());
+            console.log(elems[i].val());
+            if(elems[i].val()=='-1')
+            {
+                alert("dropdown  not selected");
+                return false;
+                break;
+            }
+        }
+
+        var data = checkID();
+        return data;
+    }
+
+</script>
+
+@using (Html.BeginForm("Create", "Organization", FormMethod.Post, new { @onsubmit="return CheckData()" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="first-part">
+        <legend>School<input class="buttn update_btn" type="submit" value="Create" /><a href="#" onclick="goBack()" class="linkbtn update_btn text-center">Back</a></legend>
+         
+    </fieldset>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Distributor)<span class="error">@Html.ValidationMessageFor(model => model.Distributor)</span>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("Distributor", "Select---")
+
+            </div>
+        </div>
+       
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SchoolID)<span class="error">@Html.ValidationMessageFor(model => model.SchoolID)</span>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.SchoolID)  <input type="button" value="check availability" id="chkSchoolID" />
+                <span id="result"></span>
+            </div>
+        </div>
+       
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Name)<span class="error">@Html.ValidationMessageFor(model => model.Name)</span>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Name)
+
+            </div>
+        </div>
+       
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ContactName)<span class="error">@Html.ValidationMessageFor(model => model.ContactName)</span>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ContactName)
+
+            </div>
+        </div>
+       
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Address1)<span class="error">@Html.ValidationMessageFor(model => model.Address1)</span>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Address1)
+
+            </div>
+        </div>
+        
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Address2)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Address2)
+
+            </div>
+        </div>
+     
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.City)<span class="error">@Html.ValidationMessageFor(model => model.City)</span>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.City)
+
+            </div>
+        </div>
+      
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.State)<span class="error">@Html.ValidationMessageFor(model => model.State)</span>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("State", "Select---")
+                @*@Html.EditorFor(model => model.State)*@
+
+            </div>
+        </div>
+       
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Postal)<span class="error">@Html.ValidationMessageFor(model => model.Postal)</span>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Postal)
+
+            </div>
+        </div>
+        
+
+        @*<div class="editor-label" >
+            @Html.LabelFor(model => model.Country)<span class="error">@Html.ValidationMessageFor(model => model.Country)</span>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Country)
+            @Html.DropDownList("Country", "Select---")
+           
+        </div>*@
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Phone)<span class="error">@Html.ValidationMessageFor(model => model.Phone)</span>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Phone)
+            </div>
+        </div>
+        
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.WelcomeMessage)
+            </div>
+            <div class="editor-field">
+                <input type="text" value="Welcome to our School Shopping Page." id="WelcomeMessage" class='text-box single-line' name="WelcomeMessage" />
+                @*@Html.EditorFor(model => model.WelcomeMessage, new { value = "." })*@
+
+            </div>
+        </div>
+       
+       
+      
+        
+    </div>
+    <div class="col-md-6">
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Catalog)<span class="error">@Html.ValidationMessageFor(model => model.Catalog)</span>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("Catalog", "Select---")
+
+            </div>
+        </div>
+
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ShipToSchool)<span class="error">@Html.ValidationMessageFor(model => model.ShipToSchool)</span>
+            </div>
+            <div class="editor-field">
+
+                @Html.RadioButtonFor(model => model.ShipToSchool, true,new{@checked="checked"})Yes
+                @Html.RadioButtonFor(model => model.ShipToSchool, false, false)No
+                @*@Html.DropDownList("ShipToSchool")*@
+                @*@Html.EditorFor(model => model.ShipToSchool)*@
+
+            </div>
+
+        </div>
+        @*<div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ShioToSchoolOnly)<span class="error">@Html.ValidationMessageFor(model => model.ShioToSchoolOnly)</span>
+            </div>
+            <div class="editor-field">
+                @Html.RadioButtonFor(model => model.ShioToSchoolOnly, true, true)Yes
+                @Html.RadioButtonFor(model => model.ShioToSchoolOnly, false, false)No
+            </div>
+        </div>*@
+     
+        @*<div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ShipToSchoolCatalog)<span class="error">@Html.ValidationMessageFor(model => model.ShipToSchoolCatalog)</span>
+            </div>
+            <div class="editor-field">
+           
+                @Html.DropDownList("ShipToSchoolCatalog", "Select---")
+             
+
+            </div>
+        </div>*@
+       
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.LoginID)<span class="error">@Html.ValidationMessageFor(model => model.LoginID)</span>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.LoginID)
+                @Html.ValidationMessageFor(model => model.LoginID)
+            </div>
+        </div>
+        
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Password)<span class="error">@Html.ValidationMessageFor(model => model.Password)</span>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+       
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ParticipantOption)<span class="error">@Html.ValidationMessageFor(model => model.ParticipantOption)</span>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("ParticipantOption", "Select--")
+                @*@Html.EditorFor(model => model.ParticipantOption)*@
+
+            </div>
+
+        </div>
+       
+        @*<div class="editor-label" >
+            @Html.LabelFor(model => model.PricingLevel)<span class="error">@Html.ValidationMessageFor(model => model.PricingLevel)</span>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("PricingLevel","Select--")
+         
+        </div>*@
+        @*<div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FreeShippingAmountS)<span class="error">@Html.ValidationMessageFor(model => model.FreeShippingAmountS)</span>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("FreeShippingAmountS", "select--")
+
+            </div>
+        </div>*@
+       
+
+        @*<div class="editor-label" >
+            @Html.LabelFor(model => model.AutoAssignParticipantID)<span class="error">@Html.ValidationMessageFor(model => model.AutoAssignParticipantID)</span>
+        </div>
+        <div class="editor-field">
+            @Html.RadioButtonFor(model => model.AutoAssignParticipantID, true, true)Yes
+            @Html.RadioButtonFor(model => model.AutoAssignParticipantID, false, false)No
+
+
+            @Html.DropDownList("AutoAssignParticipantID")
+           @Html.EditorFor(model => model.AutoAssignParticipantID)
+          
+        </div>*@
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CollectTeacherGrade)<span class="error">@Html.ValidationMessageFor(model => model.CollectTeacherGrade)</span>
+            </div>
+            <div class="editor-field">
+                @Html.RadioButtonFor(model => model.CollectTeacherGrade, true, true)Yes
+                @Html.RadioButtonFor(model => model.CollectTeacherGrade, false, false)No
+
+
+                @*@Html.DropDownList("CollectTeacherGrade")*@
+                @*@Html.EditorFor(model => model.CollectTeacherGrade)*@
+
+            </div>
+        </div>
+        
+        @*<div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CollectCellPhone)<span class="error">@Html.ValidationMessageFor(model => model.CollectCellPhone)</span>
+            </div>
+            <div class="editor-field">
+                @Html.RadioButtonFor(model => model.CollectCellPhone, true, true)Yes
+                @Html.RadioButtonFor(model => model.CollectCellPhone, false, false)No
+
+
+                @Html.DropDownList("CollectCellPhone")
+                @Html.EditorFor(model => model.CollectCellPhone)
+
+            </div>
+        </div>*@
+      
+        @*<div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CellPhoneRequired)<span class="error">@Html.ValidationMessageFor(model => model.CellPhoneRequired)</span>
+            </div>
+            <div class="editor-field">
+                @Html.RadioButtonFor(model => model.CellPhoneRequired, true, true)Yes
+                @Html.RadioButtonFor(model => model.CellPhoneRequired, false, false)No
+
+
+               @Html.DropDownList("CellPhoneRequired")
+                @Html.EditorFor(model => model.CellPhoneRequired)
+
+            </div>
+        </div>*@
+        
+        <div class="row no-margin">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.GoalType)<span class="error">@Html.ValidationMessageFor(model => model.GoalType)</span>
+            </div>
+            <div class="editor-field">
+
+                @Html.DropDownList("GoalType", "Select---")
+                @*@Html.EditorFor(model => model.GoalType)*@
+
+            </div>
+        </div>
+       
+        <div class="row no-margin">
+            <div class="editor-label" >
+                @Html.LabelFor(model => model.DefaultGoal)<span class="error">@Html.ValidationMessageFor(model => model.DefaultGoal)</span>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DefaultGoal)
+
+            </div>
+        </div>
+       
+    </div>
+</div>
+@*<div class="row">
+    <div class="back2top col-md-3">
+        <input type="submit" value="Create" class="buttn" /> <a href="#" onclick="goBack()">Back to List</a>   
+    </div>
+</div>*@
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

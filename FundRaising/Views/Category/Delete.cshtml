@@ -1,0 +1,36 @@
+﻿
+@model FundRaising.Models.Category
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Category</legend>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CategoryName)
+        </div>
+    </div>
+    <div class="main-edit">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Image)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Image)
+        </div>
+        </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input class="del_main" type="submit" value="Delete" /> |<a href="#" onclick="goBack()">Back</a>
+        @*@Html.ActionLink("Back to List", "Index")*@
+    </p>
+}

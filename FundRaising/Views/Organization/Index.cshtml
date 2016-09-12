@@ -1,0 +1,34 @@
+﻿@model IEnumerable<FundRaising.Models.Organization>
+
+@{
+    ViewBag.Title = "School";
+}
+
+
+<script>
+
+    function Deleteconfirm(id, name) {
+        var d = confirm("Are you sure you want delete the Organization with Name: " + name);
+        if (d) {
+            Delete(id, 'Organization');
+        }
+    }
+</script>
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+<p>
+    @Html.ActionLink("Create New", "Create","",new {title="tryme()"})
+</p>
+@*<div id="balloonContainer" style="display:none">
+    Tara ra ra ra rum tara ra ra pum
+</div>*@
+<div class="row">
+    <div class="col-md-12">
+        @Html.Action("Grid") @* configure grid in a partial view *@
+    </div>
+</div>

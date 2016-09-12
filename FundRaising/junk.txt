@@ -1,0 +1,280 @@
+﻿//Product
+
+ // CsvRow row = new CsvRow();
+                    // List<string> headers = new List<string> ();
+                    // string[] rowvalue = null;
+                    // int count = 0, index = 0 ;
+                    //  string itemnumber="";
+                    //  string imagePath ="";
+                    // // string errorCSVFile = Path.Combine(Server.MapPath("~/ErrorCSVs"), folderName);
+                    ////  Directory.CreateDirectory(errorCSVFile);
+                    //  //errorCSVFile += @"/ErrorCSV.csv";
+                    //  //FileStream ff = System.IO.File.Create(errorCSVFile,10000000,FileOptions.WriteThrough);
+
+
+                    //  Dictionary<string, string> productrow = new Dictionary<string, string>();
+                    // DataTable dt = new DataTable();
+                    // dt.Columns.Add();
+                    // while(CSV.ReadRow(row))
+                    // {
+                    //     if(count==0)
+                    //     {
+                    //         row.ForEach(x=>headers.Add(x.ToUpper()));
+
+                    //       //array = row.ToArray();
+                    //         count++;
+                    //     }
+                    //     else
+                    //     {
+
+                    //         index=headers.IndexOf("ITEMNUMBER");
+                    //         rowvalue=row.ToArray();
+                    //        itemnumber=rowvalue[index];
+                    //         if(itemnumber.Length<4)
+                    //         {
+                    //             itemnumber=MakeItemNumber(itemnumber);
+                    //         }
+                    //        bool result=MovePicture(itemnumber, dirs,out imagePath);
+                    //        SaveProduct(rowvalue, imagePath,itemnumber);
+                    //         //if(!result)
+                    //         //{
+
+                    //         //    CsvFileWriter write = new CsvFileWriter(ff);
+                    //         //    write.WriteRow(row);
+                    //         //    ff.Flush();
+                    //         //    ff.Close();
+                    //         //}
+                    //         //else
+                    //         //{                                
+
+                    //         //}
+                    //         //index=array.
+                    //     }                        
+                    // }
+
+
+
+
+
+					  //public void SaveProduct(string[] row,string imagePath,string Itemnumber)
+        //{
+        //    double CPrice=0.0, Fprice=0.0,itemWeight=0.0;
+        //    int Inventory = 0;
+        //    bool SaleTax=false, Shipping=false,oversize=false;
+        //    Product product = null;
+        //    bool existingProduct = false;
+        //    if (ShrdMaster.Instance.checkItemNumber(Itemnumber))
+        //    {
+        //        string itemNumber = Itemnumber;
+        //        product = db.Products.Where(x => x.ItemNumber == itemNumber).FirstOrDefault();
+        //        existingProduct = true;
+        //        //db.Entry(product).State = EntityState.Modified;
+        //     //   db.SaveChanges();// db.Products.Add(product);
+        //        //return;
+        //    }
+        //    else
+        //    {
+        //        product = new Product();
+               
+        //    }
+        //    product.ItemNumber = Itemnumber;
+        //    product.productType = 1;
+        //    if(row[1].ToUpper()!="NULL")
+        //    {
+        //        product.Description = row[1];
+        //    }
+        //    if (row[2].ToUpper() != "NULL")
+        //    {
+        //        double.TryParse(row[2], out CPrice);
+        //        product.CustomerRetailPrice = CPrice;
+        //    }
+        //    if (row[3].ToUpper() != "NULL")
+        //    {
+        //        double.TryParse(row[3], out Fprice);
+        //        product.FundTrackerPrice = Fprice;
+        //    }
+        //    if (row[4].ToUpper() != "NULL")
+        //    {
+        //        double.TryParse(row[4], out itemWeight);
+        //        product.ItemWeight = itemWeight;
+        //    }
+        //    if (row[5].ToUpper() != "NULL")
+        //    {
+        //        bool.TryParse(row[5], out SaleTax);
+        //        product.ChargeSalesTax = SaleTax;
+        //    }
+        //    if (row[6].ToUpper() != "NULL")
+        //    {
+        //        bool.TryParse(row[6], out Shipping);
+        //        product.ChargeShipping = Shipping;
+        //    }
+        //    if (row[7].ToUpper() != "NULL")
+        //    {
+        //        bool.TryParse(row[7], out oversize);
+        //        product.ItemOverSize = oversize;
+        //    }
+        //    if (row[8].ToUpper() != "NULL")
+        //    {
+        //        int.TryParse(row[8], out Inventory);
+        //        product.InventoryAmount = Inventory;
+        //        if (Inventory != -1 && Inventory >= 0)
+        //        {
+        //            product.Inventory = true;
+        //        }
+        //    }
+        //    if (row[9].ToUpper() != "NULL")
+        //    {
+        //        product.ItemExtraTitle = row[9];
+        //    }
+        //    if (row[10].ToUpper() != "NULL")
+        //    {
+        //        product.ItemExtraFileName = row[10];
+        //    }
+
+        //    if (row[11].ToUpper() != "NULL")
+        //    {
+        //         product.DetailDescription = row[11];
+        //    }
+        //    if (row[12].ToUpper() != "NULL")
+        //    {
+        //        bool ShiptoSchoolOnly=false;
+        //    bool.TryParse(row[12],out ShiptoSchoolOnly);
+        //    product.ShipToSchoolOnly = ShiptoSchoolOnly;
+        //    }
+            
+        //    if(!string.IsNullOrEmpty(imagePath))
+        //    {
+        //        product.ImageUrl = imagePath;
+        //    }
+            
+        //    //if()
+            
+           
+            
+            
+           
+          
+          
+           
+            
+          
+        //    //double amount;
+        //    //double.TryParse(row[7],out amount);
+        //    //product.ShippingAmount = amount;
+
+           
+          
+           
+           
+          
+           
+          
+           
+           
+           
+        //    //product.Issue1 = 0;
+        //    //product.Issue2 = 0;
+        //    //product.Issue3 = 0;
+        //    //product.Issue4 = 0;
+        //    //product.Price1 = 0;
+        //    //product.Price2 = 0;
+        //    //product.Price3 = 0;
+        //    //product.Price4 = 0;
+           
+
+        //    if (existingProduct)
+        //    {
+        //        db.Entry(product).State = EntityState.Modified;
+        //    }
+        //    else
+        //    {
+        //        //return product;
+        //    }
+            
+        //    db.SaveChanges();
+
+
+        //}
+
+
+
+		 //.Join(Common.ProductTypes(), p => p.productType, pp => pp.ID, (p, pp) => new { Product = p, ProductType = pp })
+            //.Select(x => new ProductViewModel {
+            //    CustomerRetailPrice = x.Product.CustomerRetailPrice,
+            //    FundTrackerRetailPrice = x.Product.FundTrackerPrice,
+            //    ID = x.Product.ID,
+            //    Name = x.Product.Description,
+            //    ItemNumber = x.Product.ItemNumber,
+            //    InventoryAmount = (int)x.Product.InventoryAmount,                    
+            //    sProductType = x.ProductType.Description
+            //}).ToList();
+            //.Join(Common.ProductTypes().AsEnumerable(), c => c.productType, pp => pp.ID, (c, pp) => new { Product = c, ProductType = pp }).
+            //Select(x => new ProductViewModel
+            //{
+            //    CustomerRetailPrice = x.Product.CustomerRetailPrice,
+            //    FundTrackerRetailPrice = x.Product.FundTrackerPrice,
+            //    ID = x.Product.ID,
+            //    Name = x.Product.Description,
+            //    ItemNumber = x.Product.ItemNumber,
+            //    InventoryAmount = (int)x.Product.InventoryAmount,
+            //    sProductType = x.ProductType.Description
+            //}); 
+
+
+			 //public int Issue1 { get; set; }
+       
+        //public int Price1 { get; set; }
+
+        
+        //public int Issue2 { get; set; }
+        
+        //public int Price2 { get; set; }
+
+        
+        //public int Issue3 { get; set; }
+        
+        //public int Price3 { get; set; }
+
+        
+        //public int Issue4 { get; set; }
+        
+        //public int Price4 { get; set; }
+
+///////////////
+
+$(document).on('click', '#ChargeShipping', function () {
+
+
+        if ($(this).is(':checked')) {
+            $('#shippingamount').css('display', 'block');
+        }
+        else {
+            $('#shippingamount').css('display', 'none');
+        }
+    });
+
+    $(document).on('keyup', '#ShippingAmount', function () {
+
+        var data = $('#ShippingAmount').val();
+
+        if (isNaN(data)) {
+            $('#ShippingAmount').val('');
+        }
+
+
+    });
+
+
+
+    $(document).on('focusout', '#ShippingAmount', function () {
+
+        var data = $('#ShippingAmount').val();
+        debugger;
+        if (data == '') {
+            $('#shiperror').css('display', 'block');
+            $('#ShippingAmount').focus();
+        }
+
+
+      
+    });

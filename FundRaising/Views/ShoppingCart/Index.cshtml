@@ -1,0 +1,177 @@
+﻿@model FundRaising.ViewModels.ShoppingCartViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+<script>
+
+    // display the subtotal if user changes the quantity
+  
+
+    //save link to show beneath of Quantity input
+    $(document).on("focusin", ".quantity", function () {
+       // var id=$(this).attr('name');
+        //alert(id);
+      //  elem="#savelink"+id;
+       // alert(elem);
+        //console.log($(elem));
+        //$(elem).css('display','block');
+    });
+
+    //$(document).on("focusout", "#Quantity", function () {
+    //    var id=$(this).attr('name');
+    //    //alert(id);
+    //    elem="#savelink+"+id;
+    //    //alert(elem);
+    //    $("#"+id).css('display','none');
+    //});
+
+    //Save cart details
+    function updateCart(ID,itemID)
+    {
+        debugger;
+        // alert(ID);
+        var quantity;
+        if ($(window).width() <=600) {
+            //Add your javascript for large screens here 
+            quantity= $("input[name='" + itemID + "+m']").val();
+        }
+        else {
+            //Add your javascript for small screens here 
+            quantity = $("input[name='" + itemID + "']").val();
+        }
+        
+        var url='/ShoppingCart/AddtoCart?ID=' + ID + '&Quantity=' + quantity + '&Option=' + 1;
+        $('#cartDiv').load(url, function (shoppingcart) {
+            debugger;
+            $('#mobile-cart').load('/ShoppingCart/cartSummary', function () {
+                $("#updateicon").fadeIn(2000, function () {
+
+                });
+
+                setTimeout(function () {
+                    $("#updateicon").fadeOut(2000, function () {
+
+                    });
+                }, 5000);
+            });                       
+        });
+
+       
+
+        //alert(quantity);
+        //$.ajax({
+        //    url: "",
+        //    data: { ID: ID, Quantity: quantity, Option:1 },
+        //    type: "GET",
+        //    contentType: 'application/json; charset=utf-8',
+        //    success: function (cartData) {
+        //        $('#count').html(cartData.Count);
+        //        $('#price'+itemID).html();
+        //    },
+        //    error: function () {
+        //        alert('not added successfully');
+        //    }
+        //});
+    }
+   
+    function ContinueShopping()
+    {
+        id=$("#studentID").val();
+       // alert(id);
+       // window.location.assign("/customer/index/"+id);
+        window.location.href="/customer/index/"+id;
+        return false;        
+    }
+
+    function removeFromCart(ID,itemID)
+    {
+        debugger;
+        sessionStorage.removeItem(itemID);
+        $('#cartDiv').load('/ShoppingCart/RemoveFromCart?ID=' + ID, function () {
+
+
+            $("#updateicon").fadeIn(2000, function () {
+
+            });
+
+            setTimeout(function () {
+                $("#updateicon").fadeOut(2000, function () {
+
+                });
+            }, 5000);
+        });
+        //$.ajax({
+        //    url: "/ShoppingCart/RemoveFromCart",
+        //    data: { ID: ID},
+        //    type: "GET",
+        //    contentType: 'application/json; charset=utf-8',
+        //    success: function (Data) {
+        //        alert(Data);
+        //        window.location.reload();
+        //        //$('#msg').html(Data);
+        //    },
+        //    error: function () {
+        //        $('#msg').html('item not deleted');
+        //    }
+        //});
+    }
+
+
+    function emptyCart() {
+
+        $('#cartDiv').load('/ShoppingCart/EmptyCart');
+
+        //$.ajax({
+        //    url: "/ShoppingCart/",            
+        //    type: "GET",
+        //    contentType: 'application/json; charset=utf-8',
+        //    success: function (Data) {
+        //        alert('deleted all items from your cart');
+        //        window.location.reload();
+        //        //$('#msg').html(Data);
+        //    },
+        //    error: function () {
+        //        $('#msg').html('item not deleted');
+        //    }
+        //});
+    }
+</script>
+
+<h3 id="customer">YOUR CART</h3>
+
+<div id="msg" >
+
+</div>
+<div id="cartDiv">
+@Html.Partial("_CartView", Model)
+</div>
+
+
+
+@*<table>
+    <tr>
+        <th>
+            Item Number
+        </th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Price</th>
+    </tr>
+   
+       
+            <tr>
+                <td></td>
+                <td></td>
+                <td> </td>               
+                <td></td>               
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          
+        </tr>
+</table>*@

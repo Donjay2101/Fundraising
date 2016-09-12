@@ -1,0 +1,320 @@
+﻿@model FundRaising.ViewModels.ShoppingCartViewModel
+
+<script>
+    $(document).ready(function () {
+
+        $('#count').html(@Model.Count);
+    });
+
+</script>
+<style>
+    .total-pay {
+         padding-top: 0px; 
+    }
+</style>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            @if (ViewBag.shipToSchool)
+            {
+                <div class="row">
+                    <div class="col-md-10 col-sm-10 col-xs-10 text-right remove-rite-text"><label class="shipToschool">Ship To School only Product highlighted:</label></div>
+                    <div class="col-md-1 col-sm-1 col-xs-2 shiptoschoolbox">
+                        <div class="ship_to_school"></div>
+                    </div>
+                </div>
+            }                       
+        </div>
+        
+    </div>
+<div class="row empty"></div>
+
+
+        <div class="row top-header hidden-xs">
+            <div class="col-md-1 col-sm-1" style="border-right:1px solid #E4E4E4">
+                Action
+            </div>
+            <div class="col-md-2 col-sm-2" style="border-right:1px solid #E4E4E4">
+                ITEM NUMBER
+            </div>
+            <div class="col-md-4 col-sm-4" style="border-right:1px solid #E4E4E4">
+                DETAILS
+            </div>
+            <div class="col-md-2 col-sm-2" style="border-right:1px solid #E4E4E4">
+                QUANTITY
+            </div>
+            <div class="col-md-1 col-sm-1" style="border-right:1px solid #E4E4E4">
+                PRICE
+            </div>
+            <div class="col-md-2 col-sm-2" style="border-right:1px solid #E4E4E4">
+                SUBTOTAL
+            </div>
+        </div>
+ 
+  
+
+    @if (Model.cartItems.Count > 0)
+    {
+        int chargeShipping = 0;
+        var pCount = 0;
+        double total_Amount = 0;
+        double ShippingCharge = 0;
+        bool shiptoschool = false;
+        double amount = 0;
+        foreach (var item in Model.cartItems)
+        {
+            var subtotal = item.Price * item.Quantity;
+            var price = "price" + item.ID;
+            var subtot = "subtotal" + item.ID;
+            var link = "savelink" + item.ID;
+            total_Amount += subtotal;
+            if (item.chargeShipping)
+            {
+                chargeShipping++;
+                pCount += item.Quantity;
+            }
+            if (item.ShipToSchool)
+            {
+                shiptoschool = true;
+                <div class="row shiptoschool_product hidden-xs">
+                    <div class="col-md-1 col-sm-1" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                        <a href="#" onclick="removeFromCart(@item.ID, @item.productId)" style="color: #717171; padding-left: 0px;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                    </div>
+                    <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                        <a href="/store/Details/@item.productId" style="color: #717171;">@item.itemNumber</a>
+                    </div>
+                    <div class="col-md-4 col-sm-4" style="border-right: 1px solid #E8E4E4; height: inherit; padding-top: 11px;">
+                        @item.Description
+                    </div>
+                    <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                        <input type="number" value="@item.Quantity" name="@item.ID" min="1" style="margin-bottom: 0; text-align: center;" id="@item.ID" class="quantity"/> <br/>
+                        <a href="#" id="@link" class="savelink visible-sm" style="display:block!important; color: #F7960B;" onclick="updateCart(@item.productId, @item.ID)">save</a>
+                    </div>
+                    <div class="col-md-1 col-sm-1" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                        <span id="@price" style="padding-left: 0px;padding-right: 0px;">@String.Format("{0:C}", Convert.ToInt32(item.Price))</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2" style="text-align: center; height: inherit; padding-top: 11px;">
+                        <span id="@subtot">@String.Format("{0:C}", Convert.ToInt32(subtotal))</span>
+                    </div>
+                </div>
+                <div class="shipToschool-mobile row hidden-md hidden-sm visible-xs">
+                    <div class="row mobile-cartrow">
+                        <div class="col-xs-2">
+                            <a href="#" onclick="removeFromCart(@item.ID, @item.productId)" style="color: #717171; padding-left: 0px;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                        </div>
+                        <div class="col-xs-10 ">@item.Description</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+
+                        </div>
+                        <div class="col-xs-6">
+                            ItemNumber: <a href="/store/Details/@item.productId" style="color: #717171;">@item.itemNumber</a><br />
+                            Quantity: <input type="number" value="@item.Quantity" name="@item.ID+m" min="1" style="margin-bottom: 0; text-align: center;" id="@item.ID" class="quantity" /> <br />
+                            <a href="#" id="@link" class="savelink visible-xs" style="display: none; color: #F7960B;" onclick="updateCart(@item.productId, @item.ID)">save</a>
+                            Price: <span id="@price" style="padding-left: 0px;">@String.Format("{0:C}", Convert.ToInt32(item.Price))</span><br />
+                            SubTotal: <span id="@subtot">@String.Format("{0:C}", Convert.ToInt32(subtotal))</span>
+                        </div>
+                    </div>
+                   
+                </div>
+            }
+            else
+            {
+                <div class="row normal_product hidden-xs">
+                    <div class="col-md-1 col-sm-1" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                        <a href="#" onclick="removeFromCart(@item.ID, @item.productId)" style="color: #717171; padding-left: 0px;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                    </div>
+                    <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                        <a href="/store/Details/@item.productId" style="color: #717171;">@item.itemNumber</a>
+                    </div>
+                    <div class="col-md-4 col-sm-4" style="border-right: 1px solid #E8E4E4; height: inherit; padding-top: 11px;">
+                        @item.Description
+                    </div>
+                    <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                        <input type="number" value="@item.Quantity" name="@item.ID" min="1" style="margin-bottom: 0; text-align: center;" id="@item.ID" class="quantity"/> <br/>
+                        <a href="#" id="@link" class="savelink visible-sm" style="display: none; color: #F7960B;" onclick="updateCart(@item.productId, @item.ID)">save</a>
+                    </div>
+                    <div class="col-md-1 col-sm-1" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                        <span id="@price" style="padding-left: 0px;">@String.Format("{0:C}", Convert.ToInt32(item.Price))</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2" style="text-align: center; height: inherit; padding-top: 11px;">
+                        <span id="@subtot">@String.Format("{0:C}", Convert.ToInt32(subtotal))</span>
+                    </div>
+                </div>
+
+                <div class="row  normal_product-mobile visible-xs hidden-md hidden-sm">
+                    <div class="row mobile-cartrow">
+                        <div class="col-xs-2">
+                            <a href="#" onclick="removeFromCart(@item.ID, @item.productId)" style="color: #717171; padding-left: 0px;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                        </div>
+                        <div class="col-xs-10 ">@item.Description</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6"></div>
+                        <div class="col-xs-6">
+                            ItemNumber: <a href="/store/Details/@item.productId" style="color: #717171;">@item.itemNumber</a><br />
+                            Quantity: <input type="number" value="@item.Quantity" name="@item.ID+m" min="1" style="margin-bottom: 0; text-align: center;" id="@item.ID" class="quantity" /> <br />
+                            <a href="#" id="@link" class="savelink visible-xs" style="display: none; color: #F7960B;" onclick="updateCart(@item.productId, @item.ID)">save</a>
+                            Price: <span id="@price" style="padding-left: 0px;">@String.Format("{0:C}", Convert.ToInt32(item.Price))</span><br />
+                            SubTotal: <span id="@subtot">@String.Format("{0:C}", Convert.ToInt32(subtotal))</span>
+                        </div>
+                    </div>
+               
+                </div>
+            }
+
+        }
+        //  var shippingamount = 7.95;
+        //if (pCount > 1)
+        //{
+
+        //    shippingamount +=((pCount-1)*2.00);
+        //}
+        //if(chargeShipping==1)
+        //{
+
+
+
+        //}
+        //else
+        //{
+        //    shippingamount = (chargeShipping - 1) * 2.00;
+        //}
+
+        <div class="row" style="padding-right: 7px; margin-top: 10px;height:inherit">
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               @if(shiptoschool)
+               {
+               <div class="S2Smessage">
+
+                   <h4 class="s2s-product">Ship To school Product selected</h4>
+                   <p>
+                       your entire order above will be shipped to @ViewBag.SchoolName on their designated delivery date, usually 4-6 weeks after the end of sale.
+
+                   </p>
+               </div>
+               }
+           </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 text-right amt-box">
+                <div class="portion">
+                    <div class="total-pay row">
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+                            <b>SubToal :</b>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4 text-center">
+                          @String.Format("{0:C}", total_Amount)
+                        </div>
+                    </div>
+                    <div class="total-pay row">
+                        @if (!ViewBag.CartView)
+                        {
+                            if (ViewBag.IsTaxChargeable == "true")
+                            {
+
+                                <div class="col-md-8 col-sm-8 col-xs-8 text-right"><b>(@ViewBag.State residents add @ViewBag.SalesTaxCharge%)sales tax:</b></div>
+                                <div class="col-md-4 col-sm-4 col-xs-4 text-center">@String.Format("{0:C}", amount)</div>
+
+                            }
+                            else
+                            {
+                                <div class="col-md-8 col-sm-8 col-xs-8 text-right"><b>(@ViewBag.State residents add @ViewBag.SalesTaxCharge%)    sales tax:</b></div>
+    <div class="col-md-4 col-sm-4 col-xs-4 text-center"><span>N/A</span></div>
+
+                            }
+                        }
+
+
+
+                    </div>
+                    @if (ViewBag.ShippingAmount > 0 && ViewBag.ShippingAmount != null)
+                    {
+                        <div class="shipping-chrg total-pay row">
+                            <div class="col-md-8 col-sm-8 col-xs-8 text-right"><b>Shipping Charge:</b></div>
+                            @if (shiptoschool)
+                            {
+                                <div class="col-md-4 col-sm-4 col-xs-4 text-center">@String.Format("{0:C}", 0)</div>
+                            }
+                            else
+                            {
+                                <div class="col-md-4 col-sm-4 col-xs-4 text-center">@String.Format("{0:C}", ViewBag.ShippingAmount)</div>
+                            }
+
+
+                        </div>
+                        <hr class="new-hr"/>
+                        <div class="total-pay row" style="padding-top: 0px;">
+                            <div class="col-md-8 col-sm-8 col-xs-8 text-right"><b>Total Payable:</b></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 text-center">@String.Format("{0:C}", Convert.ToInt32(Model.CartTotal) + ViewBag.ShippingAmount + amount)</div>
+                        </div>
+                        <br />
+                        if (shiptoschool)
+                        {
+                            @*<p class="err-msg"><span class="star">*</span>Free shipping for ship to school order</p>*@
+                        }
+                        else
+                        {
+                            <p class="err-msg"><span class="star">*</span>Free Shipping with @string.Format("{0:C}", ViewBag.FreeShippingAmount) purchase</p>
+                        }
+
+
+                        @*<hr />*@
+
+                    }
+                    else
+                    {
+                        <div class="total-pay row">
+                            <div class="col-md-8 col-sm-8 col-xs-8 text-right">
+                                <b>
+                                    Total Payable:
+                                </b>
+                            </div><div class="col-md-4 col-sm-4 col-xs-4 text-center">
+                                <span>@String.Format("{0:C}", Convert.ToInt32(Model.CartTotal))</span>
+                            </div>
+                        </div>
+                        @*<b>&nbsp;&nbsp;Total Payable: &nbsp; &nbsp; &nbsp;</b>*@
+                        if (shiptoschool)
+                        {
+                            @*<p class="err-msg"><span class="star">*</span>Free shipping for ship to school order</p>*@
+                        }
+                        else
+                        {
+                            <p class="err-msg"><span class="star">*</span>You qualify for free shipping!</p>
+                        }
+
+
+                    }
+                </div>
+            </div>
+          
+            @*@if (ViewBag.FreeShippingAmount > 0 && )
+            {
+               
+            }
+            else
+            {
+               
+            }*@
+            
+          
+        </div>
+        <hr />
+      
+
+        <br />
+        <div class="row">
+            <div>
+                <a href="#" class="btnCls" onclick="emptyCart()" id="EmptyCart">EMPTY CART</a>
+                <a href="#" class="btnCls" name="continueshopping" onclick="ContinueShopping()" id="conshopping">CONTINUE SHOPPING</a>
+                <a href="/Customer/CheckOut" class="btnCls" name="checkout" id="checkout">CHECKOUT</a>
+                @*<input type="button" class="btnCls" value="" name="EmptyCart"  />*@
+                @*<input type="button" class="btnCls" value="CONTINUE SHOPPING"   />*@
+                @*<input type="button" class="btnCls" value=" CHECKOUT" name="checkout" id="checkout" />*@
+            </div>
+           
+        </div>
+    }
+
+</div>
+

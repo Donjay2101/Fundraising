@@ -1,0 +1,29 @@
+﻿@model FundRaising.Models.Product
+
+@{
+    ViewBag.Title = "Product";
+  
+    }
+
+<script>
+    $(document).ready(function () {
+
+        var name = $("#HiddenBrochureName").val();
+        var ID = $("#HiddenBrochureID").val();
+        //alert(name);
+        //alert(ID);
+
+        var CID = $("#HiddenCategoryID").val();
+        var CName = $("#HiddenCategoryName").val();
+        //alert(CName);
+        //alert(CID);
+
+        var htmlString = "<a href='/Brochure'>Brochures</a> >>" + "<a href='/Brochure/Details?id=" + ID + "'>" + name + "</a> >>" + "<a href='/Category/Details?id=" + CID + "'>" + CName + "</a> >>";
+        $("#sitemap").html(htmlString);
+    });
+</script>
+
+
+<div>
+        
+</div>

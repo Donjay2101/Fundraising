@@ -1,0 +1,10 @@
+﻿
+                            Hello!
+
+
+
+
+Welcome to my fundraising web page for<span style="font-style: italic; font-weight: bold;"> <%orgname%></span>.&nbsp;
+<div><br /></div><div>This simple and easy to use site allows you to purchase great quality products while helping me raise money for my school.&nbsp;</div><div><br /></div><div><em>plus i can win some great prizes as well!!!!!!.&nbsp;</em></div><div><br /></div><div><span style="font-style: italic;">&nbsp;<strong>thank you</strong> in advance for helping to support <span style="font-style: italic; font-weight: bold;"> <%orgname%> </span> we really appreciate  it.
+
+                        </span></div>

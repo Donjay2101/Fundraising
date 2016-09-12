@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Register2";
+    Layout = "~/Views/Student/_Layout.cshtml";
+}
+
+
+<script>
+    function error()
+    {
+        var data = $('#txtStudentID').val();
+        if(data.length<7)
+        {
+            alert('studentID should contain 7 characters');
+            return false;
+        }
+        return true;    
+    }
+</script>
+<div class="container">
+    <h1>Seller's Registration-Student ID</h1>
+
+    <div class="row text-center" style="padding: 20px;">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <span class="verifyschool_text">Welcome to simple and easy fundraising</span>
+            <br />
+            <p class="normal_text"> On this page and the following pages, you will register as a seller for fundraising campaing for your school.</p>
+            <br />
+            <span class="textover_studid">Please enter yout Student ID below</span>
+            <br />
+            <p class="normal_text">This is a 7 digit number which is found on the top left  hand corner of your order card found in your fundraising packet.</p>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form action="/Student/Register2" method="post" onsubmit=" return error()">
+                @Html.AntiForgeryToken()
+                <label class="lab">
+                    Student ID(top of order)</label>
+                <input type="text" id="txtStudentID" name="studentID" autofocus maxlength="7" class="textfield" />
+                    <input type="submit" id="submit" name="submit" value="CONTINUE" class="buttn" style="margin-top: 15px;">
+</form>
+        </div>
+        <div class="col-md-3"></div>
+        <div style="color:red">
+            @ViewBag.Message
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,47 @@
+﻿@model FundRaising.Models.Campaign
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Campaign</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrganizatonID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrganizatonID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CampaignName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CampaignName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CampaignStartDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CampaignStartDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CampaignEndDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CampaignEndDate)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

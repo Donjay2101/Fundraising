@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "registerverify";
+    Layout = "~/Views/Student/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1>Student's Registration -Verfiy School</h1>
+
+    <div class="row" style="padding: 30px;">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <span class="verifyschool_text"> You have selected</span>
+            <br />
+            <span class="textover_studid">@ViewBag.Result </span>
+            <br />
+            <span class="verifyschool_text"> Is this correct school?</span>
+        </div>
+        <div class="col-md-4"></div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <input type="button" value="<<GO BACK" onclick="goBack()" class="buttn" />
+            <input type="button" value="CONTINUE" onclick="window.location.href='/student/Register2'" class="buttn" />
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+
+
+
+
+

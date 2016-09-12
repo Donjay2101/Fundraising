@@ -1,0 +1,327 @@
+﻿@model IEnumerable<FundRaising.Models.Cart>
+
+<div class="col-md-12 ">
+    <div class="row orderdetail hidden-xs" >
+        <div class="col-md-5 col-sm-5" style="border-right:1px solid #E8E4E4">
+            PRODUCT
+        </div>
+        <div class="col-md-2 col-sm-2" style="border-right:1px solid #E8E4E4">
+            QUANTITY
+        </div>
+        <div class="col-md-2 col-sm-2" style="border-right:1px solid #E8E4E4">
+            PRICE
+        </div>
+        <div class="col-md-2 col-sm-2" style="">
+            SUBTOTAL
+        </div>
+    </div>
+    @if (Model != null)
+    {
+        double total = 0;
+        int Shipping = 0;
+        int Pcount = 0;
+        double ShippingCharge = 0;
+        bool ShipToSchool = false;
+        double amount = 0;
+        foreach (var item in Model)
+        {
+            var subtotal = item.Price * item.Quantity;
+            var price = "price" + item.ID;
+            var subtot = "subtotal" + item.ID;
+            total += subtotal;
+
+            if (item.chargeShipping)
+            {
+                Shipping++;
+                Pcount += item.Quantity;
+            }
+            ShipToSchool = item.ShipToSchool;
+            if(item.ShipToSchool)
+            {
+                <div class="row shiptoschool_product hidden-xs" style="border-bottom: 1px solid #E8E4E4; height: 57px">
+
+                    <div class="col-md-5 col-sm-5" style="border-right: 1px solid #E8E4E4; height: inherit; padding-top: 11px;">
+                        @item.Description
+                    </div>
+                    <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                        <span id="@price">@item.Quantity</span>
+                        @*<input type="number" value="@item.Quantity" name="@item.ID" style="margin-bottom:0;text-align: center;" id="Quantity" class="quantity" /> <br />*@
+                    </div>
+                    <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                        <span id="@price">@String.Format("{0:C}", Convert.ToInt32(item.Price))</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2" style="text-align: center; height: inherit; padding-top: 11px;">
+                        <span id="@subtot"> @String.Format("{0:C}", Convert.ToInt32(subtotal))</span>
+                    </div>
+                </div>
+                <div class="row shiptoschool_product-mobile hidden-md hidden-sm visible-xs shipToschool-mobile">
+                    <div class="row mobile-cartrow ">
+                        <div class="col-xs-12">
+                            @item.Description
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">                          
+                            Quantity:
+                            <br/>
+                            Price:
+                            <br/>
+                            Subtotal:
+                        </div>
+                        <div class="col-xs-6">
+                          
+                            <span id="@price">@item.Quantity</span><br/>
+                            <span id="@price">@String.Format("{0:C}", Convert.ToInt32(item.Price))</span><br/>
+                            <span id="@subtot"> @String.Format("{0:C}", Convert.ToInt32(subtotal))</span><br/>
+                        </div>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row hidden-xs" style="border-bottom: 1px solid #E8E4E4; height: 57px; background: white;">
+
+                    <div class="col-md-5 col-sm-5" style="border-right: 1px solid #E8E4E4; height: inherit; padding-top: 11px;">
+                        @item.Description
+                    </div>
+                    <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                        <span id="@price">@item.Quantity</span>
+                        @*<input type="number" value="@item.Quantity" name="@item.ID" style="margin-bottom:0;text-align: center;" id="Quantity" class="quantity" /> <br />*@
+                    </div>
+                    <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                        <span id="@price">@String.Format("{0:C}", Convert.ToInt32(item.Price))</span>
+                    </div>
+                    <div class="col-md-2 col-sm-2" style="text-align: center; height: inherit; padding-top: 11px;">
+                        <span id="@subtot"> @String.Format("{0:C}", Convert.ToInt32(subtotal))</span>
+                    </div>
+                </div>
+                <div class="row hidden-sm hidden-md visible-xs normal_product-mobile">
+                    <div class="row mobile-cartrow ">
+                        <div class="col-xs-12">
+                            @item.Description
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Quantity:
+                            <br/>
+                            Price:
+                            <br/>
+                            Subtotal:
+                        </div>
+                        <div class="col-xs-6">
+
+                            <span id="@price">@item.Quantity</span><br/>
+                            <span id="@price">@String.Format("{0:C}", Convert.ToInt32(item.Price))</span><br/>
+                            <span id="@subtot"> @String.Format("{0:C}", Convert.ToInt32(subtotal))</span>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+        <div class="row" id="totalPayable" style="margin-top: 30px;">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div id="coupon">
+                </div>
+                @if (ShipToSchool)
+                {
+                    <div>
+                    
+                    </div>
+                    <div class="S2Smessage">
+                        <div class="row">
+                            <div class="col-md-10 col-sm-10 col-xs-10 text-right"><label class="shipToschool">Ship To School only Product highlighted:</label></div>
+                            <div class="col-md-1 col-sm-1 col-xs-1 shiptoschoolbox">
+                                <div class="ship_to_school"></div>
+                            </div>
+
+                        </div>
+                        <hr class="total-pay-hr" />
+                        <h4 class="s2s-product">Ship To school Product selected</h4>
+                        <p>
+                            your entire order above will be shipped to @ViewBag.SchoolName on their designated delivery date, usually 4-6 weeks after the end of sale.
+
+                        </p>
+                    </div>
+   
+                }
+                
+            </div>
+            <div>
+                @if (ViewBag.ShippingAmount >= 0 && ViewBag.ShippingAmount != null && ViewBag.studentID != "50000")
+                {
+                    //var shippingamount = 7.95;
+                    //if (Pcount > 1)
+                    //{
+
+                    //    shippingamount += ((Pcount - 1) * 2.00);
+                    //}
+                    <div class="col-md-6  col-sm-6" style=" line-height: 25px;">
+                        <div class="shipping-chrg row">
+                            <div class="col-md-8 col-sm-8 col-xs-8 text-right"><b>SubTotal:</b></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 text-center">@String.Format("{0:C}", total)</div>
+                        </div>
+                        <div class="shipping-chrg row">
+                            @if (ViewBag.IsTaxChargeable == "true")
+                            {
+                                double.TryParse(ViewBag.SalesTaxCharge, out ShippingCharge);
+                                amount = total * (ShippingCharge / 100);
+                                <div class="col-md-8 col-sm-8 col-xs-8 text-right"><b>(@ViewBag.State residents add @ViewBag.SalesTaxCharge%)    sales tax:</b></div>
+                                <div class="col-md-4 col-sm-4 col-xs-4 text-center"><span style="padding-left: 0;">@String.Format("{0:C}", amount)</span></div>
+
+                            }
+                            else
+                            {
+                                <div class="col-md-8 col-sm-8 col-xs-8 text-right"><b>(@ViewBag.State residents add @ViewBag.SalesTaxCharge%)    sales tax:</b></div>
+                                <div class="col-md-4 col-sm-4 col-xs-4 text-center"><span>N/A</span></div>
+
+                            }
+                        </div>
+                        <div class="shipping-chrg row">
+                            <div class="col-md-8 col-sm-8 col-xs-8 text-right"><b>Shipping Charge:</b></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 text-center">@String.Format("{0:C}", ViewBag.ShippingAmount)</div>
+                        </div>
+                        <hr class="total-pay-hr" />
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8 col-xs-8 text-right"><b>Total Payable:</b> </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 text-center">@String.Format("{0:C}", (total + ViewBag.ShippingAmount + amount))</div>
+                        </div>
+                    </div>
+                    @*<div class="row">
+
+                        <div class="col-md-7 text-right" style="padding-right:0">
+                            <b>Shipping Charge:</b>
+                        </div>
+                        <div class="col-md-3">
+                            <span id="totlamt" style="padding-left:11px!important">@String.Format("{0:C}",20)</span>@*<br />*@
+                    @*</div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-7 text-right" style="padding-right:0">
+                                <b>Total :</b>
+                            </div>
+                            <div class="col-md-3">
+                                <span id="totlamt" style="padding-left:11px!important">@String.Format("{0:C}", Convert.ToInt32(total)+20)</span>@*<br />*@
+                    @*</div>
+                        </div>*@
+                }
+                else
+                {
+
+                }
+                @*<b><span></span> </b>&nbsp;&nbsp;&nbsp;*@
+                @if (ViewBag.studentID == "50000")
+                {
+                    <div class="row">
+                        <div class="col-md-7 col-sm-7 col-xs-7 text-right" style="padding-right:0">
+                            <b>Coupon Discount:</b>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <span id="cpnValue">@ViewBag.Discount</span>
+                        </div>
+                    </div>
+
+                    <div class="row" id="cpnchk" style="border-top:1px solid #DCD7D7">
+                        <div class="col-md-7 col-sm-7 col-xs-7 text-right">
+                            <b>Total Payable:</b>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <span id="totalpay"></span>
+                        </div>
+                    </div>
+                    <br />
+                }
+
+
+                <br />
+                <br />
+            </div>
+        </div>
+    }
+    <br />
+    <br />
+
+    <div id="CardDetails">
+        <div class="row">
+            <h4 class="payment-info">Payment Information</h4>
+        </div>
+        <br />
+        <div class="row">
+
+            <div class="col-md-8 col-md-offset-2 pad-rite ">
+                <select id="paymentMethod" name="CardType">
+                    <option value="0">(Please Select)</option>
+                    <option value="VISA">VISA</option>
+                    <option value="Master Card">Master Card</option>
+                    <option value="American Express">American Express</option>
+                    <option value="DiscoverCard">DiscoverCard</option>
+                </select>
+
+            </div>
+            <div class="col-md-1"><span id="CardTypes" class="required-field">*</span></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 pad-rite">
+                <input type="text" id="txtcardNum" name="CardNumber" class="card-input" placeholder="Card Number(No Dashes or spaces)" />
+
+            </div>
+            <div class="col-md-1"><span id="txtcardNums" class="required-field">*</span></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 pad-rite ">
+
+                <input type="text" id="txtcardName" name="CardName" class="card-input" placeholder="Name on Card" />
+
+            </div>
+            <div class="col-md-1"><span id="txtcardNames" class="required-field">*</span></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 pad-rite">
+                <label class="expire">Expritation Date</label>
+                <span class="pad"></span>
+                <select id="optDate" name="ExpirationDate">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                @*<span class="pad required-field" id="optDates" >*</span>*@
+                @*<span class="pad required-field">*</span>*@
+                <select id="optYear" name="ExpirationYear">
+                    @*@for (int i = 1; i <= 31; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }*@
+                </select>
+                <span class="pad"></span>
+            </div>
+            @*<div class="col-md-1"><span id="optYears" class="required-field">*</span></div>*@
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 pad-rite">
+                @*<span>Security Code()</span>*@
+                <input type="text" id="txtCode" name="CVVNumber" class="card-input" placeholder="Security Code" /><a href="#" id="help" onclick="openHelp()" class="pull-right"><img src="~/Content/images/Questionmark (1).png" /></a>
+            </div>
+            <div class="col-md-1"><span id="txtCodes" class="required-field">*</span></div>
+        </div>
+
+
+    </div>
+</div>
+
+    <div class="row pull-right" style="margin-bottom:50px;margin-right:16px;">
+        <input type="submit" class="btnCls" value="PLACE ORDER" id="PlaceOrder"  />
+    </div>
+<script>
+    function openHelp()
+    {
+        window.open('http://localhost:51369/Customer/Help','_blank');
+    }
+</script>

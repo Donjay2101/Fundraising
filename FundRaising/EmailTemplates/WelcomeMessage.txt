@@ -1,0 +1,41 @@
+﻿The first part of your registration is complete
+
+If you are viewing this email message, it means that the email address you provided is correct. However, we would appreciate it if you would click the link below to let us know what your email address is indeed valid.
+
+Once you have completed registration, you can log back into your account to:
+<ul>
+<li>View or change your personal goal</li>
+<li>Resend the "Personalized Email" that you would forward to your family and friends.</li>
+<li>Connect to Social Media like Facbook and Twitter</li>
+<li>Track your sales and view order confirmation from anyone who has donated or purchased from your site.</li>
+<li>Change your registration settings including your email address</li>
+<li>View your personalized website</li>
+</ul>
+
+
+
+
+
+
+ <b>
+Here is your account information (KEEP IT PRIVATE!!!!!)
+</b>
+
+
+<span style='color:red'>Use this account information ONLY to monitor your account -- keep it private, keep it safe, DO NOT SHARE IT WITH ANYONE!</span>
+
+Login at "fundraising.infodatixhosting.com/student/index/<%UserID%>"  OR    <a href="fundraising.infodatixhosting.com/student/index/<%UserID%>">(Click Here)</a>
+<br/>
+Your Student ID is::<%UserID%><br/>
+Your Password is: <%password%><br/>
+<br/>
+IMPORTANT!
+
+Do NOT enter any of your online sales onto your paper order form. Your online sales are automatically added to your total sales and you will be given credit for them.
+
+
+
+Thanks very much,
+
+The Classic Group
+

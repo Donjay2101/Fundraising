@@ -1,0 +1,362 @@
+﻿@model FundRaising.Models.Product
+
+@{
+    ViewBag.Title = "Product";
+
+}
+
+<style>
+ .editor-field {
+    height: 30px;
+    width: 45%!important;
+    float: right;
+    padding: 3px;
+}
+    .editor-label {
+    width: 53% !important;
+    float: left;
+    line-height: 24px;
+}
+</style>
+<script>
+    $(document).ready(function () {
+        activeSubscription();
+    })
+    
+
+    $(document).on('change', '#ProductType', function () {
+
+        activeSubscription();
+    });
+
+    function activeSubscription()
+    {
+        var type = $('#ProductType').val();
+
+        if (type == 2) {
+            $('#subscriptionPrice').css('display', 'block');
+            $('#subPart').css('display', 'block');
+            $('#propart').css('display', 'none');
+        }
+        else {
+            $('#subscriptionPrice').css('display', 'none');
+            $('#subPart').css('display', 'none');
+            $('#propart').css('display', 'block');
+        }
+    }
+
+    
+</script>
+
+@using (Html.BeginForm("create", "Product", FormMethod.Post, new { @id = "form1", onsubmit="return getData()",@enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div>
+        @*<div>
+            @ViewBag.error
+        </div>*@
+        @*@Html.ActionLink("Back to List", "Index")*@
+    </div>
+    <fieldset>
+        @if (ViewBag.option == 1)
+        {
+            <input type="hidden" name="ProductType"  id="ProductType" value="2" />
+            <input type="hidden" name="ItemNumber" id="ItemNumber" value="0" />
+            @Html.HiddenFor(model=>model.MagazinePrice)
+
+        }
+        
+        <legend>Product<input type="submit" value="Create" class="buttn update_btn" style="width:90px;" /><a href="#" onclick="goBack()" class="linkbtn update_btn" style=" text-align: center;">Back</a></legend>
+        <div class="row">
+            <div class="col-md-4">
+                
+                @if (ViewBag.option == 1)
+                {
+                    <input type="hidden" name="ProductType" value="2" />
+                    <div>
+                        <fieldset>
+                            <legend>Price</legend>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div>
+                                        <input type="text" id="ItemNumber1" />
+                                    </div>
+                                    <div>
+                                        <input type="text" id="Issue1" />
+                                    </div>
+                                    <div>
+                                        <input type="text" id="Price1" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div>
+                                        <input type="text" id="ItemNumber2" />
+                                    </div>
+                                    <div>
+                                        <input type="text" id="Issue2" />
+                                    </div>
+                                    <div>
+                                        <input type="text" id="Price2" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div>
+                                        <input type="text" id="ItemNumber3" />
+                                    </div>
+                                    <div>
+                                        <input type="text" id="Issue3" />
+                                    </div>
+                                    <div>
+                                        <input type="text" id="Price3" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div>
+                                        <input type="text" id="ItemNumber4" />
+                                    </div>
+                                    <div>
+                                        <input type="text" id="Issue4" />
+                                    </div>
+                                    <div>
+                                        <input type="text" id="Price4" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </fieldset>
+                    </div>
+                }
+                else
+                {
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ItemNumber)<span class="error"> @Html.ValidationMessageFor(model => model.ItemNumber)</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.ItemNumber)
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.productType)<span class="error">@Html.ValidationMessageFor(model => model.productType)</span>
+                        </div>
+                        <div class="editor-field">
+
+                            @Html.DropDownList("ProductType", "select---")
+                            @*@Html.EditorFor(model => model.productType)*@
+
+                        </div>
+                    </div>
+                }                
+                <div class="row no-margin">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Description)<span class="error">@Html.ValidationMessageFor(model => model.Description)</span>
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Description)
+
+                    </div>
+                </div>
+                @if (ViewBag.option != 1)
+                {
+                    <div class="row no-margin">
+                        <div id="propart">
+                            <div class="editor-label remove-marg">
+                                @Html.LabelFor(model => model.CustomerRetailPrice)<span class="error">@Html.ValidationMessageFor(model => model.CustomerRetailPrice)</span>
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.CustomerRetailPrice)
+                            </div>
+                        </div>
+                    </div>
+                    @*<div id="subscriptionPrice" style="display:none">
+                            <div id="subPart" style="display:none">
+                                <div class="row no-margin">
+                                    <div class="editor-label">
+                                        <label>Number of Issues</label>
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.EditorFor(model => model.Issue)
+                                        @Html.ValidationMessageFor(model => model.ItemWeight)
+                                    </div>
+                                </div>
+                                <div class="row no-margin">
+                                    <div class="editor-label">
+                                        <label>Price for issue given above</label>
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.EditorFor(model => model.Price)
+                                        @Html.ValidationMessageFor(model => model.InventoryAmount)
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>*@
+                    <div class="row no-margin">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.FundTrackerPrice)<span class="error">@Html.ValidationMessageFor(model => model.FundTrackerPrice)</span>
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.FundTrackerPrice)
+
+                        </div>
+                    </div>
+                }
+
+               
+
+                <div class="row no-margin">
+                    <div class="editor-label">
+                        <label>Item weight in lbs</label>
+                        <span class="error">@Html.ValidationMessageFor(model => model.ItemWeight)</span>
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ItemWeight)
+
+                    </div>
+                </div>
+                <div class="row no-margin">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.InventoryAmount)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.InventoryAmount)
+
+                    </div>
+                </div>
+                <div class="row no-margin">
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ItemExtraTitle)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ItemExtraTitle)
+
+                    </div>
+                </div>
+                <div class="row no-margin">
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ItemExtraFileName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ItemExtraFileName)
+
+                    </div>
+
+                </div>
+                <div class="row no-margin">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ChargeShipping, new { style = "float:left;" })<span class="error">@Html.ValidationMessageFor(model => model.ChargeShipping)</span>
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ChargeShipping)
+
+                    </div>
+                </div>
+
+                <div class="row no-margin">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ChargeSalesTax)<span class="error">@Html.ValidationMessageFor(model => model.ChargeSalesTax)</span>
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ChargeSalesTax)
+
+                    </div>
+
+                </div>
+                <div class="row no-margin">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ItemOverSize)<span class="error">@Html.ValidationMessageFor(model => model.ItemOverSize)</span>
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ItemOverSize)
+
+                    </div>
+                </div>
+                <div class="row no-margin">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ShipToSchoolOnly)<span class="error">@Html.ValidationMessageFor(model => model.ShipToSchoolOnly)</span>
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ShipToSchoolOnly)
+
+                    </div>
+                </div>
+                <div class="row no-margin">
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ItemActive)<span class="error">@Html.ValidationMessageFor(model => model.ItemActive)</span>
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ItemActive)
+
+                    </div>
+
+                </div>
+                <div class="row no-margin">
+                    <div class="editor-label" style="color: #54A792; font-weight: bolder;">
+                        Image File
+                    </div>
+                    <div class="editor-field">
+                        <input type="File" name="FileUpload" id="file" />
+                    </div>
+                </div>
+            </div>     
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div style="padding-left: 15px;color:#54A792">
+                            @Html.LabelFor(model => model.DetailDescription)
+                        </div>
+                    </div>
+                    <div class="col-md-9" style="margin-top: -24px;">
+                        <div style="height:90%;padding-left: 0px;width:100%;">
+                            @*<textarea id="input" style="width:400px; height:200px"></textarea>*@
+                            @Html.TextAreaFor(model => model.DetailDescription, new { style = "width:100%;height:inherit; background-color: #F0FFFF;", cols = "5", rows = "8", ID = "input" })
+                            @*<textarea style="width:100%;height:inherit; background-color: #F0FFFF;" cols="5" rows="8" name="DetailDescription" id="input"></textarea>*@
+                            @*@Html.EditorFor(model => model.DetailDescription)*@
+
+                        </div>
+                    </div>
+                </div>
+                
+               
+
+            </div>
+                  
+                   
+           
+        </div>
+       
+      
+
+
+            
+             
+            
+            
+         
+       
+
+             
+     
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,189 @@
+﻿create table Brochures 
+(
+   ID int identity primary key,
+   BrochureID nvarchar(100),
+   BrochureName nvarchar(200),
+   Description nvarchar(500),
+   
+   
+)
+
+
+
+
+create table Categories
+(
+   ID int identity primary key,
+   CategoryID nvarchar(50),
+   CategoryName nvarchar(100),
+   Image nvarchar(100) 
+)
+
+
+create table MapCategory 
+(
+	ID int identity primary key,
+	BrochureID int ,
+	CategoryID int,
+	ProductID int
+)
+create table Products
+(
+    ID int   identity primary key,
+    ItemNumber int ,     
+    productType nvarchar(100),
+    Description nvarchar(55),
+    CustomerRetailPrice float,
+    CustomerRetailPriceA float, 
+    CustomerRetailPriceB float,
+    FundTrackerPrice float,
+    FundTrackerPriceA float,
+    FundTrackerPriceB float,
+    ItemWeight float,
+    ChargeSalesTax  bit,
+    ChargeShipping bit,
+    ItemOverSize bit,
+    ItemActive bit,
+    PicsInventory bit,
+    InventoryAmount float,
+    ItemExtraTitle nvarchar(200),
+    ItemExtraFileName nvarchar(200),
+    DetailDescription nvarchar(max)        
+)
+
+
+
+
+ALTER TABLE USERPROFILE
+ADD Address1 NVARCHAR(200)
+go
+ALTER TABLE USERPROFILE
+ADD Address2 NVARCHAR(200)
+go
+ALTER TABLE USERPROFILE
+ADD City NVARCHAR(100)
+go
+ALTER TABLE USERPROFILE
+ADD State NVARCHAR(500)
+go
+ALTER TABLE USERPROFILE
+ADD Country NVARCHAR(50)
+go
+ALTER TABLE USERPROFILE
+ADD EmailAddress NVARCHAR(50)
+go
+ALTER TABLE USERPROFILE
+ADD PhoneNumber NVARCHAR(50)
+go
+ ALTER TABLE USERPROFILE
+ADD FaxNumber NVARCHAR(50)
+go
+ ALTER TABLE USERPROFILE
+ADD Enabled Bit
+go
+ALTER TABLE USERPROFILE
+ADD PricingLevel NVARCHAR(200)
+go
+ALTER TABLE USERPROFILE
+ADD ImagePath NVARCHAR(200)
+go
+ALTER TABLE USERPROFILE
+ADD DefaultProductCatalog NVARCHAR(50)
+go
+ALTER TABLE USERPROFILE
+ADD ShipToSchoolFee float
+
+go
+ALTER TABLE USERPROFILE
+ADD 	DefaultSToSCatalog nvarchar(200)
+go
+ALTER TABLE USERPROFILE
+ADD ParticipantOption nvarchar(200)
+go
+ALTER TABLE USERPROFILE
+ADD 	FreeShipment nvarchar(50)
+go
+ALTER TABLE USERPROFILE
+ADD GoalType nvarchar(200)
+go
+ALTER TABLE USERPROFILE
+ADD ShipToSchool bit
+go
+ALTER TABLE USERPROFILE
+ADD CollectTeacher bit
+go
+ALTER TABLE USERPROFILE
+ADD ParentCertification bit
+go
+ALTER TABLE USERPROFILE
+ADD StudentAddress bit
+
+go
+ALTER TABLE USERPROFILE
+ADD ParentRequired bit
+go
+ALTER TABLE USERPROFILE
+ADD CellPhone bit
+go
+ALTER TABLE USERPROFILE
+ADD CellPhoneRequired bit
+go
+ALTER TABLE USERPROFILE
+ADD OrganzationGoal nvarchar(200)
+go
+ALTER TABLE USERPROFILE
+ADD EventID nvarchar(50)
+go
+ALTER TABLE USERPROFILE
+ADD EventTypeID nvarchar(50)
+go
+ALTER TABLE USERPROFILE
+ADD ParticipateCost nvarchar(50)
+go
+
+
+//date: 2015/11/02
+
+create table Students
+(
+  ID int identity primary key,
+  StudentID nvarchar(8),
+  StudentName nvarchar(200),
+  EmailAddress nvarchar(100),
+  TeacherName nvarchar(200),
+  Grade nvarchar(5),
+  password nvarchar(100),
+  phone nvarchar(13) 
+)
+
+
+CREATE TABLE [dbo].[Vouchers](
+	[Id] [int] identity primary key,
+	[Code] [nvarchar](100) NULL,
+	[CouponType] [nvarchar](100) NULL,
+	[Value] float NULL,
+	[CouponUsage] [nvarchar](100) NULL,
+	[startDate] [datetime] NULL,
+	[endDate] [datetime] NULL,
+	[description] [nvarchar](500) NULL,
+	[IsDelete] [bit] NULL,
+)
+
+
+
+
+// date 2015-11-04
+alter table students alter column SchoolID nvarchar(20)
+
+alter table students add DefaultGoal nvarchar(20) 
+
+
+alter table students add Image nvarchar(100)
+
+
+
+//Date:  2015-11-05
+
+
+alter table organizations 
+	alter column distributor int

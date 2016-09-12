@@ -1,0 +1,100 @@
+﻿@model IEnumerable<FundRaising.Models.Campaign>
+@using GridMvc.Html
+<script>
+    function Deleteconfirm(id, name) {
+        var d = confirm("Are you sure you want delete the Campaign : " + name);
+        if (d) {
+            Delete(id, 'Campaign');
+        }
+    }
+</script>
+<p>
+    <a href="#" onclick="gotoPrevious('/Campaign/create')">add new Campaign</a>
+    @*@Html.ActionLink("Add New Campaign", "Create", "Campaign",new { returnUrl="/Brochure/Index"},null)*@
+</p>
+<div>
+    @Html.Grid(Model).Columns(columns =>
+                    {
+                        columns.Add()
+               .Encoded(false)
+               .Sanitized(false)
+               .SetWidth(30)
+               .Css("hidden-xs") //hide on phones
+               .RenderValueAs(c =>
+                @<div id="balloon" class="balloonClass">
+                    <b>
+                        <a href="#" onclick="getBrochures('1',@c.ID)" class="modal-link">Copy</a>
+                    </b>
+                </div>);
+
+                       
+                        columns.Add()
+               .Encoded(false)
+               .Sanitized(false)
+               .SetWidth(30)
+               .Css("hidden-xs") //hide on phones
+               .RenderValueAs(c =>
+                @<div id="balloon" class="balloonClass">
+                    <b>
+                        <a href="#" onclick="gotoPrevious('/Campaign/Edit/@c.ID')" class="modal-link">Edit</a>
+                        @*@Html.ActionLink("Edit", "Edit", "Campaign", new { id = c.ID }, new { @class = "modal_link",  })*@
+                    </b>
+                </div>);
+                        columns.Add()
+                                   .Encoded(false)
+                                   .Sanitized(false)
+                                   .SetWidth(30)
+                                   .Css("hidden-xs") //hide on phones
+                                   .RenderValueAs(c =>
+                                    @<div id="balloon" class="balloonClass">
+                                        <b>
+                                            <a href="#" onclick="Deleteconfirm('@c.ID','@c.CampaignName')">Delete</a>
+                                            @*@Html.ActionLink("Delete", "Delete", new { id = c.ID }, new { @class = "modal_link" })*@
+                                        </b>
+                                    </div>);
+                        columns.Add(c => c.CampaignName).Titled("Campaign Name");
+                        columns.Add(c => c.CampaignStartDate).Titled("Start Date").Filterable(true);
+                        columns.Add(c => c.CampaignEndDate).Titled("End Date");                        
+
+                    }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
+</div>
+
+
+
+@*<table>
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.CampaignName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CampaignStartDate)
+        </th>
+        <th>
+            
+            @Html.DisplayNameFor(model => model.CampaignEndDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.CampaignName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CampaignStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CampaignEndDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", "Campaign", new { id = item.ID }, null) |
+            @Html.ActionLink("Details", "Details", "Campaign", new { id = item.ID }, null) |
+            @Html.ActionLink("Delete", "Delete", "Campaign", new { id = item.ID },null)
+        </td>
+    </tr>
+}
+
+</table>*@
