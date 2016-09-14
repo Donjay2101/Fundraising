@@ -58,16 +58,21 @@ namespace FundRaising.Controllers.Admin
         public ActionResult AjaxSalesByOrganization(string SchoolID,string CampaignID )
         {
             ReportViewer rptViewer = new ReportViewer();
-            rptViewer.ProcessingMode = ProcessingMode.Local;
-            rptViewer.SizeToReportContent = true;
-            rptViewer.Width = Unit.Percentage(100);
-            rptViewer.Height = Unit.Percentage(100);
-            FillDataSet(rds.SalesByOganization.TableName, "sp_SalesReportByOrganization", new SqlParameter("@organizationID", 1010), new SqlParameter("@CampaignID", 1));
-            rptViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\SalesByOrganization.rdlc";
-            rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables[0]));
-          //  ShrdMaster.Instance.GenerateReport("SalesByOrganization.rdlc", "sp_SalesReportByOrganization", "SalesByOganization", ref rptViewer, new SqlParameter("@organizationID", 1010), new SqlParameter("@CampaignID", 1));
+            if (string.IsNullOrEmpty(SchoolID)&& string.IsNullOrEmpty(CampaignID))
+            {
+                
+                rptViewer.ProcessingMode = ProcessingMode.Local;
+                rptViewer.SizeToReportContent = true;
+                rptViewer.Width = Unit.Percentage(100);
+                rptViewer.Height = Unit.Percentage(100);
+                FillDataSet(rds.SalesByOganization.TableName, "sp_SalesReportByOrganization", new SqlParameter("@organizationID", SchoolID), new SqlParameter("@CampaignID", CampaignID));
+                rptViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\SalesByOrganization.rdlc";
+                rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables[0]));
+                //  ShrdMaster.Instance.GenerateReport("SalesByOrganization.rdlc", "sp_SalesReportByOrganization", "SalesByOganization", ref rptViewer, new SqlParameter("@organizationID", 1010), new SqlParameter("@CampaignID", 1));                
+            }
             ViewBag.ReportViewer = rptViewer;
             return PartialView("_SalesByOrganization");
+
 
         }
 
@@ -85,9 +90,10 @@ namespace FundRaising.Controllers.Admin
             rptViewer.SizeToReportContent = true;
             rptViewer.Width = Unit.Percentage(100);
             rptViewer.Height = Unit.Percentage(100);
-            FillDataSet(rds.OrganizationActiveCampaign.TableName, "sp_ReportActiveOrganizationCampaigns",null);
-            rptViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\SalesByOrganization.rdlc";
-            rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables[0]));
+            FillDataSet(rds.ActiveOrganizationsCampaign.TableName, "sp_ReportActiveOrganizationCampaigns",null);
+            rptViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\OrganizationWithActiveCampaigns.rdlc";
+            rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables["ActiveOrganizationsCampaign"]));
+            ViewBag.ReportViewer = rptViewer;
             return View();
         }
 
@@ -104,12 +110,18 @@ namespace FundRaising.Controllers.Admin
                     cmd.Connection = con;
                     cmd.CommandText = procName;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    foreach (var item in sqlparameters)
+                    if(sqlparameters!=null)
                     {
-                        cmd.Parameters.Add(item);
+                        foreach (var item in sqlparameters)
+                        {
+                            cmd.Parameters.Add(item);
+                        }
+
                     }
+
+                   
                     SqlDataAdapter adp = new SqlDataAdapter(cmd);
-                    adp.Fill(rds,rds.SalesByOganization.TableName);
+                    adp.Fill(rds,rds.ActiveOrganizationsCampaign.TableName);
                 }
             }
         }
