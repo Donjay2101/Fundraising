@@ -46,7 +46,7 @@ namespace FundRaising.Models
         public string Phone { get; set; }
 
         [DisplayName("School ID")]
-        public int    SchoolID { get; set; }
+        public string    SchoolID { get; set; }
 
         [DisplayName("Default Goal")]
         public string DefaultGoal { get; set; }

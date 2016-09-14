@@ -86,7 +86,7 @@ namespace FundRaising.Controllers.Admin
         }
 
 
-        public async Task<ActionResult> CheckShoolID(int ID)
+        public async Task<ActionResult> CheckShoolID(string ID)
         {
             bool result =await  ShrdMaster.Instance.CheckShoolID(ID);
             if(result)

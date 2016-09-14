@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using FundRaising.Models;
 using FundRaising.ViewModels;
+using Newtonsoft.Json;
 
 namespace FundRaising.Controllers.Client
 {
@@ -125,8 +126,9 @@ namespace FundRaising.Controllers.Client
         }
 
         
-        public ActionResult AddtoCart(int ID,int Quantity,string IssueValue="",int Option=0)
+        public ActionResult AddtoCart(int ID,int Quantity, string GiftCard="",string IssueValue="",int Option=0)
         {
+            GiftCard giftCard = null;
          var product = db.Products.Find(ID);       
          var cart = ShoppingCart.GetCart(this.HttpContext);
          var cartItems = cart.GetCartItems();
@@ -159,8 +161,12 @@ namespace FundRaising.Controllers.Client
                 //    }
 
                 //}
+                if(!string.IsNullOrEmpty(GiftCard))
+                {
+                    giftCard = JsonConvert.DeserializeObject<GiftCard>(GiftCard);
+                }
                
-                cart.AddToCart(product, Quantity, Option, IssueValue,product.ChargeShipping,product.ChargeSalesTax);
+                cart.AddToCart(product, Quantity, Option, IssueValue,product.ChargeShipping,product.ChargeSalesTax, giftCard);
                 
                 //adding View Model to show data in View
                 ShoppingCartViewModel shoppingcart = new ShoppingCartViewModel()

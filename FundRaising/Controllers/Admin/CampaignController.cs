@@ -88,12 +88,13 @@ namespace FundRaising.Controllers.Admin
             campaign.CampaignStartDate = startDate;
             campaign.CampaignEndDate = EndDate;
 
-            int organizationId = -1;
+            string organizationId = "";
             if (ModelState.IsValid)
             {
                 if (Session["OrganizationID"] != null)
                 {
-                    int.TryParse(Session["OrganizationID"].ToString(), out organizationId);
+                    organizationId = Session["OrganizationID"].ToString();
+                    //int.TryParse(Session["OrganizationID"].ToString(), out organizationId);
                 }
                 campaign.OrganizatonID = organizationId;
                 db.Campaigns.Add(campaign);

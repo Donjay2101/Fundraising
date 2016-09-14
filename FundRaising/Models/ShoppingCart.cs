@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -53,22 +54,26 @@ namespace FundRaising.Models
         }
 
 
-        public void AddToCart(Product product, int Quantity, int Option,string  IssueValue,bool chargeshipping,bool chargeSalesTax)
+        public void AddToCart(Product product, int Quantity, int Option,string  IssueValue,bool chargeshipping,bool chargeSalesTax,GiftCard giftCard)
         {
             Cart CartItem=null;
             string [] splitData=null;
             int issue = 0,IssuePrice=0;
-
+            bool IsGiftcard = false;
             if (!string.IsNullOrEmpty(IssueValue) && IssueValue!="0")
             {
                 splitData = IssueValue.Split('-');
                 int.TryParse(splitData[0], out IssuePrice);
                 int.TryParse(splitData[1], out issue);
             }
-            
+            if(giftCard!=null)
+            {
+                IsGiftcard = true;
+            }
             if(IssuePrice>0)
             {
-                CartItem= storeDb.Carts.SingleOrDefault(c => c.CartID == ShoppingCartId && c.itemNumber == product.ItemNumber && c.Price==IssuePrice);
+                
+                    CartItem = storeDb.Carts.SingleOrDefault(c => c.CartID == ShoppingCartId && c.itemNumber == product.ItemNumber && c.Price == IssuePrice && c.IsGift==IsGiftcard);                                
             }
             else
             {
@@ -86,8 +91,9 @@ namespace FundRaising.Models
             if (CartItem == null)
             {
                 if(IssuePrice>0)
-                {                    
-                    CartItem = new Cart { itemNumber = product.ItemNumber, productId = product.ID, Description = product.Description +" Issues for:"+ issue.ToString(), CartID = ShoppingCartId, Quantity = Quantity, Price = IssuePrice, DateCreated = DateTime.Now ,chargeShipping=chargeshipping,ShipToSchool=product.ShipToSchoolOnly};
+                {                                        
+                    CartItem = new Cart { itemNumber = product.ItemNumber, productId = product.ID, Description = product.Description +" Issues for:"+ issue.ToString(), CartID = ShoppingCartId, Quantity = Quantity, Price = IssuePrice, DateCreated = DateTime.Now ,chargeShipping=chargeshipping,ShipToSchool=product.ShipToSchoolOnly,IsGift=IsGiftcard};
+                    
                 }
                 else
                 {
@@ -126,6 +132,12 @@ namespace FundRaising.Models
                 cartItems.ForEach(x => { x.chargeShipping = false; });
             }
             storeDb.SaveChanges();
+            if (IsGiftcard)
+            {
+                giftCard.CartITemID = CartItem.ID;
+                storeDb.GiftCards.Add(giftCard);
+                storeDb.SaveChanges();
+            }
         }
 
         public int RemoveFromCart(int Id)
@@ -164,7 +176,7 @@ namespace FundRaising.Models
 
         public List<Cart> GetCartItems()
         {
-            return storeDb.Carts.Where(cart => cart.CartID == ShoppingCartId).ToList();
+                return storeDb.Database.SqlQuery<Cart>("exec sp_GetCartItems @CartID", new SqlParameter("@cartID", ShoppingCartId)).ToList();            
         }
 
 
@@ -270,9 +282,10 @@ namespace FundRaising.Models
             var CartItems = GetCartItems();
             Product p=null;
             Organization org = null;
-
+            OrderDetail orderDetail = new Models.OrderDetail() ;
             double cartTotal = 0;
             bool ISChargeSalesTax=false ;
+            int totalQuantity = 0;
             double ShippingAmount = 0, SalesTaxAmount = 0;
             bool ShipToSchool = false;
             
@@ -295,7 +308,7 @@ namespace FundRaising.Models
                 }
                 if(p.InventoryAmount>0 ||p.InventoryAmount==-1)
                 {
-                    var orderDetail = new OrderDetail
+                    orderDetail = new OrderDetail
                     {
                         itemNumber= item.itemNumber,
                         ProductID=item.productId,
@@ -305,8 +318,37 @@ namespace FundRaising.Models
                         ChargeShipping=item.chargeShipping,
                         ChargeSalesTax=item.chargeSalesTax
                     };
-                    orderTotal += (item.Quantity * item.Price);
+                    if(item.chargeShipping)
+                    {
+                        if (!ShipToSchool)
+                        {
+                            ShippingCharge charge = storeDb.ShippingCharges.Where(x => cartTotal >= x.LowerLimit && cartTotal <= x.UpperLimit).SingleOrDefault();
+                            if (charge != null)
+                            {
+                                if (org != null)
+                                {
+                                    if (org.FreeShippingAmount)
+                                    {
+                                        ShippingAmount = 0;
+                                    }
+                                    else
+                                    {
+                                        ShippingAmount += charge.Charge;
+                                    }
 
+                                }
+                                else
+                                {
+                                    ShippingAmount += charge.Charge;
+                                }
+
+
+                            }
+                        }
+
+                    }
+                    orderTotal += (item.Quantity * item.Price);
+                    totalQuantity += item.Quantity;
                     storeDb.OrderDetails.Add(orderDetail);
                     if(p.Inventory)
                     {
@@ -327,31 +369,31 @@ namespace FundRaising.Models
             cartTotal= GetTotal();
            // ISChargeSalesTax = IsSalesTaxChargable();
             org=storeDb.Organizations.Find(order.SchoolID);
-            if(!ShipToSchool)
-            {
-                ShippingCharge charge = storeDb.ShippingCharges.Where(x => cartTotal >= x.LowerLimit && cartTotal <= x.UpperLimit).SingleOrDefault();
-                if (charge != null)
-                {
-                    if (org != null)
-                    {
-                        if (org.FreeShippingAmount)
-                        {
-                            ShippingAmount = 0;
-                        }
-                        else
-                        {
-                            ShippingAmount = charge.Charge;
-                        }
+            //if(!ShipToSchool)
+            //{
+            //    ShippingCharge charge = storeDb.ShippingCharges.Where(x => cartTotal >= x.LowerLimit && cartTotal <= x.UpperLimit).SingleOrDefault();
+            //    if (charge != null)
+            //    {
+            //        if (org != null)
+            //        {
+            //            if (org.FreeShippingAmount)
+            //            {
+            //                ShippingAmount = 0;
+            //            }
+            //            else
+            //            {
+            //                ShippingAmount = charge.Charge;
+            //            }
 
-                    }
-                    else
-                    {
-                        ShippingAmount = charge.Charge;
-                    }
+            //        }
+            //        else
+            //        {
+            //            ShippingAmount = charge.Charge;
+            //        }
 
 
-                }
-            }
+            //    }
+            //}
             
 
             //SalesTaxCharge scharge = storeDb.SalesTaxCharges.Where(x => x.Active == true).SingleOrDefault();
@@ -365,6 +407,7 @@ namespace FundRaising.Models
             ordersum.TotalAmount = cartTotal;
             ordersum.SalesTax = SalesTaxAmount;
             ordersum.TotalPayable = cartTotal + ShippingAmount + SalesTaxAmount;
+            ordersum.Quantity = totalQuantity;
             storeDb.OrderSummaries.Add(ordersum);
             EmptyCart();
             storeDb.SaveChanges();

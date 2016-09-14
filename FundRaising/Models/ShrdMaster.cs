@@ -9,6 +9,12 @@ using System.Web;
 using Ionic.Zip;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Data.SqlClient;
+using Microsoft.Reporting.WebForms;
+using System.Web.UI.WebControls;
+using FundRaising.Reports;
+using System.Configuration;
+using System.Data;
 
 namespace FundRaising.Models
 {
@@ -16,7 +22,7 @@ namespace FundRaising.Models
     {
         static ShrdMaster _Instance;
         FundRaisingDBContext db=new FundRaisingDBContext ();
-
+        ReportDataSet rds = new ReportDataSet();
 
         //string[] States = new string[] { "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"};
         Dictionary<string,string> States=new Dictionary<string,string> ();
@@ -490,19 +496,24 @@ namespace FundRaising.Models
 
         // Organization 
 
-        public async Task<Organization> organizationGetByID(int ID)
+        public List<School> GetOrganizations(string prefix)
+        {
+            return  db.Database.SqlQuery<School>("exec sp_GetOrganizationsByName @Name", new SqlParameter("@Name", prefix)).ToList();
+        }
+
+        public async Task<Organization> organizationGetByID(string ID)
         {
             Organization org = null;
             await Task.Run(() =>
             {
 
-                org = db.Organizations.Where(x=>x.SchoolID==ID).SingleOrDefault();
+                org = db.Organizations.Where(x=>x.SchoolID==ID && x.IsActive==true).SingleOrDefault();
             });
 
             return org;
         }
 
-        public async Task<Campaign> GetActiveCampaignByOrganizationId(int ID)
+        public async Task<Campaign> GetActiveCampaignByOrganizationId(string ID)
         {
             Campaign camp = null;
          
@@ -520,12 +531,12 @@ namespace FundRaising.Models
             return value is string;
         }
 
-        public async Task<bool> CheckShoolID(int ID)
+        public async Task<bool> CheckShoolID(string ID)
         {
             bool result=false;
           await  Task.Run(() =>
             {
-                var data = db.Organizations.Where(x => x.SchoolID == ID).ToList();
+                var data = db.Organizations.Where(x => x.SchoolID == ID && x.IsActive==true).ToList();
 
                 if (data.Count > 0)
                 {
@@ -545,7 +556,7 @@ namespace FundRaising.Models
 
         #region Student
         
-        public string AutoGenerateNumber(int OrgID)
+        public string AutoGenerateNumber(string OrgID)
         {
 
             //first name of School
@@ -580,7 +591,7 @@ namespace FundRaising.Models
 
         }
 
-        public bool CheckStudentID(string ID,int SchoolID)
+        public bool CheckStudentID(string ID,string SchoolID)
         {
            // string schoolID=SchoolID.ToString();
             var student = db.Students.FirstOrDefault(n => n.StudentID == ID && n.SchoolID == SchoolID);
@@ -800,7 +811,7 @@ namespace FundRaising.Models
 
 
 
-        public Image ResizeImage(Image image, string path)
+        public System.Drawing.Image ResizeImage(System.Drawing.Image image, string path)
         {
             var newWidth = (int)(150);
             var newHeight = (int)(150);
@@ -1073,5 +1084,51 @@ namespace FundRaising.Models
             db.Database.ExecuteSqlCommand("delete orderdetails where orderID="+ID);
             db.SaveChanges();
         }
+
+
+
+        #region Reports
+        public ReportViewer GenerateReport(string reportName, string procName, string TableName,ref ReportViewer reportViewer, params SqlParameter[] parameters)
+        {
+            //ReportViewer reportViewer = new ReportViewer();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+            reportViewer.Width = Unit.Percentage(100);
+            reportViewer.Height = Unit.Percentage(100);
+            FillDataSet(TableName, procName, parameters);
+            string folder=HttpContext.Current.Server.MapPath(@"~/Reports");
+            string reportPath = Path.Combine(folder, reportName);
+            reportViewer.LocalReport.ReportPath = reportPath;
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables[0]));
+            return reportViewer;
+        }
+
+        public void FillDataSet(string tableName, string procName, params SqlParameter[] sqlparameters)
+        {
+            using (SqlConnection con = new SqlConnection())
+            {
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = procName;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    foreach (var item in sqlparameters)
+                    {
+                        cmd.Parameters.Add(item);
+                    }
+                    SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                    adp.Fill(rds, tableName);
+                }
+            }
+        }
+        #endregion
+    }
+
+
+    public class School
+    {
+        public string SchoolID { get; set; }
+        public string Name { get; set; }
+        public List<Campaign> Campaigns { get; set; }
     }
 }

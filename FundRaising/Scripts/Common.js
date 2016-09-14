@@ -1,4 +1,51 @@
-﻿
+﻿function showLoadingDiv() {
+    $('#loader').css('display', 'none');
+}
+function hideLoadingDiv() {
+    $('#loader').css('display', 'none');
+}
+
+function getGiftData()
+{
+    var Name = $('#gftName').val();
+    var Email = $('#gftEmail').val();
+    var Address = $('#gftAddress').val();
+    var City = $('#gftCity').val();
+    var State = $('#gftState').val();
+    var Zip = $('#gftZip').val();
+    var itemID = $('#itemID').val();
+    if (Name == "" || Email == "" || Address == "" || City == "" || State == "" || Zip == "") {
+        alert("some required fields does not have value, pleas fill all fields.");
+        return;
+    }
+
+    var obj = {};
+
+    obj.Name = Name;
+    obj.Email = Email;
+    obj.Address = Address;
+    obj.City = City;
+    obj.State = State;
+    obj.Zip = Zip;
+    obj.itemID = itemID;
+
+
+    sessionStorage.setItem('Gift', JSON.stringify(obj));
+
+    var i = {};
+    i=sessionStorage.getItem('Gift');
+    console.log(i.Name);
+    $('#overlayw').hide();
+    //$.ajax({
+    //    url: "/Customer/SaveGift",
+    //    data: { model: obj },
+    //    type: "POST",
+    //    success: function (data) {
+
+    //    }
+
+    //});
+}
     function Delete(id,controller)
     {
      
@@ -155,6 +202,24 @@
 
     });
 
+
+
+    function ConvertJsonDateToDate(jsonDate)
+    {
+        var shortDate = null;
+        if (jsonDate) {
+            var regex = /-?\d+/;
+            var matches = regex.exec(jsonDate);
+            var dt = new Date(parseInt(matches[0]));
+            var month = dt.getMonth() + 1;
+            var monthString = month > 9 ? month : '0' + month;
+            var day = dt.getDate();
+            var dayString = day > 9 ? day : '0' + day;
+            var year = dt.getFullYear();
+            shortDate = monthString + '/' + dayString + '/' + year;
+        }
+        return shortDate;
+    }
 
 
 

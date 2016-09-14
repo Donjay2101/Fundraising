@@ -15,40 +15,40 @@ namespace FundRaising.Models
            Database.SetInitializer<FundRaisingDBContext>(null);
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Organization>()
-            .HasMany(o => o.OrganizationCampaigns)
-            .WithOptional()
-            .HasForeignKey(c => c.OrganizatonID);
-            //modelBuilder.Entity<Brochure>()
-            //.HasMany<Category>(o => o.Categories)
-            //.WithMany(c => c.Brochures)            
-            //.Map(cs =>
-            //    {
-            //        cs.MapLeftKey("BorchureID");
-            //        cs.MapRightKey("CategoryID");
-            //        cs.ToTable("MapBrochureCategory");
-            //    }
-            //);
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    //modelBuilder.Entity<Organization>()
+        //    //.HasMany(o => o.OrganizationCampaigns)
+        //    //.WithOptional()
+        //    //.HasForeignKey(c => c.OrganizatonID);
+        //    //modelBuilder.Entity<Brochure>()
+        //    //.HasMany<Category>(o => o.Categories)
+        //    //.WithMany(c => c.Brochures)            
+        //    //.Map(cs =>
+        //    //    {
+        //    //        cs.MapLeftKey("BorchureID");
+        //    //        cs.MapRightKey("CategoryID");
+        //    //        cs.ToTable("MapBrochureCategory");
+        //    //    }
+        //    //);
 
 
-            //modelBuilder.Entity<Category>()
-            //.HasMany<Product>(o => o.products)
-            //.WithMany(c => c.Categories)
-            //.Map(cs =>
-            //{
-            //    cs.MapLeftKey("CategoryID");
-            //    cs.MapRightKey("ProductID");
-            //    cs.ToTable("MapCategoryProducts");
-            //}
-            //);
+        //    //modelBuilder.Entity<Category>()
+        //    //.HasMany<Product>(o => o.products)
+        //    //.WithMany(c => c.Categories)
+        //    //.Map(cs =>
+        //    //{
+        //    //    cs.MapLeftKey("CategoryID");
+        //    //    cs.MapRightKey("ProductID");
+        //    //    cs.ToTable("MapCategoryProducts");
+        //    //}
+        //    //);
             
             
 
 
-            base.OnModelCreating(modelBuilder);
-        }
+        //    base.OnModelCreating(modelBuilder);
+        //}
 
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Campaign> Campaigns{ get; set; }
@@ -83,6 +83,8 @@ namespace FundRaising.Models
         public DbSet<OrderSummary> OrderSummaries { get; set; }    
 
         public DbSet<MagazinePriceMapping> MagazinePriceMappings { get; set; }
+
+        public DbSet<GiftCard> GiftCards { get; set; }
 
     }
 }

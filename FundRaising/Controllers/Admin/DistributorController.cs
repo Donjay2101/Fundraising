@@ -32,7 +32,7 @@ namespace FundRaising.Controllers.Admin
         public ActionResult Students()
         {
 
-            var students = db.Students.Join(db.Organizations, stu => stu.SchoolID, org => org.SchoolID, (stu, org) => new { Student = stu, Organization = org })
+            var students = db.Students.Join(db.Organizations.Where(x=>x.IsActive==true).AsEnumerable(), stu => stu.SchoolID, org => org.SchoolID, (stu, org) => new { Student = stu, Organization = org })
                     .Select(both => new StudentViewModel
                     {
                         ID = both.Student.ID,

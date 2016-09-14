@@ -22,7 +22,7 @@ namespace FundRaising.Models
 
         [Required(ErrorMessage = "*")]
         [Display(Name="School ID")]
-        public int  SchoolID{ get; set; }
+        public string  SchoolID{ get; set; }
 
         [Required(ErrorMessage = "*")]
         [Display(Name = "School Name")]
@@ -146,6 +146,8 @@ namespace FundRaising.Models
         
         public bool CellPhoneRequired { get; set; }
 
+        public bool IsActive { get; set; }
+
         [Display(Name = "Goal Type")]
         [Required(ErrorMessage = "*")]
         public string GoalType { get; set; }
@@ -157,7 +159,7 @@ namespace FundRaising.Models
         [NotMapped]
         public RegisterModel DistributorObject { get; set; }
 
-
+        [NotMapped]
         public List<Campaign> OrganizationCampaigns { get; set; }
         
         #endregion

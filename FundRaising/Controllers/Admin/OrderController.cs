@@ -24,7 +24,7 @@ namespace FundRaising.Controllers.Admin
             {
                 ViewBag.error = "File not found";
             }
-            var list = db.Orders.ToList().Join(db.Organizations.ToList(), o => o.SchoolID, org => org.ID, 
+            var list = db.Orders.ToList().Join(db.Organizations.Where(x=>x.IsActive==true).AsEnumerable(), o => o.SchoolID, org => org.ID, 
                 (o, org) => new { Order = o, Organization = org })
                 .Join(db.Students.ToList(),outer => outer.Order.StudentID, 
                 stu => stu.StudentID, (outer, stu) => new { Student = stu, Organization = outer.Organization, Order = outer.Order })

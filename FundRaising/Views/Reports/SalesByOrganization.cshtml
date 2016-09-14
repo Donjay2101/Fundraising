@@ -1,0 +1,224 @@
+﻿
+
+@{
+    ViewBag.Title = "SalesByOrganization";
+}
+
+<h2>SalesByOrganization</h2>
+<form method="post" action="SalesByOrganization" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-3">
+            School ID
+        </div>
+        <div class="col-md-9">
+            <input type="text" id="SchoolID" name="SchoolID" class="ui-autocomplete" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            School Name
+        </div>
+        <div class="col-md-9">
+            <input type="text" id="SchoolName" name="SchoolName" class="ui-autocomplete" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            Campaign
+        </div>
+        <div class="col-md-9">
+            <select id="cmbCampaign" name="cmbCampaign">
+                <option>select--</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-3">
+                Sart Date
+            </div>
+            <div class="col-md-9">
+                <input type="text" disabled  name="txtstartDate" id="txtstartDate" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-3">
+                End Date
+            </div>
+            <div class="col-md-9">
+                <input type="text" disabled name="txtendDate"  id="txtendDate" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <input type="button" id="btnsubmit" value="GenerateReport" />
+        </div>
+    </div>
+</form>
+@*@if (ViewBag.GetMethod != "1")
+{*@
+ <div id="reportData">
+
+ </div>
+
+
+
+
+
+@*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>*@  
+<script src="~/Scripts/Common.js"></script>
+<script>
+
+    
+    $(document).on('click', '#btnsubmit', function () {
+
+        showLoadingDiv();
+        var schoolID = $('#SchoolID').val();
+        var campaignID = $('#cmbCampaign').val();
+
+        $.ajax({
+            url: "/Reports/AjaxSalesByOrganization?SchoolID=" + schoolID + "&CampaignID=" + campaignID,
+            success: function (data) {
+                $('#reportData').html(data);
+                hideLoadingDiv();
+            },
+            error: function (err) {
+                alert(err.statusText);
+                hideLoadingDiv();
+            }
+        });
+
+    });
+    
+    $(document).ready(function () {
+ 
+        $('#SchoolName').autocomplete({
+            minLength: 3,
+            source:function(request,response)
+            {
+
+                $.ajax({
+                    url: "/Reports/SearchSchool",
+                    type: "GET",
+                    dataType: "JSON",
+                    data:{prefix:request.term},
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Name, value: item.Name,id:item.SchoolID};
+                        }))
+                    }                    
+                });
+            },
+            messages: {
+                noResults: "",results: ""
+            },
+            select: function (event,ui) {
+                var v = ui.item.id;               
+                $('#SchoolID').val(v);
+                $.ajax({
+                    url: "/Reports/Getcampaigns?ID=" + v,
+                    type:"GET",
+                    success: function (data) {
+                        if(data!=null)
+                        {
+                            debugger;
+                            var htmlString ="<option  value='-1'>please select--</option>";
+                            for(i=0;i<data.length;i++)
+                            {
+                                htmlString += "<option value='" + data[i].ID + "'>" + data[i].CampaignName + "</option>";
+                            }
+                            $('#cmbCampaign').html(htmlString);
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+                
+                //$('#SchoolName').val(ui.item.Name);
+
+            }
+        });
+
+
+        $('#SchoolID').autocomplete({
+            minLength: 3,
+            source: function (request, response) {
+
+                $.ajax({
+                    url: "/Reports/SearchSchool",
+                    type: "GET",
+                    dataType: "JSON",
+                    data: { prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Name, value: item.SchoolID, id: item.Name};
+                        }))
+                    }
+                });
+            },
+            messages: {
+                noResults: "", results: ""
+            },
+            select: function (event, ui) {
+                var v = ui.item.id;
+                $('#SchoolName').val(v);
+                // $('#SchoolID')
+                $.ajax({
+                    url: "/Reports/Getcampaigns?ID=" + ui.item.value,
+                    type: "GET",
+                    success: function (data) {
+                        if (data != null) {
+                            debugger;
+                            var htmlString = "<option  value='-1'>please select--</option>";
+                            for (i = 0; i < data.length; i++) {
+                                htmlString += "<option value='" + data[i].ID + "'>" + data[i].CampaignName + "</option>";
+                            }
+                            $('#cmbCampaign').html(htmlString);
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+
+                //$('#SchoolName').val(ui.item.Name);
+
+            }
+        });
+    });
+
+        $(document).on('change', '#cmbCampaign', function () {
+
+            var campaignID=$(this).val();
+            if (campaignID > 0)
+            {
+                $.ajax({
+                    url: "/Reports/GetCampaignByID?id=" + campaignID,
+                    type: "GET",
+                    success: function (data) {
+                        if (data != null) {
+                            var startDate = ConvertJsonDateToDate(data.CampaignStartDate);
+                            var endDate = ConvertJsonDateToDate(data.CampaignEndDate);
+                            $('#txtstartDate').val(startDate);
+                            var date = new Date();
+                            var month = date.getMonth()+1;
+                            if (date.getMonth()< 10)
+                            {
+                                month = "0" + month;
+                            }
+                            var datestring =  month+ "/" +date.getDate() + "/"+ date.getFullYear();
+                            $('#txtendDate').val(datestring);
+                        }
+                    },
+                    error: function (err) {
+                        alert(err.statusText);
+                    }
+                });
+            }
+        
+        });
+</script>

@@ -14,7 +14,7 @@ namespace FundRaising.ViewModels
 
         public int Distributor { get; set; }
 
-        public int SchoolID { get; set; }
+        public string SchoolID { get; set; }
 
         public string Name { get; set; }
 

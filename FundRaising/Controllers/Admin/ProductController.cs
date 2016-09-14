@@ -73,7 +73,7 @@ namespace FundRaising.Controllers.Admin
                     }
                     //product.sProductType = ;
                     plist.Add(product);
-
+                   
                 });
                 return PartialView("_ProductView", plist);
             }
@@ -823,8 +823,30 @@ namespace FundRaising.Controllers.Admin
 
         public void ResizeImage(Image image, string path)
         {
-            var newWidth = (int)(150);
-            var newHeight = (int)(150);
+            int newWidth=150, newHeight=150;
+
+            int height=image.Height;
+            int width = image.Width;
+            int temp;
+            bool isHeightGreater = (height >= width);
+            int percent=0;
+            if(isHeightGreater && height>300)
+            {
+                newHeight = height - 300;
+                percent = ((newHeight) / height) * 100;
+                newWidth = (width - (width * (percent / 100)));                                                    
+            }
+            else if(width>300)
+            {
+                newWidth = width- 300;
+                percent = ((newWidth) / width) * 100;
+                temp= (height*(percent / 100));
+                if(temp>0)
+                {
+                    newHeight = (height- (height* (percent / 100)));
+                }                
+            }
+
             using (var newImage = new Bitmap(newWidth, newHeight))
             {
                 using (var graphics = Graphics.FromImage(newImage))

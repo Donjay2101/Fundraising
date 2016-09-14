@@ -26,6 +26,14 @@ namespace FundRaising.Controllers.Seller
     [InitializeSimpleMembership]
     public class StudentController : Controller
     {
+        public StudentController()
+        {
+            if(CheckSession())
+            {
+                Response.Redirect("/");
+            }
+        }
+
         private FundRaisingDBContext db = new FundRaisingDBContext();
 
         //
@@ -47,6 +55,14 @@ namespace FundRaising.Controllers.Seller
 
        
         
+        public bool CheckSession()
+        {
+            if (Session["CategoryID"] == null || Session["studentIDs"] == null || Session["SchoolName"] == null || Session["GoalType"] ==null|| Session["Organization"]==null)
+            {
+                return true;
+            }
+            return false;
+        }
 
         public ActionResult Index(string ID="-1")
         {
@@ -55,7 +71,7 @@ namespace FundRaising.Controllers.Seller
             {
                 return RedirectToAction("Login", "Account"); 
             }
-            int orgID = -1;
+            string orgID = "";
             string stuID = ID.ToString();
             Student student = db.Students.Where(x => x.StudentID == stuID).FirstOrDefault();
             ViewBag.StudentName = student.FirstName +" "+student.LastName;
@@ -73,9 +89,9 @@ namespace FundRaising.Controllers.Seller
             StudentCookie1.Value = student.StudentID.ToString();
             Response.Cookies.Add(StudentCookie1);
            // Response.Cookies.Add(StudentCookie1);
-            if (student.SchoolID > 0)
+            if (!string.IsNullOrEmpty(student.SchoolID))
             {
-                org = db.Organizations.Where(x=>x.SchoolID==orgID).FirstOrDefault();
+                org =db.Organizations.Where(x=>x.SchoolID==orgID && x.IsActive == true).FirstOrDefault();
                 if(org!=null)
                 {
                     HttpCookie imgcookie = new HttpCookie("ImageCookie");
@@ -276,11 +292,11 @@ namespace FundRaising.Controllers.Seller
         {
             Organization org = null;
             
-            int orgID;            
+            string orgID;            
             Student student = db.Students.Where(x => x.StudentID == id).FirstOrDefault();
             orgID=student.SchoolID;
             //org = db.Organizations.Find(orgID);
-            org = db.Organizations.Where(x => x.SchoolID == orgID).SingleOrDefault();
+            org = db.Organizations.Where(x => x.SchoolID == orgID && x.IsActive == true).SingleOrDefault();
             
             if (org != null)
             {
@@ -404,12 +420,13 @@ namespace FundRaising.Controllers.Seller
         [AllowAnonymous]
         public async Task<ActionResult> Register(FormCollection form)
         {
-            int OrganizationID=-1;
+            string OrganizationID="";
             Organization org=null;
             Campaign camp = null;
             if(form["SchoolID"]!=null)
             {
-                int.TryParse(form["SchoolID"].ToString(), out OrganizationID);
+                OrganizationID = form["SchoolID"].ToString();
+                
                 org=await ShrdMaster.Instance.organizationGetByID(OrganizationID);
                 if(org!=null)
                 {
@@ -448,7 +465,7 @@ namespace FundRaising.Controllers.Seller
             // Code to generate autonumber with school name initial    
             if(org.AutoAssignParticipantID)
             {
-                string number =ShrdMaster.Instance.AutoGenerateNumber(org.ID);
+                string number =ShrdMaster.Instance.AutoGenerateNumber(org.SchoolID);
                 Session["StudentIDs"] = number;
                 ViewBag.StudentID = number;
                 //Session["studentID"] = ViewBag.studentID;
@@ -566,13 +583,13 @@ namespace FundRaising.Controllers.Seller
             Student student = db.Students.Where(x => x.StudentID == studentID).FirstOrDefault();
 
             Session["studentIDs"] = studentID;
-            if (student.SchoolID>0)
+            if (!string.IsNullOrEmpty(student.SchoolID))
             {
-                int ID = -1;
+                string ID = "";
                 ID=student.SchoolID;
                 //int.TryParse(, out ID);
 
-                Organization org = db.Organizations.Where(x=>x.SchoolID==student.SchoolID).SingleOrDefault();
+                Organization org = db.Organizations.Where(x=>x.SchoolID==student.SchoolID && x.IsActive == true).SingleOrDefault();
 
                 if(org!=null)
                 {
@@ -620,14 +637,14 @@ namespace FundRaising.Controllers.Seller
                     student = db.Students.FirstOrDefault(x => x.StudentID == studentid);
                 }
             }                   
-            if (student.SchoolID>0)
+            if (!string.IsNullOrEmpty(student.SchoolID))
             {
-                int ID = -1;
+                string ID = "";
                 ID=student.SchoolID;
                 //int.TryParse(, out ID);
 
                 //Organization org = db.Organizations.Find(ID);
-                Organization org = db.Organizations.Where(x=>x.SchoolID==ID).SingleOrDefault();
+                Organization org = db.Organizations.Where(x=>x.SchoolID==ID && x.IsActive == true).SingleOrDefault();
                 string message="";
                 if(org!=null)
                 {
@@ -710,7 +727,8 @@ namespace FundRaising.Controllers.Seller
         public async  Task<ActionResult> Personalization(HttpPostedFileBase FileUpload,FormCollection fc)
         // public ActionResult Personalization(HttpPostedFileBase FileUpload,FormCollection fc)
         {
-            int studentid,orgID=-1;
+            int studentid;
+                string orgID="";
             string message="";
              Student student=null;
         
@@ -730,7 +748,7 @@ namespace FundRaising.Controllers.Seller
                     string mailImagePath="";
                     //Organization org = db.Organizations.Find(orgID);
 
-                    Organization org = db.Organizations.Where(x=>x.SchoolID==orgID).SingleOrDefault();
+                    Organization org = db.Organizations.Where(x=>x.SchoolID==orgID && x.IsActive == true).SingleOrDefault();
                     EmailService email = new EmailService();
                     IdentityMessage details = new IdentityMessage();
                     Dictionary<string, string> param = new Dictionary<string, string>();
@@ -756,7 +774,29 @@ namespace FundRaising.Controllers.Seller
                             {
                                 var newWidth = (int)(150);
                                 var newHeight = (int)(150);
-                                using (var newImage = new Bitmap(newWidth, newHeight))
+                            int height = srcImage.Height;
+                            int width = srcImage.Width;
+                            int temp;
+                            bool isHeightGreater = (height >= width);
+                            int percent = 0;
+                            if (isHeightGreater && height > 300)
+                            {
+                                newHeight = height - 300;
+                                percent = ((newHeight) / height) * 100;
+                                newWidth = (width - (width * (percent / 100)));
+                            }
+                            else if (width > 300)
+                            {
+                                newWidth = width - 300;
+                                percent = ((newWidth) / width) * 100;
+                                temp = (height * (percent / 100));
+                                if (temp > 0)
+                                {
+                                    newHeight = (height - (height * (percent / 100)));
+                                }
+                            }
+
+                            using (var newImage = new Bitmap(newWidth, newHeight))
                                 using (var graphics = Graphics.FromImage(newImage))
                                 {
                                    

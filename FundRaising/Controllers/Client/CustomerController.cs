@@ -32,9 +32,8 @@ namespace FundRaising.Controllers.Client
         // GET: /Customer/
        
 
-        public ActionResult Index(string ID="0")                        
-       
-     {
+        public ActionResult Index(string ID="0")                               
+        {
             try
             {
                 if(ID=="0" && Session["studentID"]==null)
@@ -68,8 +67,13 @@ namespace FundRaising.Controllers.Client
                         }
                         else
                         {
-                            int OrgID = student.SchoolID;
-                            Organization org = db.Organizations.Where(x=>x.SchoolID==OrgID).FirstOrDefault();
+                            string OrgID = student.SchoolID;
+                            Organization org = db.Organizations.Where(x=>x.SchoolID==OrgID && x.IsActive==true).FirstOrDefault();
+                            if(org!=null)
+                            {
+                                string Message = "Organization is Inactive.";
+                                return RedirectToAction("ErrorView", "Customer", new { message = Message });
+                            }
                             var camp = db.Campaigns.Where(x => x.OrganizatonID == org.SchoolID).FirstOrDefault();
                             //HttpCookie imgcookie = new HttpCookie("ImageCookie");
                             RegisterModel reg = db.Distributors.Find(org.Distributor);
@@ -91,10 +95,11 @@ namespace FundRaising.Controllers.Client
                                 Session["studentID"] = ID;
                                 //Session["CartId"] = ID;
                                 Session["student"] = student;
+                               
                             }
 
 
-
+                            Session["Campaign"] = camp;
                             Session["Organization"] = org;
                             Session["SchoolID"] = org.SchoolID;
                             Session["BrochureID"] = org.Catalog;
@@ -133,7 +138,6 @@ namespace FundRaising.Controllers.Client
                     else
                     {
                         string Message = "Student Id not found.";
-
                         return RedirectToAction("ErrorView", "Customer", new { message = Message });
                     }
                 }
@@ -304,10 +308,19 @@ namespace FundRaising.Controllers.Client
 
                     //var student = db.Students.Find(studentID);
                     var student = db.Students.Where(x => x.StudentID == sID).SingleOrDefault();
-                    int orgID = student.SchoolID;
+                    string orgID = student.SchoolID;
+                    var camp = Session["Campaign"] as Campaign;
+                    if(camp!=null)
+                    {
+                        order.CampaignId = camp.ID;
+                    }
+                    else
+                    {
+                        return Redirect("/");
+                    }
 
                     //var org = db.Organizations.Find(orgID);
-                    var org = db.Organizations.Where(x => x.SchoolID == orgID).SingleOrDefault();
+                    var org = db.Organizations.Where(x => x.SchoolID == orgID && x.IsActive==true).SingleOrDefault();
                    
                     if (string.IsNullOrEmpty(order.SCountry) || order.SCountry.ToUpper()=="SELECT--")
                     {
@@ -690,23 +703,7 @@ namespace FundRaising.Controllers.Client
                                 orderarr.Add(shipping);
                             }
                     }
-                   
-
-
-
-
-
-                    //if (shipping != null)
-                    //{
-                    //    if (shipping.Cost > 0)
-                    //    {
-                    //        orderarr.Add(shipping);
-                    //    }
-
-                    //}
-
-
-
+                                    
                     var chargeRequest = new ChargeRequest()
                     {
                         iTransactApiKey = ConfigurationManager.AppSettings["iTransactApiKey"],
@@ -733,8 +730,8 @@ namespace FundRaising.Controllers.Client
                         ShippingZip = order.SPostalCode,
                         CreditCardNumber = order.CardNumber,
                         Cvv = order.CVVNumber,
-                        ExpirationMonth = DateTime.Now.AddMonths(1).Month > 10 ? DateTime.Now.AddMonths(1).Month.ToString() : "0" + DateTime.Now.AddMonths(1).Month,
-                        ExpirationYear = DateTime.Now.Year.ToString(),
+                        ExpirationMonth = order.ExpirationDate,
+                        ExpirationYear = order.ExpirationYear,
                         //ExpirationMonth = Convert.ToInt32(order.ExpirationDate) > 10 ? order.ExpirationDate : "0" + order.ExpirationDate,
                         //ExpirationYear = order.ExpirationYear,
 
@@ -852,9 +849,9 @@ namespace FundRaising.Controllers.Client
                     }
                     else
                     {
-                        db.Orders.Remove(order);
-                        db.SaveChanges();
-                        ShrdMaster.Instance.RemoverOrderDetails(order.ID);
+                       // db.Orders.Remove(order);
+                      //  db.SaveChanges();
+                      //  ShrdMaster.Instance.RemoverOrderDetails(order.ID);
                         string Message = "<span><h3>Transaction declined.</h3></span> <br/> <b>" + response.ErrorMessage + "</b>";
                         //"<span><h3>Transaction declined.</h3></span> <br/> <b>In pattern AccountInfo: AccountNumber must be between 13 and 16 digits </b>"
                         return RedirectToAction("ErrorView", "Customer", new { option = 1, message = Message });

@@ -31,13 +31,13 @@ namespace FundRaising.Views.Customer
             int BrochureID = -1;
             ViewBag.IsEndOfRecords = false;
             Category category = null;
-            int SchoolID=0;
+            string SchoolID="0";
             Organization org= null;
 
             if (Session["SchoolID"] != null)
             {
-                SchoolID = (int)Session["SchoolID"] ;
-                org = db.Organizations.Where(x => x.SchoolID == SchoolID).SingleOrDefault();
+                SchoolID =Session["SchoolID"].ToString() ;
+                org = db.Organizations.Where(x => x.SchoolID == SchoolID && x.IsActive == true).SingleOrDefault();
             }
             else
             {

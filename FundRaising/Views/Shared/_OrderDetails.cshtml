@@ -41,7 +41,7 @@
                 <div class="row shiptoschool_product hidden-xs" style="border-bottom: 1px solid #E8E4E4; height: 57px">
 
                     <div class="col-md-5 col-sm-5" style="border-right: 1px solid #E8E4E4; height: inherit; padding-top: 11px;">
-                        @item.Description
+                       @Html.Raw(@item.Description)
                     </div>
                     <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
                         <span id="@price">@item.Quantity</span>
@@ -288,7 +288,15 @@
                 <select id="optDate" name="ExpirationDate">
                     @for (int i = 1; i <= 12; i++)
                     {
-                        <option value="@i">@i</option>
+                        if (i < 10)
+                        {
+                            string num ="0" + i;
+                            <option value="@num">@num</option>
+                        }
+                        else
+                        {
+                            <option value="@i">@i</option>
+                        }
                     }
                 </select>
                 @*<span class="pad required-field" id="optDates" >*</span>*@
