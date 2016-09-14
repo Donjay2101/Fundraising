@@ -69,7 +69,7 @@ namespace FundRaising.Controllers.Client
                         {
                             string OrgID = student.SchoolID;
                             Organization org = db.Organizations.Where(x=>x.SchoolID==OrgID && x.IsActive==true).FirstOrDefault();
-                            if(org!=null)
+                            if(org==null)
                             {
                                 string Message = "Organization is Inactive.";
                                 return RedirectToAction("ErrorView", "Customer", new { message = Message });
