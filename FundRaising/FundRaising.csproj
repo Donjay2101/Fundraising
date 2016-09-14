@@ -49,8 +49,9 @@
     <Reference Include="GridMvc">
       <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
     </Reference>
-    <Reference Include="Ionic.Zip">
-      <HintPath>..\..\..\Ionic.Zip.dll</HintPath>
+    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unofficial.Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="iTransact, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -511,6 +512,7 @@
     <Content Include="Images\coupon.png" />
     <Content Include="Images\loading.gif" />
     <Content Include="Images\menu.png" />
+    <Content Include="Ionic.Zip.xml" />
     <Content Include="junk.txt" />
     <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\ImageTools.js" />

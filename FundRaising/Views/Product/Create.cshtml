@@ -16,6 +16,17 @@
     width: 53% !important;
     float: left;
     line-height: 24px;
+}.form-control {
+    width:100%;
+    height: 25px;
+    background: azure!important;
+}
+ .form-group {
+    margin-bottom: 6px;
+}
+ .mylabel{
+    color: #54a792;
+    width: 100%;
 }
 </style>
 <script>
@@ -69,62 +80,126 @@
         
         <legend>Product<input type="submit" value="Create" class="buttn update_btn" style="width:90px;" /><a href="#" onclick="goBack()" class="linkbtn update_btn" style=" text-align: center;">Back</a></legend>
         <div class="row">
-            <div class="col-md-4">
-                
+            <div class="col-md-12">
                 @if (ViewBag.option == 1)
                 {
                     <input type="hidden" name="ProductType" value="2" />
                     <div>
                         <fieldset>
-                            <legend>Price</legend>
+
                             <div class="row">
                                 <div class="col-md-3">
-                                    <div>
-                                        <input type="text" id="ItemNumber1" />
+                                    <div class="row form-group">
+                                        <div class="col-md-6">
+                                            <label class="mylabel">Item Number</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="ItemNumber1" class="form-control" />
+                                        </div>
+
                                     </div>
-                                    <div>
-                                        <input type="text" id="Issue1" />
+                                    <div class="row form-group">
+                                        <div class="col-md-6">
+                                            <label class="mylabel">Issue</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="Issue1" class="form-control" />
+                                        </div>
+
                                     </div>
-                                    <div>
-                                        <input type="text" id="Price1" />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div>
-                                        <input type="text" id="ItemNumber2" />
-                                    </div>
-                                    <div>
-                                        <input type="text" id="Issue2" />
-                                    </div>
-                                    <div>
-                                        <input type="text" id="Price2" />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div>
-                                        <input type="text" id="ItemNumber3" />
-                                    </div>
-                                    <div>
-                                        <input type="text" id="Issue3" />
-                                    </div>
-                                    <div>
-                                        <input type="text" id="Price3" />
+                                    <div class="row form-group">
+                                        <div class="col-md-6">
+                                            <label class="mylabel">Price</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="Price1" class="form-control" />
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div>
-                                        <input type="text" id="ItemNumber4" />
+                                    <div class="row form-group">
+                                        <div class="col-md-6">
+                                            <label class="mylabel">Item Number</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="ItemNumber2" class="form-control" />
+                                        </div>
+
                                     </div>
-                                    <div>
-                                        <input type="text" id="Issue4" />
+                                    <div class="row form-group">
+                                        <div class="col-md-6">
+                                            <label class="mylabel">Issue</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="Issue2" class="form-control" />
+                                        </div>
+
                                     </div>
-                                    <div>
-                                        <input type="text" id="Price4" />
+                                    <div class="row form-group">
+                                        <div class="col-md-6">
+                                            <label class="mylabel">Price</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="Price2" class="form-control" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row form-group">
+                                        <div class="col-md-6">
+                                            <label class="mylabel">Item Number</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="ItemNumber3" class="form-control" />
+                                        </div>
+
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-6">
+                                            <label class="mylabel">Issue</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="Issue3" class="form-control" />
+                                        </div>
+
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-6">
+                                            <label class="mylabel">Price</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="Price3" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row form-group">
+                                        <div class="col-md-6">
+                                            <label class="mylabel">Item Number</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="ItemNumber4" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-6">
+                                            <label class="mylabel">Issue</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="Issue4" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-6">
+                                            <label class="mylabel">Price</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="Price4" class="form-control" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-
                         </fieldset>
                     </div>
                 }
@@ -150,7 +225,13 @@
 
                         </div>
                     </div>
-                }                
+                }
+
+            </div>    
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+       
                 <div class="row no-margin">
                     <div class="editor-label">
                         @Html.LabelFor(model => model.Description)<span class="error">@Html.ValidationMessageFor(model => model.Description)</span>

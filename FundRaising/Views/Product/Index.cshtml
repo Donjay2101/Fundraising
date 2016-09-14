@@ -25,12 +25,28 @@
     }
 </script>
 
-<p>
-    <a href="#" id="create" onclick="gotoPrevious('/Product/Create')">Create New</a> | <a href="#" id="Upload" onclick="uploadProducts()">Upload Products</a>
+<div>
 
-    <a href="#" onclick="loadProducts()">Products</a>|<a href="#" onclick="loadMagazines()">Magazines</a>  
-    @*@Html.ActionLink("Create New", "Create")*@
-</p>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a  onclick="loadProducts()" aria-controls="home" role="tab" data-toggle="tab">Products</a></li>
+        <li role="presentation"><a onclick="loadMagazines()" aria-controls="profile" role="tab" data-toggle="tab">Magazines</a></li>
+    </ul>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="#" id="create" onclick="gotoPrevious('/Product/Create')">Create New</a><span class="space">|</span><a href="#" id="Upload" onclick="uploadProducts()">Upload Products</a>
+        </div>
+    </div>
+    <!-- Tab panes -->
+    <div class="tab-content" style="margin-top:10px;">
+        <div id="data-container">
+            @Html.Action("Products")
+        </div>
+    </div>
+</div>
+
+   
+
 <script>
     function loadMagazines() {
         debugger;
@@ -50,7 +66,4 @@
     }
 </script>
 
-<div id="data-container">
-    @Html.Action("Products")
-</div>
 

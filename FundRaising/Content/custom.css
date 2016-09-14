@@ -1819,3 +1819,6 @@ input#chkout:hover
         visibility: hidden;
     }
 }
+.nav-tabs {
+    margin-bottom:15px;
+}
