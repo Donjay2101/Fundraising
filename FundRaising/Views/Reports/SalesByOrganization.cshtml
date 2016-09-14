@@ -1,70 +1,72 @@
 ﻿
 
 @{
-    ViewBag.Title = "SalesByOrganization";
+    ViewBag.Title = "Sales By Organization";
 }
+<style>
+    input#SchoolID {
+    width: 100%;
+}
+    input#btnsubmit {
+    width: 80%;
+}
+    .disabled {
+        border-radius: 3px;
+        border: 1px solid #d4d2d2;
+        width:100%;
+    }
+</style>
 
-<h2>SalesByOrganization</h2>
 <form method="post" action="SalesByOrganization" enctype="multipart/form-data">
     <div class="row">
-        <div class="col-md-3">
-            School ID
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-3"><label class="editorlabel">ID</label></div>
+                <div class="col-md-8  editor-field"><input type="text" id="SchoolID" name="SchoolID" class="ui-autocomplete text-box" /></div>
+            </div>     
         </div>
-        <div class="col-md-9">
-            <input type="text" id="SchoolID" name="SchoolID" class="ui-autocomplete" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            School Name
-        </div>
-        <div class="col-md-9">
-            <input type="text" id="SchoolName" name="SchoolName" class="ui-autocomplete" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            Campaign
-        </div>
-        <div class="col-md-9">
-            <select id="cmbCampaign" name="cmbCampaign">
-                <option>select--</option>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="col-md-3">
-                Sart Date
-            </div>
-            <div class="col-md-9">
-                <input type="text" disabled  name="txtstartDate" id="txtstartDate" />
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-3"><label class="editorlabel">School Name</label></div>
+                <div class="col-md-8  editor-field"><input type="text" id="SchoolName" name="SchoolName" class="ui-autocomplete text-box" /></div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="col-md-3">
-                End Date
-            </div>
-            <div class="col-md-9">
-                <input type="text" disabled name="txtendDate"  id="txtendDate" />
-            </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-3"><label class="editorlabel">Campaign</label></div>
+                <div class="col-md-8  editor-field">
+                    <select id="cmbCampaign" name="cmbCampaign" class="text-box">
+                        <option>select--</option>
+                    </select>
+                </div>
+            </div>  
         </div>
-    </div>
+     </div>
     <div class="row">
-        <div class="col-md-12">
-            <input type="button" id="btnsubmit" value="GenerateReport" />
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-3"><label class="editorlabel">Sart Date</label></div>
+                <div class="col-md-8  editor-field"><input type="text" disabled name="txtstartDate" id="txtstartDate" class="disabled"/></div>
+            </div>          
         </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-3"><label class="editorlabel">End Date</label></div>
+                <div class="col-md-8  editor-field"><input type="text" disabled name="txtendDate" id="txtendDate"  class="disabled"/></div>
+            </div>
+        </div> 
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-5"><input type="button" id="btnsubmit" value="GenerateReport" /></div>           
+            </div>
+        
+         </div>    
     </div>
 </form>
 @*@if (ViewBag.GetMethod != "1")
 {*@
- <div id="reportData">
-
+ <div id="reportData" class="row-topPadding">
  </div>
-
-
-
-
 
 @*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>

@@ -631,7 +631,10 @@ input.btnnav {
 }
 
 ::-webkit-scrollbar {
-   width: 10px;
+   width:6px;
+}
+::-webkit-scrollbar:horizontal {
+   height:6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -1821,4 +1824,7 @@ input#chkout:hover
 }
 .nav-tabs {
     margin-bottom:15px;
+}
+.row-topPadding{
+    padding-top:30px;
 }

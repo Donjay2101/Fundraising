@@ -23,8 +23,10 @@ namespace FundRaising.Controllers.Admin
         FundRaisingDBContext db = new Models.FundRaisingDBContext();
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("SalesByOrganization");
         }
+
+      
 
         #region SalesByOrganization
         public ActionResult SearchSchool(string prefix)

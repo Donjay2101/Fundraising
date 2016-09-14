@@ -143,4 +143,6 @@ body .syntaxhighlighter { overflow-y: hidden !important; overflow-x: auto !impor
         .row-without-margin{
   margin-left: 0px!important;
         }
-          
+   label.editorlabel{
+           color: #54a792;
+   }       
