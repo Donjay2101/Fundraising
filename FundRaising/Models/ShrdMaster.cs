@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Objects;
-using System.Data.Objects.SqlClient;
+using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,12 +9,12 @@ using System.Web;
 using Ionic.Zip;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Data.SqlClient;
 using Microsoft.Reporting.WebForms;
 using System.Web.UI.WebControls;
 using FundRaising.Reports;
 using System.Configuration;
-using System.Data;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity;
 
 namespace FundRaising.Models
 {
@@ -962,7 +962,9 @@ namespace FundRaising.Models
             string orderDetailsStr = null;
             DateTime today=DateTime.Today;            
             today=today.AddDays(-1);
-            var orders = db.Orders.Where(x => EntityFunctions.TruncateTime(x.CreatedDate) >= today && EntityFunctions.TruncateTime(x.CreatedDate)<= today).ToList();
+            
+            
+            var orders = db.Orders.Where(x => DbFunctions.TruncateTime(x.CreatedDate) >= today && DbFunctions.TruncateTime(x.CreatedDate)<= today).ToList();
           //  var orders = db.Orders.GroupBy((x => EntityFunctions.TruncateTime(x.CreatedDate))).ToList();
           //  string FileName = "";
             if(orders.Count>0)

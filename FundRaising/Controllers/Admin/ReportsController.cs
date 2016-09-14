@@ -1,5 +1,5 @@
 ﻿using FundRaising.Reports;
-using Microsoft.Reporting.WebForms;
+//using Microsoft.Reporting.WebForms;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using FundRaising.Models;
 using System.IO;
+using Microsoft.Reporting.WebForms;
 
 namespace FundRaising.Controllers.Admin
 {
@@ -19,7 +20,7 @@ namespace FundRaising.Controllers.Admin
         //
         // GET: /Reports/
        ReportDataSet rds = new ReportDataSet();
-        ReportViewer rpt;
+        //ReportViewer rpt;
         FundRaisingDBContext db = new Models.FundRaisingDBContext();
         public ActionResult Index()
         {
