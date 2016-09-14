@@ -20,6 +20,7 @@ using iTransact.Requests;
 using iTransact.Responses;
 using Microsoft.AspNet.Identity;
 using SelectPdf;
+using System.Data.Entity;
 
 namespace FundRaising.Controllers.Client
 {

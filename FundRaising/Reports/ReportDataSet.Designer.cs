@@ -26,7 +26,7 @@ namespace FundRaising.Reports {
         
         private SalesByOganizationDataTable tableSalesByOganization;
         
-        private OrganizationActiveCampaignDataTable tableOrganizationActiveCampaign;
+        private ActiveOrganizationsCampaignDataTable tableActiveOrganizationsCampaign;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -59,8 +59,8 @@ namespace FundRaising.Reports {
                 if ((ds.Tables["SalesByOganization"] != null)) {
                     base.Tables.Add(new SalesByOganizationDataTable(ds.Tables["SalesByOganization"]));
                 }
-                if ((ds.Tables["OrganizationActiveCampaign"] != null)) {
-                    base.Tables.Add(new OrganizationActiveCampaignDataTable(ds.Tables["OrganizationActiveCampaign"]));
+                if ((ds.Tables["ActiveOrganizationsCampaign"] != null)) {
+                    base.Tables.Add(new ActiveOrganizationsCampaignDataTable(ds.Tables["ActiveOrganizationsCampaign"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -94,9 +94,9 @@ namespace FundRaising.Reports {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public OrganizationActiveCampaignDataTable OrganizationActiveCampaign {
+        public ActiveOrganizationsCampaignDataTable ActiveOrganizationsCampaign {
             get {
-                return this.tableOrganizationActiveCampaign;
+                return this.tableActiveOrganizationsCampaign;
             }
         }
         
@@ -170,8 +170,8 @@ namespace FundRaising.Reports {
                 if ((ds.Tables["SalesByOganization"] != null)) {
                     base.Tables.Add(new SalesByOganizationDataTable(ds.Tables["SalesByOganization"]));
                 }
-                if ((ds.Tables["OrganizationActiveCampaign"] != null)) {
-                    base.Tables.Add(new OrganizationActiveCampaignDataTable(ds.Tables["OrganizationActiveCampaign"]));
+                if ((ds.Tables["ActiveOrganizationsCampaign"] != null)) {
+                    base.Tables.Add(new ActiveOrganizationsCampaignDataTable(ds.Tables["ActiveOrganizationsCampaign"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -212,10 +212,10 @@ namespace FundRaising.Reports {
                     this.tableSalesByOganization.InitVars();
                 }
             }
-            this.tableOrganizationActiveCampaign = ((OrganizationActiveCampaignDataTable)(base.Tables["OrganizationActiveCampaign"]));
+            this.tableActiveOrganizationsCampaign = ((ActiveOrganizationsCampaignDataTable)(base.Tables["ActiveOrganizationsCampaign"]));
             if ((initTable == true)) {
-                if ((this.tableOrganizationActiveCampaign != null)) {
-                    this.tableOrganizationActiveCampaign.InitVars();
+                if ((this.tableActiveOrganizationsCampaign != null)) {
+                    this.tableActiveOrganizationsCampaign.InitVars();
                 }
             }
         }
@@ -230,8 +230,8 @@ namespace FundRaising.Reports {
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableSalesByOganization = new SalesByOganizationDataTable();
             base.Tables.Add(this.tableSalesByOganization);
-            this.tableOrganizationActiveCampaign = new OrganizationActiveCampaignDataTable();
-            base.Tables.Add(this.tableOrganizationActiveCampaign);
+            this.tableActiveOrganizationsCampaign = new ActiveOrganizationsCampaignDataTable();
+            base.Tables.Add(this.tableActiveOrganizationsCampaign);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -242,7 +242,7 @@ namespace FundRaising.Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeOrganizationActiveCampaign() {
+        private bool ShouldSerializeActiveOrganizationsCampaign() {
             return false;
         }
         
@@ -305,7 +305,7 @@ namespace FundRaising.Reports {
         public delegate void SalesByOganizationRowChangeEventHandler(object sender, SalesByOganizationRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void OrganizationActiveCampaignRowChangeEventHandler(object sender, OrganizationActiveCampaignRowChangeEvent e);
+        public delegate void ActiveOrganizationsCampaignRowChangeEventHandler(object sender, ActiveOrganizationsCampaignRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -723,7 +723,7 @@ namespace FundRaising.Reports {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class OrganizationActiveCampaignDataTable : global::System.Data.TypedTableBase<OrganizationActiveCampaignRow> {
+        public partial class ActiveOrganizationsCampaignDataTable : global::System.Data.TypedTableBase<ActiveOrganizationsCampaignRow> {
             
             private global::System.Data.DataColumn columnSchoolId;
             
@@ -739,8 +739,8 @@ namespace FundRaising.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OrganizationActiveCampaignDataTable() {
-                this.TableName = "OrganizationActiveCampaign";
+            public ActiveOrganizationsCampaignDataTable() {
+                this.TableName = "ActiveOrganizationsCampaign";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -748,7 +748,7 @@ namespace FundRaising.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal OrganizationActiveCampaignDataTable(global::System.Data.DataTable table) {
+            internal ActiveOrganizationsCampaignDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -765,7 +765,7 @@ namespace FundRaising.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected OrganizationActiveCampaignDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected ActiveOrganizationsCampaignDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -829,34 +829,34 @@ namespace FundRaising.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OrganizationActiveCampaignRow this[int index] {
+            public ActiveOrganizationsCampaignRow this[int index] {
                 get {
-                    return ((OrganizationActiveCampaignRow)(this.Rows[index]));
+                    return ((ActiveOrganizationsCampaignRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event OrganizationActiveCampaignRowChangeEventHandler OrganizationActiveCampaignRowChanging;
+            public event ActiveOrganizationsCampaignRowChangeEventHandler ActiveOrganizationsCampaignRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event OrganizationActiveCampaignRowChangeEventHandler OrganizationActiveCampaignRowChanged;
+            public event ActiveOrganizationsCampaignRowChangeEventHandler ActiveOrganizationsCampaignRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event OrganizationActiveCampaignRowChangeEventHandler OrganizationActiveCampaignRowDeleting;
+            public event ActiveOrganizationsCampaignRowChangeEventHandler ActiveOrganizationsCampaignRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event OrganizationActiveCampaignRowChangeEventHandler OrganizationActiveCampaignRowDeleted;
+            public event ActiveOrganizationsCampaignRowChangeEventHandler ActiveOrganizationsCampaignRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddOrganizationActiveCampaignRow(OrganizationActiveCampaignRow row) {
+            public void AddActiveOrganizationsCampaignRow(ActiveOrganizationsCampaignRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OrganizationActiveCampaignRow AddOrganizationActiveCampaignRow(string SchoolId, string Name, string ContactName, string Address1, string Registered, System.DateTime CampaignStartDate) {
-                OrganizationActiveCampaignRow rowOrganizationActiveCampaignRow = ((OrganizationActiveCampaignRow)(this.NewRow()));
+            public ActiveOrganizationsCampaignRow AddActiveOrganizationsCampaignRow(string SchoolId, string Name, string ContactName, string Address1, string Registered, System.DateTime CampaignStartDate) {
+                ActiveOrganizationsCampaignRow rowActiveOrganizationsCampaignRow = ((ActiveOrganizationsCampaignRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         SchoolId,
                         Name,
@@ -864,15 +864,15 @@ namespace FundRaising.Reports {
                         Address1,
                         Registered,
                         CampaignStartDate};
-                rowOrganizationActiveCampaignRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowOrganizationActiveCampaignRow);
-                return rowOrganizationActiveCampaignRow;
+                rowActiveOrganizationsCampaignRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowActiveOrganizationsCampaignRow);
+                return rowActiveOrganizationsCampaignRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                OrganizationActiveCampaignDataTable cln = ((OrganizationActiveCampaignDataTable)(base.Clone()));
+                ActiveOrganizationsCampaignDataTable cln = ((ActiveOrganizationsCampaignDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -880,7 +880,7 @@ namespace FundRaising.Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new OrganizationActiveCampaignDataTable();
+                return new ActiveOrganizationsCampaignDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -921,28 +921,28 @@ namespace FundRaising.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OrganizationActiveCampaignRow NewOrganizationActiveCampaignRow() {
-                return ((OrganizationActiveCampaignRow)(this.NewRow()));
+            public ActiveOrganizationsCampaignRow NewActiveOrganizationsCampaignRow() {
+                return ((ActiveOrganizationsCampaignRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new OrganizationActiveCampaignRow(builder);
+                return new ActiveOrganizationsCampaignRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(OrganizationActiveCampaignRow);
+                return typeof(ActiveOrganizationsCampaignRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.OrganizationActiveCampaignRowChanged != null)) {
-                    this.OrganizationActiveCampaignRowChanged(this, new OrganizationActiveCampaignRowChangeEvent(((OrganizationActiveCampaignRow)(e.Row)), e.Action));
+                if ((this.ActiveOrganizationsCampaignRowChanged != null)) {
+                    this.ActiveOrganizationsCampaignRowChanged(this, new ActiveOrganizationsCampaignRowChangeEvent(((ActiveOrganizationsCampaignRow)(e.Row)), e.Action));
                 }
             }
             
@@ -950,8 +950,8 @@ namespace FundRaising.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.OrganizationActiveCampaignRowChanging != null)) {
-                    this.OrganizationActiveCampaignRowChanging(this, new OrganizationActiveCampaignRowChangeEvent(((OrganizationActiveCampaignRow)(e.Row)), e.Action));
+                if ((this.ActiveOrganizationsCampaignRowChanging != null)) {
+                    this.ActiveOrganizationsCampaignRowChanging(this, new ActiveOrganizationsCampaignRowChangeEvent(((ActiveOrganizationsCampaignRow)(e.Row)), e.Action));
                 }
             }
             
@@ -959,8 +959,8 @@ namespace FundRaising.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.OrganizationActiveCampaignRowDeleted != null)) {
-                    this.OrganizationActiveCampaignRowDeleted(this, new OrganizationActiveCampaignRowChangeEvent(((OrganizationActiveCampaignRow)(e.Row)), e.Action));
+                if ((this.ActiveOrganizationsCampaignRowDeleted != null)) {
+                    this.ActiveOrganizationsCampaignRowDeleted(this, new ActiveOrganizationsCampaignRowChangeEvent(((ActiveOrganizationsCampaignRow)(e.Row)), e.Action));
                 }
             }
             
@@ -968,14 +968,14 @@ namespace FundRaising.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.OrganizationActiveCampaignRowDeleting != null)) {
-                    this.OrganizationActiveCampaignRowDeleting(this, new OrganizationActiveCampaignRowChangeEvent(((OrganizationActiveCampaignRow)(e.Row)), e.Action));
+                if ((this.ActiveOrganizationsCampaignRowDeleting != null)) {
+                    this.ActiveOrganizationsCampaignRowDeleting(this, new ActiveOrganizationsCampaignRowChangeEvent(((ActiveOrganizationsCampaignRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveOrganizationActiveCampaignRow(OrganizationActiveCampaignRow row) {
+            public void RemoveActiveOrganizationsCampaignRow(ActiveOrganizationsCampaignRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -1002,7 +1002,7 @@ namespace FundRaising.Reports {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "OrganizationActiveCampaignDataTable";
+                attribute2.FixedValue = "ActiveOrganizationsCampaignDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -1329,15 +1329,15 @@ namespace FundRaising.Reports {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class OrganizationActiveCampaignRow : global::System.Data.DataRow {
+        public partial class ActiveOrganizationsCampaignRow : global::System.Data.DataRow {
             
-            private OrganizationActiveCampaignDataTable tableOrganizationActiveCampaign;
+            private ActiveOrganizationsCampaignDataTable tableActiveOrganizationsCampaign;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal OrganizationActiveCampaignRow(global::System.Data.DataRowBuilder rb) : 
+            internal ActiveOrganizationsCampaignRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableOrganizationActiveCampaign = ((OrganizationActiveCampaignDataTable)(this.Table));
+                this.tableActiveOrganizationsCampaign = ((ActiveOrganizationsCampaignDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1345,14 +1345,15 @@ namespace FundRaising.Reports {
             public string SchoolId {
                 get {
                     try {
-                        return ((string)(this[this.tableOrganizationActiveCampaign.SchoolIdColumn]));
+                        return ((string)(this[this.tableActiveOrganizationsCampaign.SchoolIdColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SchoolId\' in table \'OrganizationActiveCampaign\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SchoolId\' in table \'ActiveOrganizationsCampaign\' is DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tableOrganizationActiveCampaign.SchoolIdColumn] = value;
+                    this[this.tableActiveOrganizationsCampaign.SchoolIdColumn] = value;
                 }
             }
             
@@ -1360,10 +1361,10 @@ namespace FundRaising.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Name {
                 get {
-                    return ((string)(this[this.tableOrganizationActiveCampaign.NameColumn]));
+                    return ((string)(this[this.tableActiveOrganizationsCampaign.NameColumn]));
                 }
                 set {
-                    this[this.tableOrganizationActiveCampaign.NameColumn] = value;
+                    this[this.tableActiveOrganizationsCampaign.NameColumn] = value;
                 }
             }
             
@@ -1372,15 +1373,15 @@ namespace FundRaising.Reports {
             public string ContactName {
                 get {
                     try {
-                        return ((string)(this[this.tableOrganizationActiveCampaign.ContactNameColumn]));
+                        return ((string)(this[this.tableActiveOrganizationsCampaign.ContactNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ContactName\' in table \'OrganizationActiveCampaign\' is DBNul" +
-                                "l.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContactName\' in table \'ActiveOrganizationsCampaign\' is DBNu" +
+                                "ll.", e);
                     }
                 }
                 set {
-                    this[this.tableOrganizationActiveCampaign.ContactNameColumn] = value;
+                    this[this.tableActiveOrganizationsCampaign.ContactNameColumn] = value;
                 }
             }
             
@@ -1389,14 +1390,15 @@ namespace FundRaising.Reports {
             public string Address1 {
                 get {
                     try {
-                        return ((string)(this[this.tableOrganizationActiveCampaign.Address1Column]));
+                        return ((string)(this[this.tableActiveOrganizationsCampaign.Address1Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Address1\' in table \'OrganizationActiveCampaign\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Address1\' in table \'ActiveOrganizationsCampaign\' is DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tableOrganizationActiveCampaign.Address1Column] = value;
+                    this[this.tableActiveOrganizationsCampaign.Address1Column] = value;
                 }
             }
             
@@ -1405,15 +1407,15 @@ namespace FundRaising.Reports {
             public string Registered {
                 get {
                     try {
-                        return ((string)(this[this.tableOrganizationActiveCampaign.RegisteredColumn]));
+                        return ((string)(this[this.tableActiveOrganizationsCampaign.RegisteredColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Registered\' in table \'OrganizationActiveCampaign\' is DBNull" +
-                                ".", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Registered\' in table \'ActiveOrganizationsCampaign\' is DBNul" +
+                                "l.", e);
                     }
                 }
                 set {
-                    this[this.tableOrganizationActiveCampaign.RegisteredColumn] = value;
+                    this[this.tableActiveOrganizationsCampaign.RegisteredColumn] = value;
                 }
             }
             
@@ -1421,59 +1423,59 @@ namespace FundRaising.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public System.DateTime CampaignStartDate {
                 get {
-                    return ((global::System.DateTime)(this[this.tableOrganizationActiveCampaign.CampaignStartDateColumn]));
+                    return ((global::System.DateTime)(this[this.tableActiveOrganizationsCampaign.CampaignStartDateColumn]));
                 }
                 set {
-                    this[this.tableOrganizationActiveCampaign.CampaignStartDateColumn] = value;
+                    this[this.tableActiveOrganizationsCampaign.CampaignStartDateColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsSchoolIdNull() {
-                return this.IsNull(this.tableOrganizationActiveCampaign.SchoolIdColumn);
+                return this.IsNull(this.tableActiveOrganizationsCampaign.SchoolIdColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetSchoolIdNull() {
-                this[this.tableOrganizationActiveCampaign.SchoolIdColumn] = global::System.Convert.DBNull;
+                this[this.tableActiveOrganizationsCampaign.SchoolIdColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsContactNameNull() {
-                return this.IsNull(this.tableOrganizationActiveCampaign.ContactNameColumn);
+                return this.IsNull(this.tableActiveOrganizationsCampaign.ContactNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetContactNameNull() {
-                this[this.tableOrganizationActiveCampaign.ContactNameColumn] = global::System.Convert.DBNull;
+                this[this.tableActiveOrganizationsCampaign.ContactNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsAddress1Null() {
-                return this.IsNull(this.tableOrganizationActiveCampaign.Address1Column);
+                return this.IsNull(this.tableActiveOrganizationsCampaign.Address1Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetAddress1Null() {
-                this[this.tableOrganizationActiveCampaign.Address1Column] = global::System.Convert.DBNull;
+                this[this.tableActiveOrganizationsCampaign.Address1Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsRegisteredNull() {
-                return this.IsNull(this.tableOrganizationActiveCampaign.RegisteredColumn);
+                return this.IsNull(this.tableActiveOrganizationsCampaign.RegisteredColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetRegisteredNull() {
-                this[this.tableOrganizationActiveCampaign.RegisteredColumn] = global::System.Convert.DBNull;
+                this[this.tableActiveOrganizationsCampaign.RegisteredColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1515,22 +1517,22 @@ namespace FundRaising.Reports {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class OrganizationActiveCampaignRowChangeEvent : global::System.EventArgs {
+        public class ActiveOrganizationsCampaignRowChangeEvent : global::System.EventArgs {
             
-            private OrganizationActiveCampaignRow eventRow;
+            private ActiveOrganizationsCampaignRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OrganizationActiveCampaignRowChangeEvent(OrganizationActiveCampaignRow row, global::System.Data.DataRowAction action) {
+            public ActiveOrganizationsCampaignRowChangeEvent(ActiveOrganizationsCampaignRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OrganizationActiveCampaignRow Row {
+            public ActiveOrganizationsCampaignRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -1763,7 +1765,7 @@ namespace FundRaising.Reports.ReportDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class OrganizationActiveCampaignTableAdapter : global::System.ComponentModel.Component {
+    public partial class ActiveOrganizationsCampaignTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -1777,7 +1779,7 @@ namespace FundRaising.Reports.ReportDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public OrganizationActiveCampaignTableAdapter() {
+        public ActiveOrganizationsCampaignTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -1874,7 +1876,7 @@ namespace FundRaising.Reports.ReportDataSetTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "OrganizationActiveCampaign";
+            tableMapping.DataSetTable = "ActiveOrganizationsCampaign";
             tableMapping.ColumnMappings.Add("SchoolId", "SchoolId");
             tableMapping.ColumnMappings.Add("Name", "Name");
             tableMapping.ColumnMappings.Add("ContactName", "ContactName");
@@ -1906,7 +1908,7 @@ namespace FundRaising.Reports.ReportDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(ReportDataSet.OrganizationActiveCampaignDataTable dataTable) {
+        public virtual int Fill(ReportDataSet.ActiveOrganizationsCampaignDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1919,9 +1921,9 @@ namespace FundRaising.Reports.ReportDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual ReportDataSet.OrganizationActiveCampaignDataTable GetData() {
+        public virtual ReportDataSet.ActiveOrganizationsCampaignDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            ReportDataSet.OrganizationActiveCampaignDataTable dataTable = new ReportDataSet.OrganizationActiveCampaignDataTable();
+            ReportDataSet.ActiveOrganizationsCampaignDataTable dataTable = new ReportDataSet.ActiveOrganizationsCampaignDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
