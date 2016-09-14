@@ -25,32 +25,53 @@
        // var categoryID=readCookie('categoryCookie');
         //////if()
         debugger;
-        
+        var categoryID=$('#categoryID').val().split('-')[0];
         var quantity = parseInt($("#Quantity").val());
         var availQuantity = parseInt($('#availableQuantity').html());
+        var giftObj;
         if (isNaN(availQuantity))
         {
             availQuantity = -0;
         }
+        if (quantity <= 0)
+        {
+            alert('Quantity should be greater than 0')
+            return;
+        }
 
         if ((availQuantity > 0 || availQuantity == -0) && (availQuantity >= quantity || availQuantity == -0))
         {
-            var elem = $('#subscriptionPart');
-            var issueValue=0;
-            if (elem != undefined)
+            if(categoryID=="17")
             {
-
-                var radios=$('.rad');
-                for(i=0;i<radios.length;i++)
+                var elem = $('#subscriptionPart');
+                var issueValue=0;
+                if (elem != undefined)
                 {
-                    if ($(radios[i]).is(':checked'))
+                    var count = 0;
+                    var radios=$('.rad');
+                    for(i=0;i<radios.length;i++)
                     {
-                        issueValue = $(radios[i]).val();
-                        ID = $(radios[i]).attr('productid');
+                        if ($(radios[i]).is(':checked'))
+                        {
+                            issueValue = $(radios[i]).val();
+                            ID = $(radios[i]).attr('productid');
+                            count++;
+                            break;
+                        }
                     }
-                }
+                
 
+                    if(count<=0)
+                    {
+                        alert('no issues has been selected.');
+                        return;
+                    }
+                    var giftObj = sessionStorage.getItem('Gift');
+                    //console.log(giftObj.Name);
+
+                }
             }
+            
             var shiptoschoolonly = $('#shiptoschoolonly').val();
             if (shiptoschoolonly == 1)
             {
@@ -60,7 +81,7 @@
                 }
             }
            
-            
+            //return;
             
             //if (parseInt(qtyAvailable) < quantity || parseInt(qtyAvailable) <= 0)
             //{
@@ -68,7 +89,7 @@
             //}
             $.ajax({
                 url: "/ShoppingCart/AddtoCart",
-                data: { ID: ID, Quantity: quantity, IssueValue: issueValue },
+                data: { ID: ID, Quantity: quantity, GiftCard: giftObj,IssueValue: issueValue },
                 type: "GET",
                 contentType: 'application/json; charset=utf-8',
                 success: function (cartData) {
@@ -106,6 +127,7 @@
 
                         var itemID = $('#itemID').val();
                         sessionStorage.setItem(itemID, (availQuantity - quantity));
+                        sessionStorage.setItem("Gift",null);
 
                     }
                     $('.count').html(cartData.Count);
@@ -200,8 +222,10 @@
                                     <div class="col-md-3 top-pad">@String.Format("{0:C}", Model.Price4)</div>
                                 </div>*@
                             </div>
+                            <div class="row">
+                                <input type="checkbox" id="isGift" /><span>This is a gift</span>
+                            </div>
                         </div>
-
                     }
                     else
                     {
@@ -250,3 +274,95 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).on('change', '#isGift', function () {
+        debugger;
+        if (!$('[name="rg1"]').is(':checked'))
+        {
+            alert('no issues has been selected.Select atleast 1 issue.');
+            $('#isGift').prop('checked', false);
+            return;
+        }
+        if ($(this).is(':checked')) {
+            var htmlString = '<div class="row"><div class="row textright"><div class="col-md-12"><span id="gftpopup_close" style="cursor:pointer">X</span></div></div>'
+		  + '<div class="row">'
+		  + 'Please enter the delivery information for your magazine subscription. (This is not your billing address or a shipping address for the rest of your order.)'
+		  + '</div>'
+		 + ' <div class="row">'
+			+ '<div class="col-mid-3">'
+			+ '  Name:'
+			+ '</div>'
+			+ '<div class="col-md-6">'
+			+ '<input type="text" id ="gftName" class="form-control"></input>'
+			+ '</div>'
+		  + '</div>'
+		  + '<div class="row">'
+			+ '<div class="col-mid-3">'
+			+ '  Email:'
+			+ '</div>	'
+			+ '<div class="col-md-6">'
+			+ '<input type="text" id="gftEmail" class="form-control"></input>'
+			+ '</div>'
+		 + ' </div>'
+		 + ' <div class="row">'
+		+ '	<div class="col-mid-3">'
+			+ '  Address:'
+			+ '</div>'
+			+ '<div class="col-md-6">'
+			+ '<input type="text" id="gftAddress" class="form-control"></input>'
+			+ '</div>'
+		 + ' </div>'
+		 + ' <div class="row">'
+		+ '	<div class="col-mid-3">'
+			+ '  City:'
+			+ '</div>	'
+			+ '<div class="col-md-6">'
+			+ '<input type="text" id="gftCity" class="form-control"></input>'
+			+ '</div>'
+		  + '</div>'
+		  + '<div class="row">'
+			+ '<div class="col-mid-3">'
+			+ '  State:'
+			+ '</div>'
+			+ '<div class="col-md-6">'
+			+ '<input type="text" id="gftState" class="form-control"></input>'
+			+ '</div>'
+		 + '</div>'
+		  + '<div class="row">'
+			+ '<div class="col-mid-3">'
+			+ '  Zip:'
+			+ '</div>'
+			+ '<div class="col-md-6">'
+			+ '<input type="text" id="gftZip" class="form-control"></input>'
+			+ '</div>'
+		 + '</div>'
+		 + '<div class="row">'
+			+ '<div class="col-md-12">'
+			+ '<input type="button"  id="btnGiftSave" value="save"/>'
+			+ '</div>'
+		  + '</div>'
+		+ '</div>';
+            $('#overlayw').show();
+            $('#Containerw').html(htmlString);
+        }
+        else
+        {
+            sessionStorage.setItem('Gift', null);
+        }
+
+    });
+
+    $(document).on('click', '#gftpopup_close', function () {
+        debugger;
+        $('#isGift').prop('checked', false);
+        $('#overlayw').hide();
+    });
+
+    $(document).on('click', '#btnGiftSave', function () {
+
+        debugger;
+        getGiftData();
+
+    });
+</script>
+

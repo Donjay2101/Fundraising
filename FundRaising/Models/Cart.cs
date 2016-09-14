@@ -19,6 +19,7 @@ namespace FundRaising.Models
         public bool chargeShipping { get; set; }
         public bool chargeSalesTax { get; set; }
         public bool ShipToSchool { get; set; }
+        public bool IsGift { get; set; }
     }
 
 }

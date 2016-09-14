@@ -14,7 +14,7 @@ namespace FundRaising.ViewModels
         public string StudentFirstName  { get; set; }
         public string StudentLastName { get; set; }
         public string  SchoolName { get; set; }
-        public int SchoolID { get; set; }
+        public string SchoolID { get; set; }
         public string Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ProductName { get; set; }

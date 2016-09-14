@@ -19,7 +19,7 @@ namespace FundRaising.Models
         public int ID { get; set; }
 
        
-        public int OrganizatonID { get; set; }
+        public string OrganizatonID { get; set; }
         
         [Display(Name="CampaignName")]
         [Required(ErrorMessage = "*")]

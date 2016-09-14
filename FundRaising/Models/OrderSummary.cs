@@ -13,5 +13,6 @@ namespace FundRaising.Models
         public double SalesTax { get; set; }
         public double ShippingAmount { get; set; }
         public double TotalPayable { get; set; }
+        public int Quantity { get; set; }
     }
 }

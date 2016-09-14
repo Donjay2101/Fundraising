@@ -156,7 +156,7 @@ function openCampaignPage()
 $(document).on('focus', '.is-datepick', function () {
      debugger;
 
-    $(this).datepick({ dateFormat: 'yyyy-mm-dd' });
+    //$(this).datepick({ dateFormat: 'yyyy-mm-dd' });
     //$('#txtCampainendDate').datepick({ dateFormat: 'yyyy-mm-dd' });
 });
 
@@ -168,8 +168,8 @@ $(document).on('focus', '.is-datepick', function () {
 //    this.Campaign = Campaign;
 //}
 $(document).ready(function () {
-    $('#txtCampainStartDate').datepick({ dateFormat: 'yyyy-mm-dd' });
-    $('#txtCampainendDate').datepick({ dateFormat: 'yyyy-mm-dd' });
+   // $('#txtCampainStartDate').datepick({ dateFormat: 'yyyy-mm-dd' });
+    //$('#txtCampainendDate').datepick({ dateFormat: 'yyyy-mm-dd' });
 });
 
 $(document).on('click', '#btnAddCampaing', function () {

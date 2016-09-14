@@ -1,0 +1,10 @@
+﻿@using ReportViewerForMvc;
+@{
+    ViewBag.Title = "OrganizationWithActivecampaign";
+}
+
+<h2>OrganizationWithActivecampaign</h2>
+<div>
+    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "height:500px;width:100%" })
+</div>
+

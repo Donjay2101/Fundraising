@@ -85,7 +85,7 @@
                         <a href="/store/Details/@item.productId" style="color: #717171;">@item.itemNumber</a>
                     </div>
                     <div class="col-md-4 col-sm-4" style="border-right: 1px solid #E8E4E4; height: inherit; padding-top: 11px;">
-                        @item.Description
+                      @Html.Raw(@item.Description)
                     </div>
                     <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
                         <input type="number" value="@item.Quantity" name="@item.ID" min="1" style="margin-bottom: 0; text-align: center;" id="@item.ID" class="quantity"/> <br/>

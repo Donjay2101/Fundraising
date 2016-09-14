@@ -84,6 +84,7 @@ namespace FundRaising.Models
         public string SPostalCode { get; set; }
         public string StudentID { get; set; }
         public int SchoolID { get; set; }
+        public int CampaignId { get; set; }
         public string Status { get; set; }
         public DateTime CreatedDate { get; set; }
 
