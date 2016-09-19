@@ -1,50 +1,49 @@
 ﻿
 @{
-    ViewBag.Title = "ItemSoldReport";
+    ViewBag.Title = "Item Sold Report";
+    Layout = "~/Views/Reports/_SubLayout.cshtml";
 }
-<div class="row">
-    <nav class="navbar navbar-default">
-        <ul class="nav navbar-nav">
-            <li class="navbar-link">
-                <a href="~/Reports/SalesByOrganization">Sales Report-select Organization/campaign</a>
-            </li>
-            <li>
-                <a href="~/Reports/OrganizationWithActivecampaign">Organizations With Active Campaign</a>
-            </li>
-            <li>
-                <a href="~/Reports/ProductReport">Product Report-All Product -All Categoris-All Catalogs </a>
-            </li>
-            <li>
-                <a href="~/Reports/OrganizationSalesReport">Sales By Campaign Report</a>
-            </li>
-            <li>
-                <a href="~/Reports/ItemSoldReport">Items Sold Report</a>
-            </li>
-            <li>
-                <a href="~/Reports/SchoolOrders">School Orders Report-Lists Orders By Selected School</a>
-            </li>
-        </ul>
-    </nav>
+<style>
+    input#btnSubmit {
+        background: #54a792;
+        color: white;
+        border: none;
+        padding: 5px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-radius: 3px;
+        margin-top:10px;
+         margin-left:10px;
+    }
 
-</div>
+    .form-control {
+        height: 31px;
+        padding: 0px 12px;
+        background-color: #ecf7ec;
+    }
+</style>
 <div class="row">
-    <div class="col-md-4">
-        Start Date:
-    </div>
     <div class="col-md-6">
-        <input type="text" class="date" id="txtStartDate" />
-    </div>    
-</div>
-<div class="row">
-    <div class="col-md-4">
-        End Date:
-    </div>
+        <div class="col-md-4">
+            <label class="tealblue"> Start Date</label>
+        </div>
+        <div class="col-md-8">
+            <input type="text" class="date form-control" id="txtStartDate" />
+        </div>
+        <div class="row form-group">
+            <div class="col-md-offset-4 col-md-8">
+                <input type="button" value="Submit" id="btnSubmit" />
+            </div>
+        </div>
+    </div>   
     <div class="col-md-6">
-        <input type="text" class="date" id="txtEndDate" />
-    </div>
-</div>
-<div class="row">
-    <input type="button" value="Submit"  id="btnSubmit"/>
+        <div class="col-md-4">
+            <label class="tealblue">End Date</label>
+        </div>
+        <div class="col-md-8">
+            <input type="text" class="date form-control" id="txtEndDate" />
+        </div>
+    </div>  
 </div>
 
 <div id="reportContainer">

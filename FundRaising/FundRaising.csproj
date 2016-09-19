@@ -1061,7 +1061,6 @@
     <Content Include="Views\Customer\Error1.cshtml" />
     <Content Include="Views\Customer\OrderInformation.cshtml" />
     <Content Include="Views\Shared\_MagazineView.cshtml" />
-    <Content Include="Views\Reports\SalesByOrganization.cshtml" />
     <Content Include="Views\Shared\_SalesByOrganization.cshtml" />
     <Content Include="Views\Reports\OrganizationWithActivecampaign.cshtml" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
@@ -1078,6 +1077,9 @@
     <Content Include="Views\Reports\ItemSoldReport.cshtml" />
     <Content Include="Views\Reports\ProductReport.cshtml" />
     <Content Include="Views\Reports\SchoolOrders.cshtml" />
+    <Content Include="Views\Reports\_SubLayout.cshtml" />
+    <Content Include="Views\Reports\SalesByOrganization.cshtml" />
+    <Content Include="Views\Shared\_ReportsLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201510261542262_InitialCreate.resx">

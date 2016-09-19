@@ -5,8 +5,8 @@
 }
 <script>
     $(document).ready(function () {
-        $('#CampaignStartDate').datepick({ dateFormat: 'yyyy-mm-dd' });
-        $('#CampaignEndDate').datepick({ dateFormat: 'yyyy-mm-dd' });
+        //$('#CampaignStartDate').datepick({ dateFormat: 'yyyy-mm-dd' });
+        //$('#CampaignEndDate').datepick({ dateFormat: 'yyyy-mm-dd' });
     });
 
     function checkDate()
@@ -56,7 +56,7 @@
                             @Html.LabelFor(model => model.CampaignStartDate)<span class="error">@Html.ValidationMessageFor(model => model.CampaignStartDate)</span>
                         </div>
                         <div class="editor-field">
-                            <input type="text" id="CampaignStartDate" data-val="true" name="CampaignStartDate" class="calendar input-validation-error" />
+                            <input type="text" id="CampaignStartDate" data-val="true" name="CampaignStartDate" class="calendar input-validation-error date" />
                             @*@Html.EditorFor(model => model.CampaignStartDate)*@
                             @*@Html.ValidationMessageFor(model => model.CampaignStartDate)*@
                         </div>
@@ -67,7 +67,7 @@
                             @Html.LabelFor(model => model.CampaignEndDate)<span class="error">@Html.ValidationMessageFor(model => model.CampaignEndDate)</span>
                         </div>
                         <div class="editor-field">
-                            <input type="text" id="CampaignEndDate" data-val="true" name="CampaignEndDate" class="calendar input-validation-error" />
+                            <input type="text" id="CampaignEndDate" data-val="true" name="CampaignEndDate" class="calendar input-validation-error date" />
                             @*@Html.EditorFor(model => model.CampaignEndDate)*@
                             @*@Html.ValidationMessageFor(model => model.CampaignEndDate)*@
                         </div>
