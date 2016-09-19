@@ -17,21 +17,20 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 
 
-
 namespace FundRaising.Controllers.Seller
 {
     //[Authorize(Users = "Admin")]
-    [Authorize(Roles = "Student,Admin")]
+    [System.Web.Http.Authorize(Roles = "Student,Admin")]
    //[Authorize(Users= "Admin")]
     [InitializeSimpleMembership]
     public class StudentController : Controller
     {
         public StudentController()
         {
-            if(CheckSession())
-            {
-                Response.Redirect("/");
-            }
+            //if(CheckSession())
+            //{
+            //    Response.Redirect("/");
+            //}
         }
 
         private FundRaisingDBContext db = new FundRaisingDBContext();
@@ -57,6 +56,7 @@ namespace FundRaising.Controllers.Seller
         
         public bool CheckSession()
         {
+
             if (Session["CategoryID"] == null || Session["studentIDs"] == null || Session["SchoolName"] == null || Session["GoalType"] ==null|| Session["Organization"]==null)
             {
                 return true;
@@ -397,7 +397,7 @@ namespace FundRaising.Controllers.Seller
         //
         // POST: /Student/Delete/5
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, System.Web.Http.ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
         public ActionResult DeleteConfirmed(int id)

@@ -37,6 +37,10 @@ namespace FundRaising.Controllers.Admin
 
         public ActionResult Products(int option=0)
         {
+            if(TempData["Option"]!=null)
+            {
+                int.TryParse(TempData["Option"].ToString(), out option);
+            }
             var productlist = db.Products.Where(x => x.ItemActive == true).ToList();
             List<ProductViewModel> plist = new List<ProductViewModel>();
             if (option==0)
@@ -138,6 +142,7 @@ namespace FundRaising.Controllers.Admin
             ViewBag.ProductType = new SelectList(Common.ProductTypes(), "ID", "Description");
             int option = GetOption();
             ViewBag.option = option;
+            TempData["Option"] = option;
             if (ModelState.IsValid)
             {                                
                 if(!ShrdMaster.Instance.checkItemNumber(product.ItemNumber))
@@ -206,20 +211,43 @@ namespace FundRaising.Controllers.Admin
                         var priceData = JsonConvert.DeserializeObject<List<MagazinePrice>>(product.MagazinePrice);
                         if(priceData.Count>0)
                         {
-                            priceData.ForEach(x => {
-                                product.ItemNumber = x.ItemNumber;
-                                db.Products.Add(product);
-                                db.SaveChanges();
-                                MagazinePriceMapping mp = new MagazinePriceMapping();
-                                mp.Issue = x.Issue;
-                                mp.Price = x.Price;
-                                mp.description = product.Description;
-                                mp.ItemNumber = x.ItemNumber;
-                                mp.ProductID = product.ID;
+                           
+                            db.Products.Add(product);
+                            db.SaveChanges();
+                            var data = db.MagazinePriceMappings.Where(x => x.ProductID== product.ID).ToList();
 
+                            if (data.Count > 0)
+                            {
+                                data.ForEach(x => {
+                                    db.MagazinePriceMappings.Remove(x);
+                                    db.SaveChanges();
+                                });
+                            }
+                            for (int i=0;i< priceData.Count;i++)
+                            {
+                                //product.ItemNumber = priceData[i].ItemNumber;
+                                if (!ShrdMaster.Instance.checkItemNumber(priceData[i].ItemNumber))
+                                {
+                                   // product.MagazinePriceList = priceData.ToList();
+                                    db.Products.Remove(product);                                    
+                                    db.SaveChanges();
+                                    ViewBag.error = "Product Active with "+ priceData[i].ItemNumber + "item number exists.";
+                                    return View(product);
+                                   // break;
+                                }
+                                
+                                MagazinePriceMapping mp = new MagazinePriceMapping();
+
+                                mp.Issue = priceData[i].Issue;
+                                mp.Price = priceData[i].Price;
+                                mp.description = product.Description;
+                                mp.ItemNumber = priceData[i].ItemNumber;
+                                mp.ProductID = product.ID;
                                 db.MagazinePriceMappings.Add(mp);
                                 db.SaveChanges();
-                            });
+                            }
+                                  
+                            
 
                             //product.ItemNumber = priceData[0].ItemNumber;
                             //db.Products.Add(product);
@@ -295,7 +323,7 @@ namespace FundRaising.Controllers.Admin
             if(option==1)
             {
                 Session["description"] = product.Description;
-                product.MagazinePriceList = db.Database.SqlQuery<MagazinePriceMappingModel>("exec sp_getMagazinePriceList @description",new SqlParameter("@description",product.Description)).ToList();
+                product.MagazinePriceList = db.Database.SqlQuery<MagazinePriceMappingModel>("exec sp_getMagazinePriceList @productID", new SqlParameter("@productID", product.ID)).ToList();
             }
             //var data =db.MagazinePriceMappings.Where(x => x.description == product.Description).ToList();
             
@@ -501,8 +529,110 @@ namespace FundRaising.Controllers.Admin
 
 
         }
+        public bool CheckData(string data)
+        {
+            if(data.ToUpper()=="NULL")
+            {
+                return true;
+            }
+            return false;
+        }
+        public Product ModifyProduct(ref Product product,string[]valArray,DirectoryInfo[] dirs)
+        {
+            double customerRetailPrice = 0.0, fundTrackerPrice = 0.0, itemWeight = 0.0;
+            bool chargeSalesTax = false, chargeShipping = false, itemOverSize = false, shipToSchoolOnly = false;
+            int inventoryAmount = 0;
+            string itemNumber = "", imagePath = "";
+
+            
+            if(!CheckData(valArray[1]))
+            {
+                product.Description = valArray[1];
+            }
+
+            if(!CheckData(valArray[2]))
+            {
+                double.TryParse(valArray[2], out customerRetailPrice);
+                product.CustomerRetailPrice = customerRetailPrice;
+            }
+
+            if (!CheckData(valArray[3]))
+            {
+                double.TryParse(valArray[3], out fundTrackerPrice);
+                product.FundTrackerPrice = fundTrackerPrice;
+            }
+
+            if (!CheckData(valArray[4]))
+            {
+                double.TryParse(valArray[4], out itemWeight);
+                product.ItemWeight = itemWeight;
+            }
+
+            if (!CheckData(valArray[5]))
+            {
+                bool.TryParse(valArray[5], out chargeSalesTax);
+                product.ChargeSalesTax = chargeSalesTax;
+
+            }
+
+            if (!CheckData(valArray[6]))
+            {
+                bool.TryParse(valArray[6], out chargeShipping);
+                product.ChargeShipping = chargeShipping;
+            }
+
+            if (!CheckData(valArray[7]))
+            {
+                bool.TryParse(valArray[7], out itemOverSize);
+                product.ItemOverSize = itemOverSize;
+
+            }
+
+            if (!CheckData(valArray[8]))
+            {
+                int.TryParse(valArray[8], out inventoryAmount);
+                product.InventoryAmount = inventoryAmount;
+                if (inventoryAmount > 0)
+                {
+                    product.Inventory = true;
+                }
+                else
+                {
+                    product.Inventory = false;
+                }
+            }
 
 
+            if (!CheckData(valArray[9]))
+            {
+                product.ItemExtraTitle = valArray[9];
+            }
+
+            if (!CheckData(valArray[10]))
+            {
+                product.ItemExtraFileName = valArray[10];
+            }
+
+            if (!CheckData(valArray[11]))
+            {
+                product.DetailDescription = valArray[11];
+            }
+
+            if (!CheckData(valArray[12]))
+            {
+                bool.TryParse(valArray[12], out shipToSchoolOnly);
+                product.ShipToSchoolOnly = shipToSchoolOnly;
+            }
+
+          
+
+
+            bool result = MovePicture(itemNumber, dirs, out imagePath);
+            product.ImageUrl = result ? imagePath : "";
+            product.Issue = 0;
+            product.Price = 0;
+            return product;
+        }
         public Product MapProduct(string row,DirectoryInfo[]dirs)
         {
             Product product = new Models.Product();
@@ -510,28 +640,41 @@ namespace FundRaising.Controllers.Admin
             double customerRetailPrice=0.0,fundTrackerPrice=0.0,itemWeight=0.0;
             bool chargeSalesTax = false, chargeShipping = false, itemOverSize = false,shipToSchoolOnly=false,existingItem=false;
             int inventoryAmount = 0;
-            string itemNumber = "", imagePath = "";            
-           
+            string itemNumber = "", imagePath = "";
+
             //return product;
-            if (ShrdMaster.Instance.checkItemNumber(valArray[0]))
+            itemNumber = valArray[0];
+            if (itemNumber.Length < 4)
+            {
+                itemNumber = MakeItemNumber(itemNumber);
+            }
+            if (ShrdMaster.Instance.checkItemNumber(itemNumber))
             {
                 existingItem = true; 
-                product=db.Products.FirstOrDefault(x => x.ItemNumber == valArray[0]);
+                product=db.Products.FirstOrDefault(x => x.ItemNumber == itemNumber);
                 itemNumber = product.ItemNumber;
+                product=ModifyProduct(ref product, valArray, dirs);
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+                return null;
             }
             else
             {
-                itemNumber = valArray[0];
-                if (itemNumber.Length < 4)
-                {
-                    itemNumber = MakeItemNumber(itemNumber);
-                }
+                
                 product.ItemNumber = itemNumber;
             }
             product.productType = 1;
             product.Description = valArray[1];
             double.TryParse(valArray[2], out customerRetailPrice);
-            product.CustomerRetailPrice = customerRetailPrice;
+            if(existingItem && product.CustomerRetailPrice!=customerRetailPrice)
+            {
+                product.CustomerRetailPrice = customerRetailPrice;
+            }
+            else
+            {
+                product.CustomerRetailPrice = customerRetailPrice;
+            }
+            
             double.TryParse(valArray[3], out fundTrackerPrice);
             product.FundTrackerPrice = fundTrackerPrice;
             double.TryParse(valArray[4], out itemWeight);
@@ -576,6 +719,8 @@ namespace FundRaising.Controllers.Admin
             }
             else
             {
+               // db.Entry(product).State = EntityState.Modified;
+                //db.SaveChanges();
                 return null;
             }
             

@@ -1,0 +1,6 @@
+ItemNumber,Description,CustomerRetailPrice,FundTrackerPrice,ItemWeight,ChargeSalesTax,ChargeShipping,ItemOverSize,InventoryAmount,ItemExtraTitle,ItemExtraFileName,DetailDescription,ShipToSchoolOnly
+89,Test89,12,12,112,FALSE,FALSE,FALSE,-1,Test1,ItemExtraFileName1,DetailDescription1,FASLE
+102,Test102,12,12,1211,FASE,FALSE,FALSE,-1,Test2,ItemExtraFileName2,DetailDescription2,FASLE
+106,Test106,12,12,1211,FASE,FALSE,FALSE,-1,Test3,ItemExtraFileName3,DetailDescription3,FASLE
+107,Test107,12,12,1211,FASE,FALSE,FALSE,-1,Test4,ItemExtraFileName4,DetailDescription4,FASLE
+147,Test147,12,12,1211,FASE,FALSE,FALSE,-1,Test5,ItemExtraFileName5,DetailDescription5,FASLE

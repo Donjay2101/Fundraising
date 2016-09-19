@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "ItemSoldReport";
+}
+<div class="row">
+    <nav class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li class="navbar-link">
+                <a href="~/Reports/SalesByOrganization">Sales Report-select Organization/campaign</a>
+            </li>
+            <li>
+                <a href="~/Reports/OrganizationWithActivecampaign">Organizations With Active Campaign</a>
+            </li>
+            <li>
+                <a href="~/Reports/ProductReport">Product Report-All Product -All Categoris-All Catalogs </a>
+            </li>
+            <li>
+                <a href="~/Reports/OrganizationSalesReport">Sales By Campaign Report</a>
+            </li>
+            <li>
+                <a href="~/Reports/ItemSoldReport">Items Sold Report</a>
+            </li>
+            <li>
+                <a href="~/Reports/SchoolOrders">School Orders Report-Lists Orders By Selected School</a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Start Date:
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="date" id="txtStartDate" />
+    </div>    
+</div>
+<div class="row">
+    <div class="col-md-4">
+        End Date:
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="date" id="txtEndDate" />
+    </div>
+</div>
+<div class="row">
+    <input type="button" value="Submit"  id="btnSubmit"/>
+</div>
+
+<div id="reportContainer">
+     
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $(".date").datepicker();
+        });
+    });
+
+    $(document).on('click', '#btnSubmit', function () {
+        debugger;
+        var startDate = $('#txtStartDate').val();
+        var endDate= $('#txtEndDate').val();
+
+        $.ajax({
+            url: "/Reports/ItemSoldReportAjax?StartDate=" + startDate + "&EndDate=" + endDate,
+            success: function (data) {
+                $('#reportContainer').html(data);
+            },
+            error: function (err) {
+                alert('Error:' + err.statusText);
+            }
+        });
+
+    });
+</script>
+
+

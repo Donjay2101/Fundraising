@@ -34,7 +34,7 @@
     </ul>
     <div class="row">
         <div class="col-md-6">
-            <a href="#" id="create" onclick="gotoPrevious('/Product/Create')">Create New</a><span class="space">|</span><a href="#" id="Upload" onclick="uploadProducts()">Upload Products</a>
+            <a href="#" id="create" onclick="gotoPrevious('/Product/Create')">Create New</a><span class="space" id="sperator">|</span><a href="#" id="Upload" onclick="uploadProducts()">Upload Products</a>
         </div>
     </div>
     <!-- Tab panes -->
@@ -50,8 +50,11 @@
 <script>
     function loadMagazines() {
         debugger;
-            $('#data-container').load('/product/products?option=1', function () {
-                var htmlString = '<h2 class="row text-center h2_margin">Magazines</h2>';
+        $('#data-container').load('/product/products?option=1', function () {
+            debugger;
+            var htmlString = '<h2 class="row text-center h2_margin">Magazines</h2>';
+            $('#sperator').css('display','none');
+                $('#Upload').css('display', 'none');
                 $('#DemoDiv').html(htmlString);
                 $('#create').attr('onclick', 'gotoPrevious("/Product/Create?option=1")');
             });
@@ -61,6 +64,8 @@
         $('#data-container').load('/product/products?option=0', function () {
             var htmlString = '<h2 class="row text-center h2_margin">Products</h2>';
             $('#DemoDiv').html(htmlString);
+            $('#sperator').css('display', 'block');
+            $('#Upload').css('display', 'block');
             $('#create').attr('onclick', 'gotoPrevious("/Product/Create?option=0")');
         });
     }

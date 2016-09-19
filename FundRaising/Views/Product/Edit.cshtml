@@ -96,16 +96,16 @@
                                             <div class="col-md-3">
                                                 <div class="row form-group">
                                                     <div class="col-md-6"><label class="mylabel">Item Number</label></div>
-                                                    <div class="col-md-6"><label>@Model.MagazinePriceList[i].ItemNumber</label></div>
+                                                    <div class="col-md-6"><label>@Model.MagazinePriceList[i].ItemNumber</label><span class="error" style="color:red;display:none">*</span></div>
                                                     <input type="hidden" value="@Model.MagazinePriceList[i].ItemNumber" id="@ItemNumberName" />
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col-md-6"><label class="mylabel">Issue</label></div>
-                                                    <div class="col-md-6"><input type="text" id="@IssueName" value="@Model.MagazinePriceList[i].Issue" class="form-control"/></div>
+                                                    <div class="col-md-6"><input type="text" id="@IssueName" value="@Model.MagazinePriceList[i].Issue" class="form-control"/><span class="error" style="color:red;display:none">*</span></div>                                                    
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col-md-6"><label class="mylabel">Price</label></div>
-                                                    <div class="col-md-6"><input type="text" id="@PriceName" value="@Model.MagazinePriceList[i].Price" class="form-control"/></div>
+                                                    <div class="col-md-6"><input type="text" id="@PriceName" value="@Model.MagazinePriceList[i].Price" class="form-control"/><span class="error" style="color:red;display:none">*</span></div>
                                                 </div>
                                             </div>
                                         }

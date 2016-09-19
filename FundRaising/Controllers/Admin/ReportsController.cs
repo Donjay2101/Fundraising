@@ -61,16 +61,16 @@ namespace FundRaising.Controllers.Admin
         public ActionResult AjaxSalesByOrganization(string SchoolID,string CampaignID )
         {
             ReportViewer rptViewer = new ReportViewer();
-            if (string.IsNullOrEmpty(SchoolID)&& string.IsNullOrEmpty(CampaignID))
+            if (!string.IsNullOrEmpty(SchoolID)&& !string.IsNullOrEmpty(CampaignID))
             {
                 
                 rptViewer.ProcessingMode = ProcessingMode.Local;
                 rptViewer.SizeToReportContent = true;
                 rptViewer.Width = Unit.Percentage(100);
                 rptViewer.Height = Unit.Percentage(100);
-                FillDataSet(rds.SalesByOganization.TableName, "sp_SalesReportByOrganization", new SqlParameter("@organizationID", SchoolID), new SqlParameter("@CampaignID", CampaignID));
-                rptViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\SalesByOrganization.rdlc";
-                rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables[0]));
+                FillDataSet(rds.CampaignSalesReport.TableName, "sp_SalesReportByOrganization", new SqlParameter("@organizationID", SchoolID), new SqlParameter("@CampaignID", CampaignID));
+                rptViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\OrganizationSalesReport.rdlc";
+                rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables[rds.CampaignSalesReport.TableName]));
                 //  ShrdMaster.Instance.GenerateReport("SalesByOrganization.rdlc", "sp_SalesReportByOrganization", "SalesByOganization", ref rptViewer, new SqlParameter("@organizationID", 1010), new SqlParameter("@CampaignID", 1));                
             }
             ViewBag.ReportViewer = rptViewer;
@@ -93,14 +93,134 @@ namespace FundRaising.Controllers.Admin
             rptViewer.SizeToReportContent = true;
             rptViewer.Width = Unit.Percentage(100);
             rptViewer.Height = Unit.Percentage(100);
-            FillDataSet(rds.ActiveOrganizationsCampaign.TableName, "sp_ReportActiveOrganizationCampaigns",null);
-            rptViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\OrganizationWithActiveCampaigns.rdlc";
-            rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables["ActiveOrganizationsCampaign"]));
+            FillDataSet(rds.ActiveCampaignOfOrganizations.TableName, "sp_ReportActiveOrganizationCampaigns",null);
+            rptViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\ActiveCampaignOfOrganizations.rdlc";
+            rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables[rds.ActiveCampaignOfOrganizations.TableName]));
             ViewBag.ReportViewer = rptViewer;
             return View();
         }
 
         #endregion  Organizations_with_Active_Campaign
+
+
+
+        #region  OrganizationSalesReport
+
+        public ActionResult OrganizationSalesReport()
+        {
+            ViewBag.Distrinutor = new SelectList(db.Distributors.ToList(), "userID", "Username");
+            return View();
+        }
+
+        public ActionResult OrganizationSalesReportAjax(int DistributorID)
+        {
+
+            ReportViewer rptViewer = new ReportViewer();
+            if(DistributorID>0)
+            {
+                rptViewer.ProcessingMode = ProcessingMode.Local;
+                rptViewer.SizeToReportContent = true;
+                rptViewer.Width = Unit.Percentage(100);
+                rptViewer.Height = Unit.Percentage(100);
+                FillDataSet(rds.SalesReportByOrganization.TableName, "sp_ReportOrganizationSalesReport", new SqlParameter("@DistributorID", DistributorID));
+                rptViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\SalesByOrganizations.rdlc";
+                rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables[rds.SalesReportByOrganization.TableName]));
+            }            
+            ViewBag.ReportViewer = rptViewer;
+            return PartialView("_SalesByOrganization");
+        }
+
+        #endregion  OrganizationSalesReport
+
+
+        #region ItemSoldsReport
+
+        public ActionResult ItemSoldReport()
+        {
+            return View();
+        }
+
+        public ActionResult ItemSoldReportAjax(DateTime? StartDate,DateTime? EndDate)
+        {
+            ReportViewer rptViewer = new ReportViewer();
+            if (StartDate.HasValue && EndDate.HasValue)
+            {
+                rptViewer.ProcessingMode = ProcessingMode.Local;
+                rptViewer.SizeToReportContent = true;
+                rptViewer.Width = Unit.Percentage(100);
+                rptViewer.Height = Unit.Percentage(100);
+                FillDataSet(rds.ItemSoldReport.TableName, "sp_ReportITemSold", new SqlParameter("@StartDate", StartDate), new SqlParameter("@EndDate", EndDate));
+                rptViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\ItemSoldReport.rdlc";
+                rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables[rds.ItemSoldReport.TableName]));
+            }
+            ViewBag.ReportViewer = rptViewer;
+            return PartialView("_SalesByOrganization");
+        }
+
+        #endregion ItemSoldsReport
+
+
+        #region ProductReport
+
+        public ActionResult ProductReport()
+        {
+            ReportViewer rptViewer = new ReportViewer();
+            
+                rptViewer.ProcessingMode = ProcessingMode.Local;
+                rptViewer.SizeToReportContent = true;
+                rptViewer.Width = Unit.Percentage(100);
+                rptViewer.Height = Unit.Percentage(100);
+                FillDataSet(rds.ProductsByCatalog.TableName, "sp_ReportProductWithCategoryandBrochureMapping",null);
+                rptViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\ProductReport.rdlc";
+                rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables[rds.ProductsByCatalog.TableName]));            
+            ViewBag.ReportViewer = rptViewer;
+            return View();
+            
+        }
+
+        #endregion ProductReport
+
+
+        #region SchoolOrders
+
+        public ActionResult SchoolOrders()
+        {
+            return View();
+        }
+        
+        public ActionResult SchoolOrdersAjax(DateTime? startDate,DateTime? endDate,string SchoolID,string STS)
+        {
+            bool? IsSTS = null;
+            ReportViewer rptViewer = new ReportViewer();
+            if (STS.ToUpper()=="STS")
+            {
+                IsSTS= true;
+            }
+            else if(STS.ToUpper()=="UPS")
+            {
+                IsSTS= false;
+            }
+            
+            if(startDate.HasValue && endDate.HasValue && !string.IsNullOrEmpty(SchoolID) && !string.IsNullOrEmpty(STS))
+            {
+                rptViewer.ProcessingMode = ProcessingMode.Local;
+                rptViewer.SizeToReportContent = true;
+                rptViewer.Width = Unit.Percentage(100);
+                rptViewer.Height = Unit.Percentage(100);
+                FillDataSet(rds.SchoolOrders.TableName, "Sp_ReportOrdersBySchool", new SqlParameter("@IsShipToSchool", (object)IsSTS.Value ?? DBNull.Value),
+                    new SqlParameter("@startDate",startDate),
+                    new SqlParameter("@endDate",endDate),
+                    new SqlParameter("@orgID",SchoolID));
+                rptViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\SchoolOrders.rdlc";
+                rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables[rds.SchoolOrders.TableName]));
+                
+
+            }
+
+            ViewBag.ReportViewer = rptViewer;
+            return PartialView("_SalesByOrganization");
+        }
+        #endregion Schoolorders
 
 
         public void FillDataSet(string tableName, string procName, params SqlParameter[] sqlparameters)
@@ -124,7 +244,7 @@ namespace FundRaising.Controllers.Admin
 
                    
                     SqlDataAdapter adp = new SqlDataAdapter(cmd);
-                    adp.Fill(rds,rds.ActiveOrganizationsCampaign.TableName);
+                    adp.Fill(rds,tableName);
                 }
             }
         }

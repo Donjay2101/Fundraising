@@ -278,6 +278,7 @@ namespace FundRaising.Controllers.Client
                     {
                         return RedirectPermanent("/");
                     }
+                    
                    
                     shipToSchool = true;
                 }
@@ -936,7 +937,7 @@ namespace FundRaising.Controllers.Client
             
         }
 
-        [AllowAnonymous]
+        [System.Web.Http.AllowAnonymous]
         public ActionResult InvoicePrint (int orderID,int PDF=0)
         {
             Order order = db.Orders.Find(orderID);            

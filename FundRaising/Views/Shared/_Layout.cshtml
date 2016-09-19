@@ -145,23 +145,76 @@
         function getData() {
             debugger;
             var type = $('#ProductType').val();
+            var count = 0;
             if (type == 2) {
                 $('#FundTrackerPrice').val(0);
-                $('#ItemNumber').val("0");
+                $('#ItemNumber').val(0);
                 $('#CustomerRetailPrice').val(0);
-                var issue1=$('#Issue1').val();
-                var issue2=$('#Issue2').val();
-                var issue3=$('#Issue3').val();
-                var issue4=$('#Issue4').val();
-                var price1=$('#Price1').val();
-                var price2=$('#Price2').val();
-                var price3 = $('#Price3').val();
-                var price4 = $('#Price4').val();
-                var ItemNumber1 = $('#ItemNumber1').val();
-                var ItemNumber2 = $('#ItemNumber2').val();
-                var ItemNumber3 = $('#ItemNumber3').val();
-                var ItemNumber4 = $('#ItemNumber4').val();
 
+                var issue1 = $('#Issue1').val();
+                if (check(issue1)) {
+                    $('#Issue1').parent().find('.error').css('display', 'block');
+                    count++;
+                }
+                var issue2=$('#Issue2').val();
+                if (check(issue2)) {
+                    $('#Issue2').parent().find('.error').css('display', 'block');
+                    count++;
+                }
+                var issue3 = $('#Issue3').val();
+                if (check(issue3)) {
+                    $('#Issue3').parent().find('.error').css('display', 'block');
+                    count++;
+                }
+                var issue4 = $('#Issue4').val();
+                if (check(issue4)) {
+                    $('#Issue4').parent().find('.error').css('display', 'block');
+                    count++;
+                }
+                var price1 = $('#Price1').val();
+                if (check(price1)) {
+                    $('#Price1').parent().find('.error').css('display', 'block');
+                    count++;
+                }
+                var price2=$('#Price2').val();
+                if (check(price2)) {
+                    $('#Price2').parent().find('.error').css('display', 'block');
+                    count++;
+                }
+                var price3 = $('#Price3').val();
+                if (check(price3)) {
+                    $('#Price3').parent().find('.error').css('display', 'block');
+                    count++;
+                }
+                var price4 = $('#Price4').val();
+                if (check(price4)) {
+                    $('#Price4').parent().find('.error').css('display', 'block');
+                    count++;
+                }
+                var ItemNumber1 = $('#ItemNumber1').val();
+                if (check(ItemNumber1)) {
+                    $('#ItemNumber1').parent().find('.error').css('display', 'block');
+                    count++;
+                }
+                var ItemNumber2 = $('#ItemNumber2').val();
+                if (check(ItemNumber2)) {
+                    $('#ItemNumber2').parent().find('.error').css('display', 'block');
+                    count++;
+                }
+                var ItemNumber3 = $('#ItemNumber3').val();
+                if (check(ItemNumber3)) {
+                    $('#ItemNumber3').parent().find('.error').css('display', 'block');
+                    count++;
+                }
+                var ItemNumber4 = $('#ItemNumber4').val();
+                if (check(ItemNumber4)) {
+                    $('#ItemNumber4').parent().find('.error').css('display', 'block');
+                    count++;
+                }
+                if (count > 0)
+                {
+                    return false;
+                }
                 var priceList = [];
                 var obj = {};
 

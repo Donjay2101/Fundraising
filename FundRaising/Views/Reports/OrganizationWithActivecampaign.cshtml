@@ -2,7 +2,31 @@
 @{
     ViewBag.Title = "OrganizationWithActivecampaign";
 }
+<div class="row">
+    <nav class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li class="navbar-link">
+                <a href="~/Reports/SalesByOrganization">Sales Report-select Organization/campaign</a>
+            </li>
+            <li>
+                <a href="~/Reports/OrganizationWithActivecampaign">Organizations With Active Campaign</a>
+            </li>
+            <li>
+                <a href="~/Reports/ProductReport">Product Report-All Product -All Categoris-All Catalogs </a>
+            </li>
+            <li>
+                <a href="~/Reports/OrganizationSalesReport">Sales By Campaign Report</a>
+            </li>
+            <li>
+                <a href="~/Reports/ItemSoldReport">Items Sold Report</a>
+            </li>
+            <li>
+                <a href="~/Reports/SchoolOrders">School Orders Report-Lists Orders By Selected School</a>
+            </li>
+        </ul>
+    </nav>
 
+</div>
 @using ReportViewerForMvc;
 <div class="row">
     @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "height:500px;width:100%" })
