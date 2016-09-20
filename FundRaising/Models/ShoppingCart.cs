@@ -243,7 +243,7 @@ namespace FundRaising.Models
                     if (context.Request.Cookies[studentID] != null)
                     {
                         cartCookie = context.Request.Cookies[studentID].Value.ToString();
-                        var cart = storeDb.Carts.Where(x => x.CartID == cartCookie).SingleOrDefault();
+                        var cart = storeDb.Carts.Where(x => x.CartID == cartCookie).FirstOrDefault();
                         if(cart!=null)
                         {
                             context.Session[CartSessionKey] = cart.CartID.ToString();

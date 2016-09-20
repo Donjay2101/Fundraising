@@ -78,23 +78,23 @@
             {
                 shiptoschool = true;
                 <div class="row shiptoschool_product hidden-xs">
-                    <div class="col-md-1 col-sm-1" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                    <div class="col-md-1 col-sm-1 your-cart-table" >
                         <a href="#" onclick="removeFromCart(@item.ID, @item.productId)" style="color: #717171; padding-left: 0px;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                     </div>
-                    <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                    <div class="col-md-2 col-sm-2 your-cart-table">
                         <a href="/store/Details/@item.productId" style="color: #717171;">@item.itemNumber</a>
                     </div>
-                    <div class="col-md-4 col-sm-4" style="border-right: 1px solid #E8E4E4; height: inherit; padding-top: 11px;">
+                    <div class="col-md-4 col-sm-4 your-cart-table">
                       @Html.Raw(item.Description)
                     </div>
-                    <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                    <div class="col-md-2 col-sm-2 your-cart-table">
                         <input type="number" value="@item.Quantity" name="@item.ID" min="1" style="margin-bottom: 0; text-align: center;" id="@item.ID" class="quantity"/> <br/>
                         <a href="#" id="@link" class="savelink visible-sm" style="display:block!important; color: #F7960B;" onclick="updateCart(@item.productId, @item.ID)">save</a>
                     </div>
-                    <div class="col-md-1 col-sm-1" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                    <div class="col-md-1 col-sm-1 your-cart-table">
                         <span id="@price" style="padding-left: 0px;padding-right: 0px;">@String.Format("{0:C}", Convert.ToInt32(item.Price))</span>
                     </div>
-                    <div class="col-md-2 col-sm-2" style="text-align: center; height: inherit; padding-top: 11px;">
+                    <div class="col-md-2 col-sm-2 your-cart-table">
                         <span id="@subtot">@String.Format("{0:C}", Convert.ToInt32(subtotal))</span>
                     </div>
                 </div>
@@ -123,20 +123,20 @@
             else
             {
                 <div class="row normal_product hidden-xs">
-                    <div class="col-md-1 col-sm-1" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                    <div class="col-md-1 col-sm-1 your-cart-table">
                         <a href="#" onclick="removeFromCart(@item.ID, @item.productId)" style="color: #717171; padding-left: 0px;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                     </div>
-                    <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                    <div class="col-md-2 col-sm-2 your-cart-table">
                         <a href="/store/Details/@item.productId" style="color: #717171;">@item.itemNumber</a>
                     </div>
-                    <div class="col-md-4 col-sm-4" style="border-right: 1px solid #E8E4E4; height: inherit; padding-top: 11px;">
+                    <div class="col-md-4 col-sm-4 your-cart-table">
                       @Html.Raw(item.Description)
                     </div>
-                    <div class="col-md-2 col-sm-2" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                    <div class="col-md-2 col-sm-2 your-cart-table">
                         <input type="number" value="@item.Quantity" name="@item.ID" min="1" style="margin-bottom: 0; text-align: center;" id="@item.ID" class="quantity"/> <br/>
                         <a href="#" id="@link" class="savelink visible-sm" style="display: none; color: #F7960B;" onclick="updateCart(@item.productId, @item.ID)">save</a>
                     </div>
-                    <div class="col-md-1 col-sm-1" style="border-right: 1px solid #E8E4E4; text-align: center; height: inherit; padding-top: 11px;">
+                    <div class="col-md-1 col-sm-1 your-cart-table">
                         <span id="@price" style="padding-left: 0px;">@String.Format("{0:C}", Convert.ToInt32(item.Price))</span>
                     </div>
                     <div class="col-md-2 col-sm-2" style="text-align: center; height: inherit; padding-top: 11px;">

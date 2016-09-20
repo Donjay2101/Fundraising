@@ -1346,10 +1346,10 @@ label.shipToschool {
     color: #FF0000;
 }
 .shiptoschool_product{
-    border-bottom: 1px solid #E8E4E4;height:57px;background:#BECEDA;
+    border-bottom: 1px solid #E8E4E4;min-height:90px;background:#BECEDA;font-size:12px;
 }
 .normal_product{
-     border-bottom: 1px solid #E8E4E4;height:57px;background:white;
+     border-bottom: 1px solid #E8E4E4;min-height: 90px;background:white;font-size: 12px;
 }
 .shiptoschoolbox{
     PADDING-LEFT: 0PX;
@@ -1379,6 +1379,12 @@ label.shipToschool {
 }
 .total-pay-hr{
 margin-top: 5px;margin-bottom: 5px;
+}
+.your-cart-table{
+    border-right: 1px solid #E8E4E4;
+    text-align: center;
+    padding-top: 11px;
+    min-height:90px;
 }
 .s2s-product{
     font-size: 13px;
