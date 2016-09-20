@@ -16,7 +16,7 @@ namespace FundRaising.Models
         public int Quantity { get; set; }
         public bool ChargeShipping { get; set; }
         public bool ChargeSalesTax { get; set; }
-
+        public bool IsGift { get; set; }
         [NotMapped]
         public List<Product> Products {get;set;}
     }

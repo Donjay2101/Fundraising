@@ -106,6 +106,9 @@
       <HintPath>..\packages\Microsoft.Data.OData.5.7.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Http">
+      <HintPath>..\..\..\..\iTransact\iTransact\bin\Debug\Microsoft.Http.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\MicrosoftReportViewerWebForms.11.0.0.0\lib\Microsoft.ReportViewer.Common.dll</HintPath>
       <Private>True</Private>
