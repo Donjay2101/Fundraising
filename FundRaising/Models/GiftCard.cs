@@ -15,5 +15,7 @@ namespace FundRaising.Models
         public string Zip { get; set; }
         public int  ItemID { get; set; }
         public int CartITemID { get; set; }
+        public int OrderID { get; set; }
+        public int BaseOrderId { get; set; }
     }
 }

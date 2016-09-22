@@ -1346,10 +1346,10 @@ label.shipToschool {
     color: #FF0000;
 }
 .shiptoschool_product{
-    border-bottom: 1px solid #E8E4E4;height:57px;background:#BECEDA;
+    border-bottom: 1px solid #E8E4E4;min-height:90px;background:#BECEDA;font-size:12px;
 }
 .normal_product{
-     border-bottom: 1px solid #E8E4E4;height:57px;background:white;
+     border-bottom: 1px solid #E8E4E4;min-height: 90px;background:white;font-size: 12px;
 }
 .shiptoschoolbox{
     PADDING-LEFT: 0PX;
@@ -1379,6 +1379,12 @@ label.shipToschool {
 }
 .total-pay-hr{
 margin-top: 5px;margin-bottom: 5px;
+}
+.your-cart-table{
+    border-right: 1px solid #E8E4E4;
+    text-align: center;
+    padding-top: 11px;
+    min-height:90px;
 }
 .s2s-product{
     font-size: 13px;
@@ -1860,3 +1866,31 @@ input#btnGiftSave {
     background-color:white;
     border: 1px solid #ca8931;
 }
+.report-menu ul{
+    padding-left:0px;
+}
+.report-menu ul>li{
+  padding-bottom: 15px;
+    border-bottom: 1px dotted #d4cccc;
+    padding-top: 6px;
+}
+.report-menu{
+    border-right: 1px solid #dadada;
+    min-height: 490px;
+    /*background: #ececec;*/
+    padding-left: 13px;
+    padding-top: 20px;
+    padding-right: 13px;
+}
+.tealblue{
+    color:#54A792;
+}
+.report-menu ul>li a{
+    color:#1e755f;
+}
+.report-menu ul>li a:hover{
+    color:#801912;
+    text-decoration:underline;
+}
+
+
