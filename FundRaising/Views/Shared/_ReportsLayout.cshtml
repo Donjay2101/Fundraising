@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Scripts.Render("~/bundles/jquery")
+    @*<script src="~/Scripts/jquery-ui.min.js"></script>*@
+    <script src="~/Scripts/moment.js"></script>
+
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+   
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/Content/jquery-ui.theme.min.css" rel="stylesheet" />*@
+
+    <!-- SCRIPTS -->
+
+
+
+    <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+    <link href="~/Content/custom.css" rel="stylesheet" />
+
+
+    <script src="~/Scripts/Common.js"></script>
+   
+    <style>
+        div.fileinputs {
+            position: relative;
+        }
+
+        div.fakefile {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 1;
+        }
+
+        input.file {
+            position: relative;
+            text-align: right;
+            -moz-opacity: 0;
+            filter: alpha(opacity: 0);
+            opacity: 0;
+            z-index: 2;
+        }
+         .ui-datepicker th {
+            padding:0px!important;
+        }
+        #ui-datepicker-div{
+            width:inherit!important;
+        }
+    </style>
+    <script type="text/javascript">
+
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+   
+
+</head>
+<body>
+  
+
+    <div id="w" style="min-height:744px">
+        <div id="top" class="container-fluid">
+            <div class="container">
+                <div class="logos">
+                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                </div>
+                <div class="moon-out" style="float:right;color:white;">
+                    @Html.Partial("_LoginPartial")
+                   
+                </div>
+            </div>
+
+        </div>
+        <header>
+            <div class="container-fluid">
+                <nav class="navbar" style="margin-top: 20px;">
+                    @*<div class="content-wrapper container">*@
+
+                    <div class="menu row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <section id="login">
+                                <ul class="menu" id="menu" style="height: 48px; line-height: 2.5;border-top: 1px inset rgba(237, 237, 237, 0.17);border-bottom: 1px inset;border-left: 1px solid #E8E2E2;border-right: 1px solid #E8E2E2;margin:0 auto;background-color: #D9ECD9;">
+                                    <li>@Html.ActionLink("Product", "Index", "Product")</li>
+                                    <li>@Html.ActionLink("Category", "Index", "Category")</li>
+                                    <li>
+                                        @Html.ActionLink("Brochures", "Index", "Brochure")
+                                        @*@if (Request.IsAuthenticated)
+                                            {
+                                                <ul id="submenu">
+                                                    <li><a href="#" onclick="getBrochures('3')">Move Products</a></li>
+                                                </ul>
+                                            }*@
+                                    </li>
+                                    <li>@Html.ActionLink("Distributor", "Index", "Distributor")</li>
+                                    <li>@Html.ActionLink("School", "Index", "Organization")</li>
+                                    <li>@Html.ActionLink("Student", "Students", "Distributor", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                                    <li>@Html.ActionLink("Orders", "Index", "Order")</li>
+                                    <li><a href="#" onclick="openShippingChargeForm()">Shipping Charge</a></li>
+                                    <li><a href="#" onclick="openSalesTaxAddForm()">Sales Tax</a></li>
+                                    <li><a href="#" onclick="openOrderDownLoadForm()">Download Orders</a></li>
+                                    <li>@Html.ActionLink("Coupons", "Index", "Coupon")</li>
+                                    <li>@Html.ActionLink("Reports", "Index", "Reports")</li>
+                                </ul>
+
+                            </section>
+                        </div>
+                        <div class="col-md-1"></div>
+
+
+                    </div>
+                </nav>
+            </div>
+
+        </header>
+        <div>
+            @*@RenderSection("featured", required: false)*@
+
+            <div class="container" id="DemoDiv" style="width: 100%;height: 60px;background-color: transparent;">
+                <h2 class="row text-center h2_margin">@ViewBag.Title</h2>
+            </div>
+            <div id="sitemap" style="width:87%;height:30px;margin-left: 87px;line-height: 2;padding-left: 6px;">
+            </div>
+            <section class="container-fluid" style="width:1400px; margin:0 auto;">
+                <span style="color:red">@ViewBag.error</span>
+
+                @RenderBody()
+            </section>
+        </div>
+        <div id="overlayw" style="display:none; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(128, 128, 128, 0.52);z-index: 9999;position: fixed;">
+            @*<form action="Brochure/mapping" method="post">*@
+            <div id='Containerw'>
+
+            </div>
+
+            @*</form>*@
+        </div>
+    </div>
+    <footer>
+        <div>
+            <div>
+                <p style="float:left">&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                <p style="float:right;color:white"> Developed by: <a style=" color:white;" href="www.infodatix.com">www.Infodatix.com</a></p>
+            </div>
+        </div>
+    </footer>
+
+
+    @RenderSection("scripts", required: false)
+
+
+    @if (@ViewBag.BrochureID != null)
+    {
+        <input type="hidden" id="HiddenBrochureID" value="@ViewBag.BrochureID" />
+    }
+    @if (@ViewBag.BrochureName != null)
+    {
+        <input type="hidden" id="HiddenBrochureName" value="@ViewBag.BrochureName" />
+    }
+    @if (@ViewBag.CategoryID != null)
+    {
+        <input type="hidden" id="HiddenCategoryID" value="@ViewBag.CategoryID" />
+    }
+    @if (@ViewBag.CategoryName != null)
+    {
+        <input type="hidden" id="HiddenCategoryName" value="@ViewBag.CategoryName" />
+    }
+</body>
+</html>
