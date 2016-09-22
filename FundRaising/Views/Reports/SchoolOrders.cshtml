@@ -1,77 +1,78 @@
 ﻿
 @{
     ViewBag.Title = "School Orders";
+    Layout = "~/Views/Reports/_SubLayout.cshtml";
 }
+<style>
+        input#btnSubmit {
+    background: #54a792;
+    color: white;
+    border: none;
+    padding: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 3px;
+}
+            .form-control {
+    height: 31px;
+    padding: 0px 12px;
+    background-color: #ecf7ec;
+}
+</style>
 <div class="row">
-    <nav class="navbar navbar-default">
-        <ul class="nav navbar-nav">
-            <li class="navbar-link">
-                <a href="~/Reports/SalesByOrganization">Sales Report-select Organization/campaign</a>
-            </li>
-            <li>
-                <a href="~/Reports/OrganizationWithActivecampaign">Organizations With Active Campaign</a>
-            </li>
-            <li>
-                <a href="~/Reports/ProductReport">Product Report-All Product -All Categoris-All Catalogs </a>
-            </li>
-            <li>
-                <a href="~/Reports/OrganizationSalesReport">Sales By Campaign Report</a>
-            </li>
-            <li>
-                <a href="~/Reports/ItemSoldReport">Items Sold Report</a>
-            </li>
-            <li>
-                <a href="~/Reports/SchoolOrders">School Orders Report-Lists Orders By Selected School</a>
-            </li>
-        </ul>
-    </nav>
+    <div class="col-md-6">
+        <div class="row" style="margin-bottom:5px;">
+            <div class="col-md-4">
+               <label class="tealblue">Order From Date</label> 
+            </div>
+            <div class="col-md-8">
+                <input type="text" id="txtstartDate" class="date form-control" style="width:97%"/>
+            </div>
+        </div>
+      
+        <div class="row form-group">
+            <div class="col-md-4">
+                <label class="tealblue"> School/Organization ID</label>                
+            </div>
+            <div class="col-md-8">
+                <input type="text" id="SchoolID" class="ui-autocomplete form-control" style="margin-left:14px;width:90%;"/>
+            </div>
+        </div>
+      
+        <div class="row form-group">
+            <div class="col-md-4">
+                <label class="tealblue"> Shipping Method</label> 
+               
+            </div>
+            <div class="col-md-8">
+                <input type="checkbox" name="chkbs" id="chkUPS" /><span>UPS</span>
+                <input type="checkbox" name="chkbs" id="chkSTS" /><span>Ship To School</span>
+            </div>
+        </div>   
+    </div>
+    <div class="col-md-6">
+        <div class="row" style="margin-bottom:5px;">
+            <div class="col-md-4">
+                <label class="tealblue">  Order To Date</label>
 
-</div>
-<div class="row">
-    <div class="row">
-        <div class="col-md-6">
-            Order From Date:
+            </div>
+            <div class="col-md-8">
+                <input type="text" id="txtendDate" class="date form-control" style="width:97%"/>
+            </div>
         </div>
-        <div class="col-md-6">
-            <input type="text" id="txtstartDate" class="date" />
+        <div class="row form-group">
+            <div class="col-md-4">
+                <label class="tealblue">School/Organization Name</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" id="SchoolName" class="ui-autocomplete form-control" style="margin-left:14px;width:90%;" />
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            Order To Date:
+        <div class="row form-group">
+            <div class="col-md-8 col-md-offset-4">
+                <input type="button" value="Submit" id="btnSubmit" />
+            </div>
         </div>
-        <div class="col-md-6">
-            <input type="text" id="txtendDate" class="date" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            School/Organization ID:
-        </div>
-        <div class="col-md-6">
-            <input type="text" id="SchoolID" class="ui-autocomplete" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            School/Organization Name:
-        </div>
-        <div class="col-md-6">
-            <input type="text" id="SchoolName" class="ui-autocomplete" />
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            Shipping Method:
-        </div>
-        <div class="col-md-6">
-            <input type="checkbox" name="chkbs" id="chkUPS" /><span>UPS</span>
-            <input type="checkbox" name="chkbs" id="chkSTS" /><span>Ship To School</span>
-        </div>
-    </div>
-    <div class="row">
-        <input type="button" value="Submit" id="btnSubmit" />
     </div>
 </div>
 <div class="row">

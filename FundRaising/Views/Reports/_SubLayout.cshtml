@@ -1,0 +1,37 @@
+﻿@{    
+    Layout = "~/Views/Shared/_ReportsLayout.cshtml";
+
+}
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="report-menu">
+            <ul class="nonbullet">
+                <li class="navbar-link">
+                    <a href="~/Reports/SalesByOrganization">Sales Report-select Organization/campaign</a>
+                </li>
+                <li>
+                    <a href="~/Reports/OrganizationWithActivecampaign">Organizations With Active Campaign</a>
+                </li>
+                <li>
+                    <a href="~/Reports/ProductReport">Product Report-All Product -All Categoris-All Catalogs </a>
+                </li>
+                <li>
+                    <a href="~/Reports/OrganizationSalesReport">Sales By Campaign Report</a>
+                </li>
+                <li>
+                    <a href="~/Reports/ItemSoldReport">Items Sold Report</a>
+                </li>
+                <li>
+                    <a href="~/Reports/SchoolOrders">School Orders Report-Lists Orders By Selected School</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-10">
+         @RenderBody()
+    </div>
+</div>
+
+
+
