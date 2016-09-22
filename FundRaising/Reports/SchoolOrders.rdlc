@@ -105,7 +105,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Posted Date</Value>
+                              <Value>Psoted Date</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -675,7 +675,7 @@
         <Top>0.72792in</Top>
         <Left>0.33208in</Left>
         <Height>0.5in</Height>
-        <Width>9.39584in</Width>
+        <Width>9.39583in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>

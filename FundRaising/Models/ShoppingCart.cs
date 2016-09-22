@@ -243,7 +243,7 @@ namespace FundRaising.Models
                     if (context.Request.Cookies[studentID] != null)
                     {
                         cartCookie = context.Request.Cookies[studentID].Value.ToString();
-                        var cart = storeDb.Carts.Where(x => x.CartID == cartCookie).FirstOrDefault();
+                        var cart = storeDb.Carts.Where(x => x.CartID == cartCookie).SingleOrDefault();
                         if(cart!=null)
                         {
                             context.Session[CartSessionKey] = cart.CartID.ToString();
@@ -279,7 +279,7 @@ namespace FundRaising.Models
         public int createOrder(Order order)
         {
             double orderTotal = 0;
-            int orderID=order.ID;
+
             var CartItems = GetCartItems();
             Product p=null;
             Organization org = null;
@@ -302,53 +302,6 @@ namespace FundRaising.Models
 
             foreach (var item in CartItems)
             {
-
-                //if the product is distributed as gift..
-                if(item.IsGift)
-                {
-
-                    var gift = storeDb.GiftCards.FirstOrDefault(x => x.CartITemID == item.ID);                
-                    Order Giftorder = new Order();
-                    Giftorder.Address1 = order.Address1;
-                    Giftorder.Address2 = order.Address2;
-                    Giftorder.CampaignId = order.CampaignId;
-                    Giftorder.CardName = order.CardName;
-                    Giftorder.CardNumber = order.CardNumber;
-                    Giftorder.CardType = order.CardType;
-                    Giftorder.City = order.City;
-                    Giftorder.State = order.State;
-                    Giftorder.CompanyName = order.CompanyName;
-                    Giftorder.Country = order.Country;
-                    Giftorder.CreatedDate = order.CreatedDate;
-                    Giftorder.CVVNumber = order.CVVNumber;
-                    Giftorder.EmailAddress = order.EmailAddress;
-                    Giftorder.ExpirationDate = order.ExpirationDate;
-                    Giftorder.ExpirationYear = order.ExpirationYear;
-                    Giftorder.FirstName = order.FirstName;
-                    Giftorder.LastName = order.LastName;
-                    Giftorder.PhoneNumber = order.PhoneNumber;
-                    Giftorder.PostalCode = order.PostalCode;
-                    Giftorder.SAddress1 = gift.Address;
-                    Giftorder.SCity=gift.City;
-                    Giftorder.SState = gift.State;
-                    Giftorder.SPostalCode = gift.Zip;
-                    Giftorder.StudentID = order.StudentID;
-                    Giftorder.SchoolID = order.SchoolID;
-                    if(item.ShipToSchool)
-                    {
-                        Giftorder.ShiptoSchool = true;
-                    }
-                    Giftorder.Status = order.Status;
-                    storeDb.Orders.Add(Giftorder);
-                    storeDb.SaveChanges();
-                    gift.OrderID = Giftorder.ID;
-                    orderID = Giftorder.ID;
-                    gift.BaseOrderId = order.ID;
-                    storeDb.Entry(gift).State = EntityState.Modified;
-                    storeDb.SaveChanges();                                                                       
-                }
-                
-               
                 p = storeDb.Products.Find(item.productId);
                 if(item.ShipToSchool)
                 {
@@ -360,12 +313,11 @@ namespace FundRaising.Models
                     {
                         itemNumber= item.itemNumber,
                         ProductID=item.productId,
-                        OrderID = orderID,
+                        OrderID = order.ID,
                         Quantity = item.Quantity,
                         unitPrice = item.Price,
                         ChargeShipping=item.chargeShipping,
-                        ChargeSalesTax=item.chargeSalesTax,
-                        IsGift=item.IsGift
+                        ChargeSalesTax=item.chargeSalesTax
                     };
                     if(item.chargeShipping)
                     {
@@ -451,7 +403,7 @@ namespace FundRaising.Models
             //    SalesTaxAmount = scharge.TaxAmount;
             //}
             OrderSummary ordersum = new OrderSummary();
-            ordersum.OrderID = orderID;
+            ordersum.OrderID = order.ID;
             ordersum.ShippingAmount = ShippingAmount;
             ordersum.TotalAmount = cartTotal;
             ordersum.SalesTax = SalesTaxAmount;

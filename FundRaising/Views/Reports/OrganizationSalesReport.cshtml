@@ -1,35 +1,36 @@
 ﻿
 @{
-    ViewBag.Title = "Organization Sales Report";
-    Layout = "~/Views/Reports/_SubLayout.cshtml";
+    ViewBag.Title = "OrganizationSalesReport";
 }
-<style>
-    input#btnSubmit {
-    background: #54a792;
-    color: white;
-    border: none;
-    padding: 5px;
-    padding-left: 30px;
-    padding-right: 30px;
-    border-radius: 3px;
-}
-    .form-control {
-    height: 31px;
-    padding: 0px 12px;
-    background-color: #ecf7ec;
-}
-</style>
 <div class="row">
-    <div class="col-md-2">
-        <label style="color:#54a792">Select Distrinutor</label>
-    </div>
-    <div class="col-md-4">
-        @Html.DropDownList("cmbDistributor", ViewBag.Distrinutor as IEnumerable<SelectListItem>, "please select---", new { @class = "form-control" })
-    </div>
-   <div class="row form-group">
-       <input type="button" value="submit" id="btnSubmit" />
-   </div>
-  </div>
+    <nav class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li class="navbar-link">
+                <a href="~/Reports/SalesByOrganization">Sales Report-select Organization/campaign</a>
+            </li>
+            <li>
+                <a href="~/Reports/OrganizationWithActivecampaign">Organizations With Active Campaign</a>
+            </li>
+            <li>
+                <a href="~/Reports/ProductReport">Product Report-All Product -All Categoris-All Catalogs </a>
+            </li>
+            <li>
+                <a href="~/Reports/OrganizationSalesReport">Sales By Campaign Report</a>
+            </li>
+            <li>
+                <a href="~/Reports/ItemSoldReport">Items Sold Report</a>
+            </li>
+            <li>
+                <a href="~/Reports/SchoolOrders">School Orders Report-Lists Orders By Selected School</a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+<div class="row">
+    <span>Select Distrinutor:</span>@Html.DropDownList("cmbDistributor",ViewBag.Distrinutor as IEnumerable<SelectListItem>,"please select---",new { @class="form-control"})
+    <input type="button" value="submit" id="btnSubmit" />
+</div>
 
 <div class="row" id="reportContainer">
 

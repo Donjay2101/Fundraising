@@ -5,10 +5,10 @@
 }
 
 <script>
-    //$(document).ready(function () {
-    //    $('#CampaignStartDate').datepick({ dateFormat: 'yyyy-mm-dd' });
-    //    $('#CampaignEndDate').datepick({ dateFormat: 'yyyy-mm-dd' });
-    //});
+    $(document).ready(function () {
+        $('#CampaignStartDate').datepick({ dateFormat: 'yyyy-mm-dd' });
+        $('#CampaignEndDate').datepick({ dateFormat: 'yyyy-mm-dd' });
+    });
     function checkDate() {
         var startDate = $('#CampaignStartDate').val();
         var endDate = $('#CampaignEndDate').val();
@@ -63,7 +63,7 @@
                         </div>
                         <div class="editor-field">
                             @*@Html.EditorFor(model => model.CampaignStartDate.ToShortDateString())*@
-                            <input type="text" id="CampaignStartDate" data-val="true" name="CampaignStartDate" value="@Model.CampaignStartDate.ToShortDateString()" data-val-required="*" class="text-box single-line valid date" />
+                            <input type="text" id="CampaignStartDate" data-val="true" name="CampaignStartDate" value="@Model.CampaignStartDate.ToShortDateString()" data-val-required="*" class="text-box single-line valid" />
                             @*@Html.ValidationMessageFor(model => model.CampaignStartDate)*@
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="editor-field">
                             @*@Html.EditorFor(model => model.CampaignEndDate.ToShortDateString())*@
-                            <input type="text" id="CampaignEndDate" data-val="true" name="CampaignEndDate" value="@Model.CampaignEndDate.ToShortDateString()" data-val-required="*" class="text-box single-line valid date" />
+                            <input type="text" id="CampaignEndDate" data-val="true" name="CampaignEndDate" value="@Model.CampaignEndDate.ToShortDateString()" data-val-required="*" class="text-box single-line valid" />
                             @*@Html.ValidationMessageFor(model => model.CampaignEndDate)*@
                         </div>
                     </div>

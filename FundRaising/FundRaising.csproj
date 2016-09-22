@@ -87,12 +87,12 @@
       <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unofficial.Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
+      <HintPath>\\DESKTOP-19RJRV0\Videos\_junk\Ionic.Zip.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="iTransact, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\iTransact\obj\Debug\iTransact.dll</HintPath>
+      <HintPath>\\DESKTOP-19RJRV0\Videos\_junk\iTransact.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -105,9 +105,6 @@
     <Reference Include="Microsoft.Data.OData, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.OData.5.7.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Http">
-      <HintPath>..\..\..\..\iTransact\iTransact\bin\Debug\Microsoft.Http.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\MicrosoftReportViewerWebForms.11.0.0.0\lib\Microsoft.ReportViewer.Common.dll</HintPath>
@@ -265,6 +262,7 @@
     <Compile Include="Controllers\Admin\OrganizationController.cs" />
     <Compile Include="Controllers\Admin\ProductController.cs" />
     <Compile Include="Controllers\Admin\ReportsController.cs" />
+    <Compile Include="Controllers\Admin\SchoolController.cs" />
     <Compile Include="Controllers\Admin\VoucherController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\Admin\BrochureController.cs" />
@@ -548,7 +546,9 @@
     <Content Include="Reports\ReportDataSet.xss">
       <DependentUpon>ReportDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
     <Content Include="Scripts\jquery-3.1.0.slim.js" />
@@ -1064,6 +1064,7 @@
     <Content Include="Views\Customer\Error1.cshtml" />
     <Content Include="Views\Customer\OrderInformation.cshtml" />
     <Content Include="Views\Shared\_MagazineView.cshtml" />
+    <Content Include="Views\Reports\SalesByOrganization.cshtml" />
     <Content Include="Views\Shared\_SalesByOrganization.cshtml" />
     <Content Include="Views\Reports\OrganizationWithActivecampaign.cshtml" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
@@ -1080,9 +1081,24 @@
     <Content Include="Views\Reports\ItemSoldReport.cshtml" />
     <Content Include="Views\Reports\ProductReport.cshtml" />
     <Content Include="Views\Reports\SchoolOrders.cshtml" />
-    <Content Include="Views\Reports\_SubLayout.cshtml" />
-    <Content Include="Views\Reports\SalesByOrganization.cshtml" />
-    <Content Include="Views\Shared\_ReportsLayout.cshtml" />
+    <Content Include="Views\Shared\_SchoolDash.cshtml" />
+    <Content Include="Views\School\Create.cshtml" />
+    <Content Include="Views\School\Delete.cshtml" />
+    <Content Include="Views\School\Details.cshtml" />
+    <Content Include="Views\School\Edit.cshtml" />
+    <Content Include="Views\School\Index.cshtml" />
+    <Content Include="Views\School\_SchoolLayout.cshtml" />
+    <Content Include="Views\School\Dashboard.cshtml" />
+    <Content Include="Views\School\Reports.cshtml" />
+    <Content Include="Views\School\Participants.cshtml" />
+    <Content Include="Views\School\Email.cshtml" />
+    <Content Include="Views\School\Faq.cshtml" />
+    <Content Include="Views\School\Help.cshtml" />
+    <Content Include="Views\School\_Layout.cshtml" />
+    <Content Include="Views\School\StudentDetails.cshtml" />
+    <Content Include="Views\School\OrderDetails.cshtml" />
+    <Content Include="Views\School\sortedbyteacher.cshtml" />
+    <Content Include="Views\School\sortedbyparticipant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201510261542262_InitialCreate.resx">
