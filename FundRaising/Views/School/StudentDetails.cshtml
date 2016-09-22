@@ -1,0 +1,38 @@
+﻿
+@model FundRaising.Models.Student
+
+@{
+    ViewBag.Title = "StudentDetails";
+    Layout = "~/Views/School/_SchoolLayout.cshtml";
+}
+
+<h2>Email Single Student - @string.Format("{0} {1}",Model.FirstName,Model.LastName)</h2>
+<hr />
+
+<form method="post" onsubmit="getData();">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2"><b>To Email Address</b></div>
+           <div class="col-xs-5"><input type="text" name="sentto" class="form-control input-sm" value="@Model.EmailAddress"/></div>
+                
+    </div>
+                 
+        <br />
+        <div class="row">
+            <div class="col-sm-2"><b>CC</b></div>
+            <div class="col-xs-5"><input type="text" name="cc" class="form-control input-sm" /></div>
+        </div>
+        <br />
+        <div class="row ">
+            <div class="col-sm-2"><b>Subject</b></div>
+            <div class="col-xs-5"><input type="text" name="subject" class="form-control input-sm" /></div>
+        </div>
+        <br />
+        <div class="row">
+            <b><p>Enter Message Below:- </p></b>
+            <textarea name="message" rows="10" cols="50" style="width:100%" id="input"></textarea>
+            <input type="submit" value="Send Email" />
+        </div>
+
+    </div>
+</form>

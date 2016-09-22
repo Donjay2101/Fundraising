@@ -5,6 +5,22 @@ function hideLoadingDiv() {
     $('#loader').css('display', 'none');
 }
 
+function goToCreate(url) {
+
+    //debugger;
+    var returnUrl = getURL();
+    var newurl = "";
+    if (url.indexOf('?') > 0) {
+        newurl = url + "&returnUrl=" + returnUrl;;
+    }
+    else {
+        newurl = url + "?returnUrl=" + returnUrl;
+    }
+
+    window.location.href = newurl;
+}
+
+
 function getGiftData()
 {
     var Name = $('#gftName').val();
@@ -83,14 +99,14 @@ function getGiftData()
     //})
 
 
-
-
-    function createCookie(name,value, days) {
+    function createCookie(name, value, days) {
+        debugger;
         var expires = "";
         document.cookie = name + "=" + value + expires + "; path=/";
     }
 
     function readCookie(name) {
+
         var nameEQ = name + "=";
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {

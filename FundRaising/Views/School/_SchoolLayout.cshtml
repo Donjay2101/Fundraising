@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "_SchoolLayout";
+    Layout = "~/Views/School/_Layout.cshtml";
+}
+
+<style>
+    #cont {
+        width: 100%;
+    }
+</style>
+<script>
+    function Dashboard()
+    {
+
+        var ID = readCookie("OrgID");
+       // var stuID = readCookie('CustomStudentID');
+        //id = $('#studentID').val();
+        window.location.href = '/School/Dashboard/' + ID;
+    }
+    function Reports()
+    {
+        debugger;
+        var id = readCookie("OrgID");
+        //id = $('#studentID').val();
+        window.location.href = '/School/Reports?schoolID='+id+"&option=0";
+    }
+
+
+    function participants()
+    {
+        debugger;
+        var id = readCookie("OrgID");
+        //id = $('#studentID').val();
+        window.location.href = '/School/Participants?schoolID=' + id + "&option=0";
+    }
+
+    function Email() {
+        var id = readCookie("OrgID");
+        //id = $('#studentID').val();
+        window.location.href = '/School/Email?schoolID=' + id;
+    }
+
+
+    function Faq() {
+       // var id = readCookie("StudentID");
+        //id = $('#studentID').val();
+       // debugger;
+        var id = readCookie("OrgID");
+        window.location.href = '/School/Faq/?schoolID=' + id;
+    }
+
+    function Help()
+    {
+        var id = readCookie("OrgID");
+        //alert(ID);
+        //id = $('#studentID').val();
+        window.location.href = "/School/Help/?schoolID=" + id;
+    }
+
+    function Sortedbyteacher()
+    {
+        var id = readCookie("OrgID");
+        //alert(ID);
+        //id = $('#studentID').val();
+        window.location.href = "/School/sortedbyteacher/?schoolID=" + id;
+    }
+
+    function SortedbyParticipant() {
+        var id = readCookie("OrgID");
+        //alert(ID);
+        //id = $('#studentID').val();
+        window.location.href = "/School/sortedbyparticipant/?schoolID=" + id;
+    }
+
+    $(document).ready(function () {
+
+        //console.log($('#logoutForm'));
+        var htmlString = "Welcome @ViewBag.StudentName &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a style='color:white' href=\"javascript:document.getElementById('logoutF').submit()\">Log off</a>";
+        $('#logoutF').append(htmlString);
+    });
+</script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3" style="margin-left:-15%;">
+            <ul class="nonbullet" id="stud_info">
+                <li>@ViewBag.SchoolID - @ViewBag.CampaignName</li>
+                <li>Campaign Begin:- <span id="stuID">@ViewBag.CampaignStartDate</span> </li>
+                <li>Campaign End:- : @ViewBag.CampaignEndDate</li>
+                
+            </ul>
+            <ul class="nonbullet" id="stud">
+                <li class="stud_menu"><a href="#" onclick="Dashboard()">Dashboard</a> </li>                
+                <li class="stud_menu"><a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="participants()">Participants/Students </a></li>
+                <li class="stud_menu"> <a href="#" onclick="Reports()">Reports</a></li>            
+                <li class="stud_menu"><a href="#" onclick="Sortedbyteacher()">Participant Sales Sorted By Teacher</a> </li>
+                <li class="stud_menu"><a href="#" onclick="SortedbyParticipant()">Participant Sales Sorted By Participant</a> </li>
+             <li class="stud_menu"><a href="#" onclick="Email()">Email</a> </li>
+                <li class="stud_menu"><a href="#" onclick="Faq()">FAQ</a> </li>
+                <li class="stud_menu"><a href="#" onclick="Help()">Help</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+    <input type="hidden" value="@ViewBag.ID" id="studentID" />
+</div>

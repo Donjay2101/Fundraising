@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Email";
+    Layout = "~/Views/School/_SchoolLayout.cshtml";
+}
+
+<script>
+
+    function getData() {
+        var div = document.getElementsByClassName("toggle");
+        //alert('hello');
+        div[0].click();
+        // $("#input").html(TINY.editor.edit.prototype.toggle(0,div[0]));
+        //alert(TINY.editor.edit.prototype.toggle(0,div[0]));        
+        //console.log(TINY.editor.edit.prototype.toggle(0,div[0]));
+        //return false;
+    }
+
+</script>
+
+<h2>Email All Participants</h2>
+    <hr />
+
+<p>The Email will be Sent to <b> @ViewBag.stdcount</b> Registered Students/Participants</p>
+<br />
+<form method="post" onsubmit="getData();">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2"><b>CC</b></div>
+            <div class="col-xs-5"><input type="text" name="cc" class="form-control input-sm" /></div>
+        </div>
+        <br />
+        <div class="row ">
+            <div class="col-sm-2"><b>Subject</b></div>
+            <div class="col-xs-5"><input type="text" name="subject" class="form-control input-sm" /></div>
+        </div>
+        <br />
+        <div class="row">
+            <b><p>Enter Message Below:- </p></b>
+            <textarea name="message" rows="10" cols="50" style="width:100%" id="input"></textarea>
+            <input type="submit" value="Send Email" />
+        </div>
+
+    </div>
+</form>

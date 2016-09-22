@@ -80,9 +80,55 @@ namespace FundRaising.Controllers
                 
             }
 
+            Organization org = db.Organizations.Where(x => x.LoginID == model.UserName && x.Password == model.Password).FirstOrDefault();
+            if (org != null)
+            {
+
+                if (!org.IsActive)
+                {
+                    ViewBag.Error = "ID is deactivated. contact administrator for further details";
+                    return View();
+
+                }
+                else
+                {
+
+                    SetupFormsAuthTicket(org, model.RememberMe);
+                    returnUrl = "/School/Dashboard/" + org.ID;
+                    return RedirectToLocal(returnUrl);
+                }
+
+            }
+            
+
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
+        }
+
+        public ActionResult SchoolDash()
+        {
+            return PartialView("_SchoolDash");
+
+        }
+
+
+        private Organization SetupFormsAuthTicket(Organization org, bool persistanceFlag)
+        {
+            //Student user;
+
+            var userId = org.ID;
+            var userData = userId.ToString(CultureInfo.InvariantCulture);
+            var authTicket = new FormsAuthenticationTicket(1, //version
+                                                        org.LoginID, // user name
+                                                        DateTime.Now,             //creation
+                                                        DateTime.Now.AddMinutes(30), //Expiration
+                                                        persistanceFlag, //Persistent
+                                                        userData);
+
+            var encTicket = FormsAuthentication.Encrypt(authTicket);
+            Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+            return org;
         }
 
         private Student SetupFormsAuthTicket(Student student, bool persistanceFlag)

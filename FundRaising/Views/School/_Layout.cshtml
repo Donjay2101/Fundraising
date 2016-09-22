@@ -1,0 +1,249 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/Content/SyntaxHighlighter/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/SyntaxHighlighter/shCoreDefault.css" rel="stylesheet" type="text/css" />*@
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/gridmvc.datepicker.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.structure.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.structure.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.theme.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/jquery-ui.theme.min.css" rel="stylesheet" />
+    <!-- SCRIPTS -->
+    <script src="~/Scripts/jquery-3.1.0.min.js"></script>
+    @*<script src="~/Scripts/jquery-2.1.4.min.js" type="text/javascript"> </script>*@
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/main.js" type="text/javascript"> </script>
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <script src="~/Scripts/SyntaxHighlighter/shCore.js"></script>
+    <script src="~/Scripts/SyntaxHighlighter/shBrushCSharp.js"></script>
+    <script src="~/Scripts/SyntaxHighlighter/shBrushCss.js"></script>
+    <script src="~/Scripts/SyntaxHighlighter/shBrushJScript.js"></script>
+    <script src="~/Scripts/SyntaxHighlighter/shBrushRazor.js"></script>
+
+    <script src="~/Scripts/gridmvc.js" type="text/javascript"> </script>
+    <script src="~/Scripts/gridmvc.lang.ru.js" type="text/javascript"> </script>
+    <script src="~/Scripts/gridmvc.lang.fr.js" type="text/javascript"> </script>
+    <script src="~/Scripts/gridmvc.customwidgets.js" type="text/javascript"> </script>
+    <!-- referencing datepicker control -->
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <!-- Locale datepicker scripts ( get more on https://github.com/bukharin/bootstrap-datepicker/tree/master/js/locales )-->
+    <script src="~/Scripts/bootstrap-datepicker.ru.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+    <link href="~/Content/custom.css" rel="stylesheet" />
+
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/ShowImageonHover_Script.js"></script>
+    <script src="~/Scripts/brochure.js"></script>
+    <script src="~/Scripts/Product.js"></script>
+    <script src="~/Scripts/tinyeditor.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        //no of Items sold by Student
+
+            var count=$('#count').val();
+
+
+            var goal = $('#hgoal').val();
+        //Goal of Student
+        if(goal!=undefined && goal>0)
+        {
+            var Goal=goal;
+
+
+            //Precentage of color to Fill
+            var per=(count/Goal)*100;
+            per +="%";
+            $('#colorFill').css("width",per);
+        }
+        else
+        {
+            $('#colorFill').css("width","0%");
+        }
+
+        var goalType=$('#goalType').val();
+
+        // alert(@ViewBag.GoalType);
+        if(goalType=='1')
+        {
+            $('#count').html('$ '+count);
+            $('#goal').html('$ '+goal);
+
+        }
+        else
+        {
+            $('#count').html(count+' items');
+            $('#goal').html(goal+' items');
+
+        }
+        //alert(Goal);
+
+    });
+
+    function goBack() {
+        window.history.back();
+    }
+
+
+
+    // Initialize your tinyMCE Editor with your preferred options
+
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        new TINY.editor.edit('editor', {
+            id: 'input',
+            width: 584,
+            height: 175,
+            cssclass: 'te',
+            controlclass: 'tecontrol',
+            rowclass: 'teheader',
+            dividerclass: 'tedivider',
+            controls: ['bold', 'italic', 'underline', 'strikethrough', '|', 'subscript', 'superscript', '|',
+                      'orderedlist', 'unorderedlist', '|', 'outdent', 'indent', '|', 'leftalign',
+                      'centeralign', 'rightalign', 'blockjustify', '|', 'unformat', '|', 'undo', 'redo', 'n',
+                      'font', 'size', 'style', '|', 'image', 'hr', 'link', 'unlink', '|', 'cut', 'copy', 'paste', 'print'],
+            footer: true,
+            fonts: ['Verdana', 'Arial', 'Georgia', 'Trebuchet MS'],
+            xhtml: true,
+            cssfile: '/Content/custom.css',
+            bodyid: 'editor',
+            footerclass: 'tefooter',
+            toggle: { text: 'show source', activetext: 'show wysiwyg', cssclass: 'toggle' },
+            resize: { cssclass: 'resize' }
+        });
+    });
+
+    function getData() {
+        var div = document.getElementsByClassName("toggle");
+        div[0].click();
+        // $("#input").html(TINY.editor.edit.prototype.toggle(0,div[0]));
+        //alert(TINY.editor.edit.prototype.toggle(0,div[0]));
+        //console.log(TINY.editor.edit.prototype.toggle(0,div[0]));
+        //return false;
+    }
+
+    </script>
+
+    <script type="text/javascript">
+    WebFontConfig = {
+        google: { families: ['Abel::latin'] }
+    };
+    (function () {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+    })(); </script>
+
+    <script>
+    function gotoPrevious(currentUrl) {
+        var url = window.location.href;
+
+        var splitData = url.split('/');
+        var returnUrl="";
+        for (i = 3; i < splitData.length; i++)
+        {
+            returnUrl += "/"+splitData[i];
+        }
+
+        currentUrl += "?returnUrl=" + returnUrl;
+
+        window.location.href = currentUrl;
+        //alert(returnUrl);
+    }
+        function home()
+    {
+            var id = $('studentID').val();
+            window.location.href = "/School/GetGoalData/" + id;
+        }
+
+        $(document).ready(function () {
+            //alert('hello');
+            var src = readCookie('ImageCookie');
+            var htmlString="";
+            if (src != undefined)
+            {
+               // alert('hello');
+                htmlString = "<img style='width:125px' src='" + src + "'/>";
+            }
+
+            $('#logocontainer').html(htmlString);
+        });
+
+
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+    </script>
+
+
+</head>
+<body>
+    <div id="top" class="container-fluid">
+        <div class="container">
+            <div class="logos">
+                <p class="site-title"><a id="logocontainer" href="#"><img id="imglogo" src="" /></a></p>
+            </div>
+            <div class="row" style="float:right">
+                <div id="logoff" style="height: 66px;padding-top: 19px; font-size: 17px;">
+                    <form method='Post' action='/Account/Logoff' id='logoutF'>
+                        @Html.AntiForgeryToken()
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            @RenderBody()
+        </div>
+        <input type="hidden" value="@ViewBag.GoalType" id="goalType" />
+        <input type="hidden" value="@ViewBag.Goal" id="hgoal" />
+        <input type="hidden" value="@ViewBag.Count" id="count" />
+        <footer>
+            <div>
+                <div>
+                    <p style="float:left">&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    <p style="float:right;color:white"> Developed by: <a style="color:white;" href="www.infodatix.com">www.Infodatix.com</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
