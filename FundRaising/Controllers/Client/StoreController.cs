@@ -19,8 +19,7 @@ namespace FundRaising.Views.Customer
 
         public ActionResult Index()
         {
-            
-            
+               
             return View();
         }
 

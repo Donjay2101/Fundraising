@@ -85,6 +85,7 @@ namespace FundRaising.Controllers.Seller
             HttpCookie StudentCookie = new HttpCookie("StudentID");
             StudentCookie.Value = student.StudentID.ToString();
             Response.Cookies.Add(StudentCookie);
+
             HttpCookie StudentCookie1 = new HttpCookie("CustomStudentID");
             StudentCookie1.Value = student.StudentID.ToString();
             Response.Cookies.Add(StudentCookie1);

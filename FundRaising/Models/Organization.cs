@@ -156,6 +156,8 @@ namespace FundRaising.Models
         [Required(ErrorMessage = "*")]
         public decimal DefaultGoal { get; set; }
        
+        
+
         [NotMapped]
         public RegisterModel DistributorObject { get; set; }
 

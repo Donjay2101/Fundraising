@@ -60,7 +60,33 @@ namespace FundRaising.Models
         [DisplayName("Active")]
         public bool Active { get; set; }
 
+        [DisplayName("Date Registered")]
+        public Nullable<DateTime> DateRegistered { get; set; }
+
         [NotMapped]
         public string SchoolName { get; set; }
+
+        [NotMapped]
+        public string FullName { get; set; }
+
+        [NotMapped]
+        public string CampaignName { get; set; }
+
+        [NotMapped]
+        public double totalsales { get; set; }
+
+        [NotMapped]
+        public int totalOrders { get; set; }
+
+        [NotMapped]
+        public string CampaignDates { get; set; }
+
+        [NotMapped]
+        public string username { get; set; }
+
+        [NotMapped]
+       public string Status { get; set; }
+
+
     }
 }

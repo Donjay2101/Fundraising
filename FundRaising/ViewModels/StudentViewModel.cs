@@ -16,5 +16,29 @@ namespace FundRaising.ViewModels
         public string SchoolName { get; set; }
         public string SchoolID { get; set; }
         public bool IsActive{ get; set; }
+
+        public bool Active { get; set; }
+
+        public string FullName { get; set; }
+
+        public string CampaignName { get; set; }
+
+        public double totalsales { get; set; }
+
+        public int totalOrders { get; set; }
+
+        public string CampaignDates { get; set; }
+
+        public string image { get; set; }
+
+        public string username { get; set; }
+
+        public string TeacherName { get; set; }
+
+        public string Grade { get; set; }
+
+        public string Status { get; set; }
+
+        public Nullable<DateTime> DateRegistered { get; set; }
     }
 }
