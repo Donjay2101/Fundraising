@@ -192,12 +192,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\DESKTOP-19RJRV0\Videos\_junk\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\DESKTOP-19RJRV0\Videos\_junk\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
@@ -431,6 +431,7 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Data\Error.txt" />
     <Content Include="Data\Log.txt" />
+    <Content Include="EmailTemplates\ContactUsTemplate.txt" />
     <Content Include="EmailTemplates\CouponTextFile.txt" />
     <Content Include="EmailTemplates\DefaultMailForInvitation.txt" />
     <Content Include="EmailTemplates\InviteEmailTemplate.txt" />
@@ -1098,7 +1099,8 @@
     <Content Include="Views\School\StudentDetails.cshtml" />
     <Content Include="Views\School\OrderDetails.cshtml" />
     <Content Include="Views\School\sortedbyteacher.cshtml" />
-    <Content Include="Views\School\sortedbyparticipant.cshtml" />
+    <Content Include="Views\School\ReportByParticpant.cshtml" />
+    <Content Include="Views\School\EmailtoAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201510261542262_InitialCreate.resx">
@@ -1110,6 +1112,7 @@
     <EmbeddedResource Include="Reports\ProductReport.rdlc" />
     <EmbeddedResource Include="Reports\SalesByOrganizations.rdlc" />
     <EmbeddedResource Include="Reports\SchoolOrders.rdlc" />
+    <EmbeddedResource Include="Reports\SchoolReportByParticipant.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,0 +1,36 @@
+﻿
+<div>
+  <span>
+    Name:
+  </span>
+  <span>
+   <%Name%>
+  </span>  
+</div>
+<br/>
+<div>
+  <span>
+    Phone:
+  </span>
+  <span>
+   <%Phone%>
+  </span>  
+</div>
+<br/>
+<div>
+  <span>
+    Email:
+  </span>
+  <span>
+   <%Email%>
+  </span>  
+</div>
+<br/>
+<div>
+	<div>
+	   Enquiry From Customer:
+	</div>
+	<div>
+	  <%Message%>
+	</div>
+</div>

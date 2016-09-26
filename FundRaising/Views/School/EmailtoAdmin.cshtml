@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "EmailtoAdmin";
+    Layout = "~/Views/School/_SchoolLayout.cshtml";
+}
+
+
+<script>
+
+    function getData() {
+        var div = document.getElementsByClassName("toggle");
+        //alert('hello');
+        div[0].click();
+        // $("#input").html(TINY.editor.edit.prototype.toggle(0,div[0]));
+        //alert(TINY.editor.edit.prototype.toggle(0,div[0]));
+        //console.log(TINY.editor.edit.prototype.toggle(0,div[0]));
+        //return false;
+    }
+    </script>
+
+<h2>Email Us</h2>
+
+
+<hr />
+<br /><form method="post" onsubmit="getData();">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2"><b>Your Email Address</b></div>
+            <div class="col-xs-5"><input type="text" name="youremail" class="form-control input-sm" /></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-2"><b>Your Name</b></div>
+            <div class="col-xs-5"><input type="text" name="yourname" class="form-control input-sm" /></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-2"><b>Your Phone</b></div>
+            <div class="col-xs-5"><input type="text" name="phone" class="form-control input-sm" /></div>
+        </div>
+<br />
+        <div class="row ">
+            <div class="col-sm-2"><b>Subject</b></div>
+            <div class="col-xs-5"><input type="text" name="subject" class="form-control input-sm" /></div>
+        </div>
+        <br />
+        <div class="row">
+            <b><p>Enter Message Below:- </p></b>
+            <textarea name="message" rows="10" cols="50" style="width:100%" id="input"></textarea>
+            <input type="submit" value="Send Email" />
+        </div>
+
+    </div>
+</form>

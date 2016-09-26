@@ -1,0 +1,16 @@
+﻿@using ReportViewerForMvc;
+@{
+    ViewBag.Title = "sortedbyparticipant";
+    Layout = "~/Views/School/_SchoolLayout.cshtml";
+}
+
+<h2>Sorted By Participant</h2>
+
+<div>
+    
+    <div class="row">
+        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "height:500px;width:100%" })
+    </div>
+
+</div>
+

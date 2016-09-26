@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{ 
     ViewBag.Title = "_SchoolLayout";
     Layout = "~/Views/School/_Layout.cshtml";
 }
@@ -70,7 +69,7 @@
         var id = readCookie("OrgID");
         //alert(ID);
         //id = $('#studentID').val();
-        window.location.href = "/School/sortedbyparticipant/?schoolID=" + id;
+        window.location.href = "/School/ReportByParticpant";
     }
 
     $(document).ready(function () {
