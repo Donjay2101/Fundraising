@@ -1860,3 +1860,24 @@ input#btnGiftSave {
     background-color:white;
     border: 1px solid #ca8931;
 }
+.send-email{
+    background: #29463f;
+    border: none;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 3px;
+}
+.label-orderdetails{
+    font-weight: bold;
+    color: #5a5757;
+    text-align: end;
+}
+.report-btn{
+    background: #f3f3f3;
+    padding: 3px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 3px;
+    border: 1px solid #54a792;
+}

@@ -6,55 +6,52 @@
 
 <h2>Student Information Dashboard - @Model.FullName</h2> 
 
-
-<br />
 <div class="row">
 
     <div class="col-sm-4"><img src="@Model.image" style="height:200px; width:200px;" /> </div>
 
     <div class="col-sm-8">
-        <div class="container">
             <div class="row">
-                <div class="col-sm-4">Account Status :</div>
+                <div class="col-sm-4 label-orderdetails">Account Status :</div>
                 <div class="col-sm-4">@Model.Status</div>
                 <div class="col-sm-4"></div>
         </div>
 
         <div class="row">
-            <div class="col-sm-4">Distributor Name :</div>
+            <div class="col-sm-4 label-orderdetails">Distributor Name :</div>
             <div class="col-sm-4">@Model.username</div>
             <div class="col-sm-4"></div>
 
         </div>
         <div class="row">
-            <div class="col-sm-4">School Name :</div>
+            <div class="col-sm-4 label-orderdetails">School Name :</div>
             <div class="col-sm-4">@Model.SchoolName</div>
             <div class="col-sm-4"></div>
 
         </div>
         <div class="row">
-            <div class="col-sm-4">Campaign Name :</div>
+            <div class="col-sm-4 label-orderdetails">Campaign Name :</div>
             <div class="col-sm-4">@Model.CampaignName</div>
             <div class="col-sm-4"></div>
 
         </div>
 
         <div class="row">
-            <div class="col-sm-4">Student ID :</div>
+            <div class="col-sm-4 label-orderdetails">Student ID :</div>
             <div class="col-sm-4">@Model.StudentID</div>
             <div class="col-sm-4"></div>
 
         </div>
 
         <div class="row">
-            <div class="col-sm-4">Teacher / HomeRoom :</div>
+            <div class="col-sm-4 label-orderdetails">Teacher / HomeRoom :</div>
             <div class="col-sm-4">@Model.TeacherName</div>
             <div class="col-sm-4"></div>
 
         </div>
 
         <div class="row">
-            <div class="col-sm-4">Grade :</div>
+            <div class="col-sm-4 label-orderdetails">Grade :</div>
             <div class="col-sm-4">@Model.Grade</div>
             <div class="col-sm-4"></div>
 
@@ -62,39 +59,38 @@
 
 
         <div class="row">
-            <div class="col-sm-4">Student Email :</div>
+            <div class="col-sm-4 label-orderdetails">Student Email :</div>
             <div class="col-sm-4">@Model.EmailAddress</div>
             <div class="col-sm-4"></div>
 
         </div>
 
         <div class="row">
-            <div class="col-sm-4">Date Registered :</div>
+            <div class="col-sm-4 label-orderdetails">Date Registered :</div>
             <div class="col-sm-4">@Model.DateRegistered</div>
             <div class="col-sm-4"></div>
 
         </div>
 
         <div class="row">
-            <div class="col-sm-4">Campaign Dates :</div>
+            <div class="col-sm-4 label-orderdetails">Campaign Dates :</div>
             <div class="col-sm-4">@Model.CampaignDates</div>
             <div class="col-sm-4"></div>
 
         </div>
 
         <div class="row">
-            <div class="col-sm-4">Numbers of Orders :</div>
+            <div class="col-sm-4 label-orderdetails">Numbers of Orders :</div>
             <div class="col-sm-4">@Model.totalOrders</div>
             <div class="col-sm-4"></div>
 
         </div>
 
         <div class="row">
-            <div class="col-sm-4">Total Sales :</div>
+            <div class="col-sm-4 label-orderdetails">Total Sales :</div>
             <div class="col-sm-4">$ @Model.totalsales</div>
             <div class="col-sm-4"></div>
 
         </div>
     </div>
-</div>
 </div>
