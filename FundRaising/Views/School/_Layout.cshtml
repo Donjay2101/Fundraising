@@ -215,14 +215,22 @@
 
 </head>
 <body>
+    <div id="loader" style="position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.529412);
+    z-index: 99999;
+    text-align: center;
+    padding-top: 20%;display:none">
+        <div id="laadingImage" style="text-align: center;">
+            <img src="~/Images/loading.gif" style="height: 63px; width: 63px;" />
+        </div>
+    </div>
     <div id="top" class="container-fluid">
-        <div class="container">
-            <div class="logos">
-                <p class="site-title"><a id="logocontainer" href="#"><img id="imglogo" src="" /></a></p>
-            </div>
+        <div class="container">            
             <div class="row" style="float:right">
                 <div id="logoff" style="height: 66px;padding-top: 19px; font-size: 17px;">
-                    <form method='Post' action='/Account/Logoff' id='logoutF'>
+                    <form method='Post' action='/Account/Logoff' id='logoutF'>                        
                         @Html.AntiForgeryToken()
                     </form>
                 </div>

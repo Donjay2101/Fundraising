@@ -75,7 +75,7 @@
     $(document).ready(function () {
 
         //console.log($('#logoutForm'));
-        var htmlString = "Welcome @ViewBag.StudentName &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a style='color:white' href=\"javascript:document.getElementById('logoutF').submit()\">Log off</a>";
+        var htmlString = "Welcome @ViewBag.SchoolName  &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a style='color:white' href=\"javascript:document.getElementById('logoutF').submit()\">Log off</a>";
         $('#logoutF').append(htmlString);
     });
 </script>
@@ -91,9 +91,7 @@
             <ul class="nonbullet" id="stud">
                 <li class="stud_menu"><a href="#" onclick="Dashboard()">Dashboard</a> </li>                
                 <li class="stud_menu"><a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="participants()">Participants/Students </a></li>
-                <li class="stud_menu"> <a href="#" onclick="Reports()">Reports</a></li>            
-                <li class="stud_menu"><a href="#" onclick="Sortedbyteacher()">Participant Sales Sorted By Teacher</a> </li>
-                <li class="stud_menu"><a href="#" onclick="SortedbyParticipant()">Participant Sales Sorted By Participant</a> </li>
+                <li class="stud_menu"> <a href="#" onclick="Reports()">Reports</a></li>                          
              <li class="stud_menu"><a href="#" onclick="Email()">Email</a> </li>
                 <li class="stud_menu"><a href="#" onclick="Faq()">FAQ</a> </li>
                 <li class="stud_menu"><a href="#" onclick="Help()">Help</a></li>

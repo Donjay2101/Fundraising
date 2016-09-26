@@ -5,4 +5,29 @@
 }
 
 <h2>Reports</h2>
+<hr />
+<a id="reportByParticpant" href="#">Report by participant Sales</a>
+<div id="reportContainer">
+    
+</div>
+<script>
+    $(document).on('click', '#reportByParticpant', function () {
+        $('#loader').css('display', 'block');
+        $.ajax({
+            url: "/School/ReportByParticpant",
+            type: "GET",
+            success:function(data)
+            {
+                $('#reportContainer').html(data);
+                $('#loader').css('display', 'none');
+            },
+            erro: function (err) {
+                alert(err.statusText);
+                $('#loader').css('display', 'none');
+            }
+
+        });
+    });
+</script>
+
 

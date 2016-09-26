@@ -3,20 +3,65 @@
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/School/_SchoolLayout.cshtml";
 }
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
+<script type="text/javascript" src="http://cdn3.devexpress.com/jslib/15.2.5/js/dx.chartjs.js"></script>
+<script>
+    $(document).ready(function () {
+        setTimeout(setChart,1000);
+    });
 
+
+    function setChart()
+    {
+        $.ajax({
+            url: "/School/GetChartData",
+            type: "GET",
+            success: function (data) {
+                if (data != null) {
+                  
+                  //  typeof (data);
+                    console.log(data);
+                    var dataSource = JSON.parse(data);
+                    //var dataSource = [{ Total: "34", OrderDate: new Date() }, { Total: "34", OrderDate: new Date() }, { Total: "34", OrderDate: new Date() }];
+                   
+                    $("#chart").dxChart({
+                        dataSource: dataSource,
+                        series: {
+                            argumentField: "OrderDate",
+                            valueField: "Total",
+                            name: "Sales",
+                            type: "Line",
+                            color: '#ffaa66'
+                        }
+                    });
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+    
+</script>
 <div class="container">
     <div class="row">
         <h2>Daily Sales Totals(Not Accumulated Sales)</h2>
     </div>
+    <div class="row">
+        <div id="chart">
 
+        </div>
+    </div>
+    <hr style="border-top:1px solid #b0acac!important"/>
 <div class="row">
     <h2>Statistics</h2>
     <p>The Campaign Ended on @ViewBag.CampaignEndDate</p>  
     <p>@ViewBag.totalstd Students Have Registered</p>
     <p>Different Teachers have been added to the system by students</p>
-    <p>as the Average order size per customer </p>
+    @*<p>as the Average order size per customer </p>
     <p>is the average amount sold by each student</p>
-    <p>is the average amount attributed to each teacher (classroom)</p>
+    <p>is the average amount attributed to each teacher (classroom)</p>*@
 
 </div>
 

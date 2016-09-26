@@ -17,6 +17,8 @@ using System.Configuration;
 using Microsoft.Reporting.WebForms;
 using System.Web.UI.WebControls;
 using FundRaising.Reports;
+using System.Web.Helpers;
+using Newtonsoft.Json;
 
 namespace FundRaising.Controllers.Admin
 {
@@ -27,8 +29,12 @@ namespace FundRaising.Controllers.Admin
 
         ReportDataSet rds = new ReportDataSet();
         Organization org = null;
-        public ActionResult Dashboard(int id)
-        {
+        public ActionResult Dashboard(int? id)
+        {            
+            if(id==null)
+            {
+                return Redirect("/Account/login");
+            }
             var std = db.Students.Count();
             ViewBag.totalstd = std;
             Organization org = db.Organizations.Where(x => x.ID == id).SingleOrDefault();
@@ -45,8 +51,6 @@ namespace FundRaising.Controllers.Admin
                     ViewBag.CampaignEndDate = data.CampaignEndDate.ToShortDateString();
                 }
             }
-
-
             Session["OrgID"] = org.ID;
             HttpCookie StudentCookie = new HttpCookie("OrgID");
             StudentCookie.Value = org.ID.ToString();
@@ -55,9 +59,27 @@ namespace FundRaising.Controllers.Admin
             return View();
         }
 
+        public ActionResult GetChartData()
+        {
+            var org = SetOrganization();
+            
+            if(org!=null)
+            {
+                Campaign camp = db.Campaigns.FirstOrDefault(x => x.OrganizatonID == org.SchoolID && x.CampaignEndDate > DateTime.Now);
+                if(camp!=null)
+                {
+                    var data = db.Database.SqlQuery<FundRaising.Models.Chart>("exec sp_GetChartData @orgID ,@campaignID", new SqlParameter("@orgID", org.ID), new SqlParameter("@campaignID", camp.ID));
+                    string jsondata=JsonConvert.SerializeObject(data);
+                    return Json(jsondata, JsonRequestBehavior.AllowGet);
+                }
+                
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult EmailtoAdmin()
         {
-            
+            SetSchoolInformation();
             return View();
         }
 
@@ -118,6 +140,7 @@ namespace FundRaising.Controllers.Admin
                     ViewBag.CampaignStartDate = data.CampaignStartDate.ToShortDateString();
                     ViewBag.CampaignEndDate = data.CampaignEndDate.ToShortDateString();
                     ViewBag.SchoolID = data.OrganizatonID;
+                    ViewBag.SchoolName = org.Name;
                 }
 
                                 
@@ -146,18 +169,18 @@ namespace FundRaising.Controllers.Admin
             SetSchoolInformation();
             return View();
         }
-        public bool SetOrganization()
+        public Organization SetOrganization()
         {
             if (Session["Organization"] != null)
             {
                 org = Session["Organization"] as Organization;
-                return true;
+                return org;
             }
-            return false;
+            return null;
         }
         public ActionResult ReportByParticpant()
         {
-            if (SetOrganization())
+            if (SetOrganization()!=null)
             {
                 ReportViewer rptViewer = new ReportViewer();
                 rptViewer.ProcessingMode = ProcessingMode.Local;
@@ -169,6 +192,10 @@ namespace FundRaising.Controllers.Admin
                 rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", rds.Tables[rds.AdminReportByParticipant.TableName]));
                 ViewBag.ReportViewer = rptViewer;
                 SetSchoolInformation();            
+            }
+            else
+            {
+                return Redirect("/Account/Login");
             }
             return View();
         }
